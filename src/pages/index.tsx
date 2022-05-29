@@ -1,7 +1,1 @@
-const MainPage = () => {
-  return (
-    <h2>안녕하세요</h2>
-  );
-}
-
-export default MainPage;
+export { default } from '~/views/page-components/ComingSoonPage'
