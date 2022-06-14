@@ -2,3 +2,7 @@ body {
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
   overflow-x: hidden;
 }
+
+#__next, main {
+  height: 100%;
+}
