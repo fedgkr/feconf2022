@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
 import { EFFECT_COLOR } from "~/views/components/threeConsts";
 import { Mesh } from "three";
+import { clamp } from "lodash";
 
 const DEFAULT_VELOCITY = 0.007;
 const LINE_COUNT = 500;
@@ -170,6 +171,7 @@ export const WarpLine = () => {
       const delta = (e?.deltaY ?? 0) / 50 / size.y;
 
       velocityRef.current += delta >= 0 ? delta : delta * 2;
+      velocityRef.current = clamp(velocityRef.current, -0.05, 0.05);
     }
     onWheel();
     window.addEventListener("wheel", onWheel);
