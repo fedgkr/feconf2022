@@ -28,7 +28,7 @@ const ComingSoonSection: FC<Props> = (props) => {
         </FixedWrap>
       </Portal>
       <Portal>
-        <FixedWrap>
+        <FixedWrap style={{ pointerEvents: "none", zIndex: 0 }}>
           <Earth fadeIn={props.in} />
         </FixedWrap>
       </Portal>
@@ -36,9 +36,7 @@ const ComingSoonSection: FC<Props> = (props) => {
   );
 }
 
-const Container = styled.div`
-
-`;
+const Container = styled.div``;
 
 const FixedWrap = styled.div`
   position: fixed;
