@@ -11,26 +11,18 @@ interface Props {
 export const useHandleAnimation = (props: Props) => {
   const styles = useRef({ opacity: 0, scale: 0, transition: ' ' });
   if (props.in) {
-    if (props.direction === 'down') {
-      styles.current.opacity = 1;
-      styles.current.scale = 1;
-      styles.current.transition = 'opacity 600ms 300ms, transform 600ms 300ms';
-    }
-    if (props.direction === 'up') {
-      styles.current.opacity = 1;
-      styles.current.scale = 1;
-      styles.current.transition = 'opacity 600ms 300ms, transform 600ms 300ms';
-    }
+    styles.current.opacity = 1;
+    styles.current.scale = 1;
+    styles.current.transition = 'opacity 600ms 300ms, transform 600ms 300ms';
   } else if (props.out) {
+    styles.current.opacity = 0;
+    styles.current.opacity = 0;
+    styles.current.transition = 'opacity 400ms, transform 400ms';
     if (props.direction === 'down') {
-      styles.current.opacity = 0;
       styles.current.scale = 2;
-      styles.current.transition = 'opacity 400ms, transform 400ms';
     }
     if (props.direction === 'up') {
-      styles.current.opacity = 0;
       styles.current.scale = 0;
-      styles.current.transition = 'opacity 400ms, transform 400ms';
     }
   }
   return styles.current;
