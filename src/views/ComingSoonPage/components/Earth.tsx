@@ -155,9 +155,10 @@ export const Earth = (props: EarthProps) => {
     return earthItem;
   });
   useEffect(() => {
-    if (isReady && !props.fadeIn) {
-      earthScene.setTime(0);
-    } else if (props.fadeIn && isReady) {
+    earthScene.setTime(0);
+  }, []);
+  useEffect(() => {
+    if (props.fadeIn && isReady) {
       earthScene.setDirection("normal");
       earthScene.setTime(0);
       earthScene.setPlaySpeed(1);
