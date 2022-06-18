@@ -1,7 +1,7 @@
-import {FC} from "react";
+import { FC } from "react";
 import styled from "@emotion/styled";
 import Portal from "~/views/components/Portal";
-import {useHandleAnimation} from "~/views/ComingSoonPage/components/HeroSection";
+import { useHandleAnimation } from "~/views/ComingSoonPage/components/HeroSection";
 import { Earth } from "./Earth";
 
 interface Props {
@@ -19,13 +19,17 @@ const ComingSoonSection: FC<Props> = (props) => {
     <Container className="section">
       <Portal>
         <FixedWrap>
-        <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
+          <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
+            <TextWrap>
+              <h2>10월에 찾아옵니다.</h2>
+              <p>2022 FEConf -&gt; Frontend Developer Conference</p>
+            </TextWrap>
+          </TextContainer>
+        </FixedWrap>
+      </Portal>
+      <Portal>
+        <FixedWrap>
           <Earth fadeIn={props.in} />
-          <TextWrap>
-            <h2>10월에 찾아옵니다.</h2>
-            <p>2022 FEConf -&gt; Frontend Developer Conference</p>
-          </TextWrap>
-        </TextContainer>
         </FixedWrap>
       </Portal>
     </Container>

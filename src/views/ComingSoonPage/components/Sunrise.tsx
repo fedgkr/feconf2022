@@ -59,7 +59,7 @@ export function getHaloMesh() {
     haloGeometry,
     haloMaterial,
   );
-  haloMesh.position.set(0, -0.44, -0.1);
+  haloMesh.position.set(0, -0.46, -0.1);
   haloMesh.scale.set(1.5, 1, 1);
 
   return haloMesh;
@@ -98,6 +98,6 @@ export function getSunriseMesh() {
     sunriseGeometry,
     sunriseMaterial,
   );
-  sunriseMesh.position.set(0, -0.295, 0);
+  sunriseMesh.position.set(0, -0.415, -1);
   return sunriseMesh;
 }
