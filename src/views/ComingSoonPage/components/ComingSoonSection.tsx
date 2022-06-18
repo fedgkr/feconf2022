@@ -2,6 +2,7 @@ import {FC} from "react";
 import styled from "@emotion/styled";
 import Portal from "~/views/components/Portal";
 import {useHandleAnimation} from "~/views/ComingSoonPage/components/HeroSection";
+import { Earth } from "./Earth";
 
 interface Props {
   in: boolean;
@@ -11,14 +12,20 @@ interface Props {
 
 const ComingSoonSection: FC<Props> = (props) => {
   const { opacity, scale, transition } = useHandleAnimation(props);
+
+
+
   return (
     <Container className="section">
       <Portal>
         <FixedWrap>
-          <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
+        <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
+          <Earth fadeIn={props.in} />
+          <TextWrap>
             <h2>10월에 찾아옵니다.</h2>
             <p>2022 FEConf -&gt; Frontend Developer Conference</p>
           </TextWrap>
+        </TextContainer>
         </FixedWrap>
       </Portal>
     </Container>
@@ -40,7 +47,17 @@ const FixedWrap = styled.div`
   justify-content: center;
 `;
 
+const TextContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
 const TextWrap = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
 
