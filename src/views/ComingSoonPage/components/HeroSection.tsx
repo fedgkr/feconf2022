@@ -1,94 +1,76 @@
-import {FC, useRef, CSSProperties} from "react";
-import {useIntersectionObserver} from 'usehooks-ts';
+import {FC, useRef} from "react";
 import styled from '@emotion/styled';
+import Portal from "~/views/components/Portal";
 
-export const styles: Record<string, CSSProperties> = {
-  fadeUpOut: {
-    opacity: 0,
-    transform: 'scale(3.0)',
-    transition: 'all 800ms ease-out',
-  },
-  fadeUpIn: {
-    opacity: 1,
-    transform: 'scale(1.0)',
-    transition: 'opacity 1200ms ease-out 900ms, transform 1200ms ease-out 900ms'
-  },
-  fadeDownOut: {
-    opacity: 0,
-    transform: 'scale(0.2)',
-    transition: 'all 800ms ease-in'
-  },
-  fadeDownIn: {
-    opacity: 1,
-    transform: 'scale(1.0)',
-    transition: 'opacity 1200ms ease-out 900ms, transform 1200ms ease-out 900ms'
-  },
-};
-
-export const getStyle = (isVisible: boolean, fadeUpOut: boolean, fadeUpIn: boolean, fadeDownIn: boolean, fadeDownOut: boolean) => {
-  let animation: keyof typeof styles;
-  if (fadeUpOut) {
-    animation = 'fadeUpOut';
-  } else if (fadeUpIn) {
-    animation = 'fadeUpIn';
-  } else if (fadeDownIn) {
-    animation = 'fadeDownIn';
-  } else if (fadeDownOut) {
-    animation = 'fadeDownOut';
-  }
-  return styles[animation];
+interface Props {
+  in: boolean;
+  out: boolean;
+  direction: 'up' | 'down';
 }
 
-const HeroSection: FC = () => {
+export const useHandleAnimation = (props: Props) => {
+  const styles = useRef({ opacity: 0, scale: 0, transition: ' ' });
+  if (props.in) {
+    if (props.direction === 'down') {
+      styles.current.opacity = 1;
+      styles.current.scale = 1;
+      styles.current.transition = 'opacity 600ms 300ms, transform 600ms 300ms';
+    }
+    if (props.direction === 'up') {
+      styles.current.opacity = 1;
+      styles.current.scale = 1;
+      styles.current.transition = 'opacity 600ms 300ms, transform 600ms 300ms';
+    }
+  } else if (props.out) {
+    if (props.direction === 'down') {
+      styles.current.opacity = 0;
+      styles.current.scale = 2;
+      styles.current.transition = 'opacity 400ms, transform 400ms';
+    }
+    if (props.direction === 'up') {
+      styles.current.opacity = 0;
+      styles.current.scale = 0;
+      styles.current.transition = 'opacity 400ms, transform 400ms';
+    }
+  }
+  return styles.current;
+}
+
+const HeroSection: FC<Props> = (props) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const entry = useIntersectionObserver(ref, {
-    rootMargin: "0px",
-    threshold: 0.25
-  });
-  const isVisible = !!entry?.isIntersecting;
-  const fadeUpOut = !isVisible && entry?.boundingClientRect?.y < 0;
-  const fadeUpIn = isVisible && entry?.boundingClientRect?.y > 0;
-  const fadeDownIn = isVisible && entry?.boundingClientRect?.y < 0;
-  const fadeDownOut = !isVisible && entry?.boundingClientRect?.y < entry?.rootBounds.height;
-  const css = getStyle(isVisible, fadeUpOut, fadeUpIn, fadeDownIn, fadeDownOut);
+  const { opacity, scale, transition } = useHandleAnimation(props);
   return (
     <Container ref={ref} className="section">
-      <FixedWrap>
-        <TextWrap isVisible={isVisible} style={{...css}}>
-          <h3>Explore the forefront of FE dev</h3>
-          <h2>FECONF.22</h2>
-        </TextWrap>
-      </FixedWrap>
+      <Portal>
+        <FixedWrap>
+          <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
+            <h3>Explore the forefront of FE dev</h3>
+            <h2>FECONF.22</h2>
+          </TextWrap>
+        </FixedWrap>
+      </Portal>
     </Container>
   );
 };
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100vh;
-  scroll-snap-align: center;
-  background-color: black;
+const Container = styled.section`
 `;
 
 const FixedWrap = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
 `;
 
-const TextWrap = styled.div<{ isVisible: boolean }>`
+const TextWrap = styled.div`
   width: 100%;
   text-align: center;
-  opacity: ${({isVisible}) => isVisible ? 1 : 0};
+  opacity: 1;
   transform: scale(1);
 
   h3 {
