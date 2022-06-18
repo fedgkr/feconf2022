@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import ComingSoonSection from "~/views/ComingSoonPage/components/ComingSoonSection";
 import { WarpLine } from "~/views/ComingSoonPage/components/WarpLine";
 import {anchors} from "~/views/ComingSoonPage/data/anchors";
+import ComingSoonMeta from "~/views/ComingSoonPage/components/ComingSoonMeta";
 
 const ComingSoonPage = () => {
   const [state, setState] = useState<{ origin: number; target: number; direction: 'up' | 'down' }>({ origin: null, target: 0, direction: 'down' });
@@ -19,6 +20,7 @@ const ComingSoonPage = () => {
   };
   return (
     <Container>
+      <ComingSoonMeta/>
       <FixedContainer>
         <WarpLine />
       </FixedContainer>
