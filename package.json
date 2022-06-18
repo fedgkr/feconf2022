@@ -32,6 +32,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@fullpage/react-fullpage": "^0.1.26",
     "glslify-loader": "^2.0.0",
     "gsap": "^3.10.4",
     "lodash": "^4.17.21",
@@ -40,7 +44,8 @@
     "raw-loader": "^4.0.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "three": "^0.141.0"
+    "three": "^0.141.0",
+    "usehooks-ts": "^2.5.4"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",

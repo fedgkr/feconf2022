@@ -1,1 +1,1 @@
-export { default } from '~/views/page-components/ComingSoonPage'
+export { default } from '~/views/ComingSoonPage'
