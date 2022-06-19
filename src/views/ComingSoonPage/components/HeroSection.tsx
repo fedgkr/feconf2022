@@ -1,6 +1,7 @@
 import {FC, useRef} from "react";
 import styled from '@emotion/styled';
 import Portal from "~/views/components/Portal";
+import SpaceshipIcon from "~/views/ComingSoonPage/components/SpaceshipIcon";
 
 interface Props {
   in: boolean;
@@ -36,8 +37,8 @@ const HeroSection: FC<Props> = (props) => {
       <Portal area="content">
         <FixedWrap>
           <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
-            <h3>Explore the forefront of FE dev</h3>
-            <h2>FECONF.22</h2>
+            <h2><span>올해도 가보자고</span><SpaceshipIcon/></h2>
+            <h4>국내 최대 프론트엔드 개발 컨퍼런스,<br/> FECONF 2022가 찾아옵니다.</h4>
           </TextWrap>
         </FixedWrap>
       </Portal>
@@ -65,15 +66,22 @@ const TextWrap = styled.div`
   opacity: 1;
   transform: scale(1);
 
-  h3 {
-    font-size: 24px;
-    color: #D7DCE5;
-  }
-
   h2 {
-    font-size: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 92px;
     font-weight: 900;
     color: white;
+    svg {
+      width: 80px;
+      margin-left: 24px;
+    }
+  }
+  h4 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #B0BECF;
   }
 `;
 

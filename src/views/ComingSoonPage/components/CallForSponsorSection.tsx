@@ -19,11 +19,13 @@ const CallForSponsorSection: FC<Props> = (props) => {
         <FixedWrap>
           <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
             <h2>
-              컨퍼런스를 함께 만들어갈<br/>
-              후원사를 모집해요.
+              개발 문화를 선도하는<br/>
+              후원사가 되어주세요.
             </h2>
-            <p>후원을 통해 함께 프론트엔드 개발 문화를 만들고, <br/>
-              기업 홍보 및 채용 활동을 계획해보세요!</p>
+            <p>
+              FECONF 후원사가 되어 개발 문화를 만들고,<br/>
+              기업 홍와 채용 활동을 계획하세요.
+            </p>
             <ApplyButton href="#">후원 문의하기</ApplyButton>
           </TextWrap>
         </FixedWrap>
@@ -53,16 +55,16 @@ const TextWrap = styled.div`
   transform: scale(1);
 
   h2 {
-    font-weight: 700;
     font-size: 60px;
-    line-height: 130%;
+    font-weight: 700;
+    line-height: 1.3;
     color: #FFFFFF;
   }
   p {
-    width: 468px;
     margin: 24px auto 42px auto;
-    color: #C8CCD5;
+    color: #B0BECF;
     font-size: 24px;
+    font-weight: 600;
     line-height: 1.6;
     opacity: 0.9;
   }

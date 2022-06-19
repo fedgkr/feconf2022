@@ -16,14 +16,14 @@ const ApplyButton: FC<Props> = ({ children, ...rest }) => {
 
 const Button = styled.a`
   display: inline-block;
-  padding: 24px 36px;
+  padding: 22px 32px;
   font-size: 16px;
   font-weight: 600;
-  color: white;
   line-height: 1.2;
+  color: black;
   border-radius: 100px;
   border: 1px solid white;
-  background-color: transparent;
+  background-color: white;
 `;
 
 export default ApplyButton;

@@ -12,17 +12,14 @@ interface Props {
 
 const ComingSoonSection: FC<Props> = (props) => {
   const { opacity, scale, transition } = useHandleAnimation(props);
-
-
-
   return (
     <Container className="section">
       <Portal area="content">
         <FixedWrap>
           <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
             <TextWrap>
-              <h2>10월에 찾아옵니다.</h2>
-              <p>2022 FEConf -&gt; Frontend Developer Conference</p>
+              <h2>마침내, 오프라인에서</h2>
+              <p>10월 8일, 잠실 롯데타워에서 만나요.</p>
             </TextWrap>
           </TextContainer>
         </FixedWrap>
@@ -73,6 +70,7 @@ const TextWrap = styled.div`
     margin: 32px auto 0 auto;
     color: #C8CCD5;
     font-size: 24px;
+    font-weight: 600;
     line-height: 1.6;
   }
 `;

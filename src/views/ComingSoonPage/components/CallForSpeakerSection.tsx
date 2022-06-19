@@ -19,10 +19,13 @@ const CallForSpeakerSection: FC<Props> = (props) => {
         <FixedWrap>
           <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
             <h2>
-              FEConf 22를 함께 빛낼 <br/>
-              스피커를 모집해요
+              꾸준 성장하는 <br/>
+              당신이 올해의 주인공.
             </h2>
-            <p>당신의 멋진 스토리를 공유하고, 함께 빛내요.</p>
+            <p>
+              FECONF 2022의 스피커가 되어 <br/>
+              당신의 멋진 스토리를 공유해주세요.
+            </p>
             <ApplyButton href="#">스피커 신청하기</ApplyButton>
           </TextWrap>
         </FixedWrap>

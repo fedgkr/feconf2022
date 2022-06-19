@@ -18,8 +18,7 @@ const IntroSection: FC<Props> = (props) => {
         <FixedWrap>
           <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
             <p>
-              국내 최대 규모 프론트엔드 개발 컨퍼런스 FEConf 엔지니어들의 다양한 도전과 경험을 공유합니다.
-              새로운 기술을 익히고 함께 성장해요.
+              프론트엔드 엔지니어의 다양한 도전과 경험, <br/> 개발하며 마주한 치열한 고민과 깊은 인사이트를 나누고 <br/> 새로운 기술을 익히며 함께 성장해요.
             </p>
           </TextWrap>
         </FixedWrap>
@@ -48,10 +47,10 @@ const TextWrap = styled.div`
   opacity: 1;
   transform: scale(1);
   p {
-    width: 468px;
     margin: 0 auto;
-    color: #C8CCD5;
+    color: #B0BECF;
     font-size: 24px;
+    font-weight: 600;
     line-height: 1.6;
     opacity: 0.9;
   }
