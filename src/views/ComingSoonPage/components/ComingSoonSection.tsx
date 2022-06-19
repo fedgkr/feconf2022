@@ -17,7 +17,7 @@ const ComingSoonSection: FC<Props> = (props) => {
 
   return (
     <Container className="section">
-      <Portal>
+      <Portal area="content">
         <FixedWrap>
           <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
             <TextWrap>
@@ -27,8 +27,8 @@ const ComingSoonSection: FC<Props> = (props) => {
           </TextContainer>
         </FixedWrap>
       </Portal>
-      <Portal>
-        <FixedWrap style={{ pointerEvents: "none", zIndex: 0 }}>
+      <Portal area="content">
+        <FixedWrap style={{ pointerEvents: 'none', zIndex: 0 }}>
           <Earth fadeIn={props.in} />
         </FixedWrap>
       </Portal>

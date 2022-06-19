@@ -15,7 +15,7 @@ const CallForSpeakerSection: FC<Props> = (props) => {
   const { opacity, scale, transition } = useHandleAnimation(props);
   return (
     <Container ref={ref} className="section">
-      <Portal>
+      <Portal area="content">
         <FixedWrap>
           <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
             <h2>

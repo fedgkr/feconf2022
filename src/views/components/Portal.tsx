@@ -1,14 +1,17 @@
-import {FC, ReactNode, useEffect, useRef, useState} from "react";
+import { FC, ReactNode, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
+type PortalArea = 'content'
+
 interface Props {
+  area: PortalArea;
   children: ReactNode;
 }
 
-const Portal: FC<Props> = ({ children }) => {
+const Portal: FC<Props> = ({ area, children }) => {
   const ref = useRef<HTMLElement>();
   useEffect(() => {
-    ref.current = document.getElementById('content');
+    ref.current = document.getElementById(area);
   }, []);
   if (!ref.current) {
     return null;
