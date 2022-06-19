@@ -2,40 +2,35 @@ import {FC, useRef} from "react";
 import styled from '@emotion/styled';
 import ApplyButton from "~/views/components/ApplyButton";
 import Portal from "~/views/components/Portal";
-import {useHandleAnimation} from "~/views/ComingSoonPage/components/HeroSection";
+import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
+import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
+import Center from "~/views/ComingSoonPage/components/Center";
 
 interface Props {
-  in: boolean;
-  out: boolean;
-  direction: 'up' | 'down';
+  state: SectionState;
 }
 
-const CallForSpeakerSection: FC<Props> = (props) => {
+const CallForSpeakerSection: FC<Props> = ({ state }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const { opacity, scale, transition } = useHandleAnimation(props);
+  const { opacity, scale, transition } = useFadeInOutAnimation(state);
   return (
-    <Container ref={ref} className="section">
-      <Portal area="content">
-        <FixedWrap>
-          <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
-            <h2>
-              꾸준 성장하는 <br/>
-              당신이 올해의 주인공.
-            </h2>
-            <p>
-              FECONF 2022의 스피커가 되어 <br/>
-              당신의 멋진 스토리를 공유해주세요.
-            </p>
-            <ApplyButton href="#">스피커 신청하기</ApplyButton>
-          </TextWrap>
-        </FixedWrap>
-      </Portal>
-    </Container>
+    <SectionContainer ref={ref}>
+      <Center visible={state.visible}>
+        <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
+          <h2>
+            꾸준 성장하는 <br/>
+            당신이 올해의 주인공.
+          </h2>
+          <p>
+            FECONF 2022의 스피커가 되어 <br/>
+            당신의 멋진 스토리를 공유해주세요.
+          </p>
+          <ApplyButton href="#">스피커 신청하기</ApplyButton>
+        </TextWrap>
+      </Center>
+    </SectionContainer>
   );
 };
-
-const Container = styled.section`
-`;
 
 const FixedWrap = styled.div`
   position: fixed;

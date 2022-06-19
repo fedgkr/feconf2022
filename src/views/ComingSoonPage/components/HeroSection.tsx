@@ -1,71 +1,30 @@
 import {FC, useRef} from "react";
 import styled from '@emotion/styled';
-import Portal from "~/views/components/Portal";
 import SpaceshipIcon from "~/views/ComingSoonPage/components/SpaceshipIcon";
+import Center from "~/views/ComingSoonPage/components/Center";
+import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
+import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
 
 interface Props {
-  in: boolean;
-  out: boolean;
-  direction: 'up' | 'down';
+  state: SectionState;
 }
 
-export const useHandleAnimation = (props: Props) => {
-  const styles = useRef({ opacity: 0, scale: 0, transition: ' ' });
-  if (props.in) {
-    styles.current.opacity = 1;
-    styles.current.scale = 1;
-    styles.current.transition = 'opacity 600ms 300ms, transform 600ms 300ms';
-  } else if (props.out) {
-    styles.current.opacity = 0;
-    styles.current.opacity = 0;
-    styles.current.transition = 'opacity 400ms, transform 400ms';
-    if (props.direction === 'down') {
-      styles.current.scale = 2;
-    }
-    if (props.direction === 'up') {
-      styles.current.scale = 0;
-    }
-  }
-  return styles.current;
-}
-
-const HeroSection: FC<Props> = (props) => {
+const HeroSection: FC<Props> = ({ state }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const { opacity, scale, transition } = useHandleAnimation(props);
+  const { opacity, scale, transition } = useFadeInOutAnimation(state);
   return (
-    <Container ref={ref} className="section">
-      <Portal area="content">
-        <FixedWrap>
-          <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
-            <h2><span>올해도 가보자고</span><SpaceshipIcon/></h2>
-            <h4>국내 최대 프론트엔드 개발 컨퍼런스,<br/> FECONF 2022가 찾아옵니다.</h4>
-          </TextWrap>
-        </FixedWrap>
-      </Portal>
-    </Container>
+    <SectionContainer ref={ref}>
+      <Center visible={state.visible}>
+        <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
+          <h2><span>올해도 가보자고</span><SpaceshipIcon/></h2>
+          <h4>국내 최대 프론트엔드 개발 컨퍼런스,<br/> FECONF 2022가 찾아옵니다.</h4>
+        </TextWrap>
+      </Center>
+    </SectionContainer>
   );
 };
 
-const Container = styled.section`
-`;
-
-const FixedWrap = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const TextWrap = styled.div`
-  width: 100%;
-  text-align: center;
-  opacity: 1;
-  transform: scale(1);
-
   h2 {
     display: flex;
     align-items: center;
@@ -79,6 +38,7 @@ const TextWrap = styled.div`
     }
   }
   h4 {
+    margin-top: 24px;
     font-size: 24px;
     font-weight: 600;
     color: #B0BECF;

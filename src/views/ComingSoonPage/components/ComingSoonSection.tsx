@@ -1,35 +1,33 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
 import Portal from "~/views/components/Portal";
-import { useHandleAnimation } from "~/views/ComingSoonPage/components/HeroSection";
 import { Earth } from "./Earth";
+import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
+import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
+import Center from "~/views/ComingSoonPage/components/Center";
 
 interface Props {
-  in: boolean;
-  out: boolean;
-  direction: 'up' | 'down';
+  state: SectionState;
 }
 
-const ComingSoonSection: FC<Props> = (props) => {
-  const { opacity, scale, transition } = useHandleAnimation(props);
+const ComingSoonSection: FC<Props> = ({ state }) => {
+  const { opacity, scale, transition } = useFadeInOutAnimation(state);
   return (
-    <Container className="section">
-      <Portal area="content">
-        <FixedWrap>
-          <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
-            <TextWrap>
-              <h2>마침내, 오프라인에서</h2>
-              <p>10월 8일, 잠실 롯데타워에서 만나요.</p>
-            </TextWrap>
-          </TextContainer>
-        </FixedWrap>
-      </Portal>
+    <SectionContainer>
+      <Center visible={state.visible}>
+        <TextContainer style={{ opacity, transform: `scale(${scale})`, transition }}>
+          <TextWrap>
+            <h2>마침내, 오프라인에서</h2>
+            <p>10월 8일, 잠실 롯데타워에서 만나요.</p>
+          </TextWrap>
+        </TextContainer>
+      </Center>
       <Portal area="content">
         <FixedWrap style={{ pointerEvents: 'none', zIndex: 0 }}>
-          <Earth fadeIn={props.in} />
+          <Earth fadeIn={state.visible} />
         </FixedWrap>
       </Portal>
-    </Container>
+    </SectionContainer>
   );
 }
 

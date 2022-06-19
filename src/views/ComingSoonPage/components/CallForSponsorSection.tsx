@@ -2,35 +2,33 @@ import {FC, useRef} from "react";
 import styled from '@emotion/styled';
 import ApplyButton from "~/views/components/ApplyButton";
 import Portal from "~/views/components/Portal";
-import {useHandleAnimation} from "~/views/ComingSoonPage/components/HeroSection";
+import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
+import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
+import Center from "~/views/ComingSoonPage/components/Center";
 
 interface Props {
-  in: boolean;
-  out: boolean;
-  direction: 'up' | 'down';
+  state: SectionState;
 }
 
-const CallForSponsorSection: FC<Props> = (props) => {
+const CallForSponsorSection: FC<Props> = ({ state }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const { opacity, scale, transition } = useHandleAnimation(props);
+  const { opacity, scale, transition } = useFadeInOutAnimation(state);
   return (
-    <Container ref={ref} className="section">
-      <Portal area="content">
-        <FixedWrap>
-          <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
-            <h2>
-              개발 문화를 선도하는<br/>
-              후원사가 되어주세요.
-            </h2>
-            <p>
-              FECONF 후원사가 되어 개발 문화를 만들고,<br/>
-              기업 홍와 채용 활동을 계획하세요.
-            </p>
-            <ApplyButton href="#">후원 문의하기</ApplyButton>
-          </TextWrap>
-        </FixedWrap>
-      </Portal>
-    </Container>
+    <SectionContainer ref={ref}>
+      <Center visible={state.visible}>
+        <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
+          <h2>
+            개발 문화를 선도하는<br/>
+            후원사가 되어주세요.
+          </h2>
+          <p>
+            FECONF 후원사가 되어 개발 문화를 만들고,<br/>
+            기업 홍와 채용 활동을 계획하세요.
+          </p>
+          <ApplyButton href="#">후원 문의하기</ApplyButton>
+        </TextWrap>
+      </Center>
+    </SectionContainer>
   );
 };
 

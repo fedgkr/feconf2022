@@ -6,5 +6,14 @@ module.exports = {
       use: ['raw-loader', 'glslify-loader'],
     });
     return config;
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/trailer',
+        permanent: true,
+      },
+    ]
+  },
 };
