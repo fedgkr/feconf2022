@@ -12,7 +12,6 @@ interface Props {
 const IntroSection: FC<Props> = ({ state }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const { opacity, scale, transition } = useFadeInOutAnimation(state);
-  console.log('opacity, scale, transition : ', state);
   return (
     <SectionContainer ref={ref}>
       <Center visible={state.visible}>

@@ -5,6 +5,7 @@ import { Earth } from "./Earth";
 import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
 import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
 import Center from "~/views/ComingSoonPage/components/Center";
+import Footer from "~/views/ComingSoonPage/components/Footer";
 
 interface Props {
   state: SectionState;
@@ -26,12 +27,11 @@ const ComingSoonSection: FC<Props> = ({ state }) => {
         <FixedWrap style={{ pointerEvents: 'none', zIndex: 0 }}>
           <Earth fadeIn={state.visible} />
         </FixedWrap>
+        <Footer visible={state.visible}/>
       </Portal>
     </SectionContainer>
   );
 }
-
-const Container = styled.div``;
 
 const FixedWrap = styled.div`
   position: fixed;

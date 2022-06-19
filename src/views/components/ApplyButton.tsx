@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import {FC, HTMLAttributes, ReactNode} from "react";
+import SafeLink from "~/views/components/SafeLink";
 
 interface Props extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -14,7 +15,7 @@ const ApplyButton: FC<Props> = ({ children, ...rest }) => {
   );
 }
 
-const Button = styled.a`
+const Button = styled(SafeLink)`
   display: inline-block;
   padding: 22px 32px;
   font-size: 16px;
