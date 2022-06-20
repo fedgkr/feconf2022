@@ -1,5 +1,5 @@
-import {FC, useEffect, useRef, useState} from "react";
-import FullPage, {fullpageApi as FullPageApi, fullpageOptions as FullPageOptions} from '@fullpage/react-fullpage';
+import {FC, useEffect, useState} from "react";
+import FullPage, {fullpageOptions as FullPageOptions} from '@fullpage/react-fullpage';
 
 import HeroSection from "~/views/ComingSoonPage/components/HeroSection";
 import IntroSection from "~/views/ComingSoonPage/components/IntroSection";

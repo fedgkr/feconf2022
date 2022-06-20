@@ -20,12 +20,12 @@ const CallForSpeakerSection: FC<Props> = ({ state }) => {
       <Center visible={state.visible}>
         <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
           <h2>
-            꾸준 성장하는 <br/>
+            꾸준히 성장하는 <br/>
             당신이 올해의 <span>주인공<CircleIcon visible={state.visible}/></span>.
           </h2>
           <p>
             FECONF 2022의 스피커가 되어 <br/>
-            당신의 멋진 스토리를 공유해주세요.
+            당신의 멋진 경험을 공유해주세요.
           </p>
           <ApplyButton href={SPEAKER_FORM} style={{ pointerEvents: state.visible ? 'all' : 'none' }}>
             스피커 신청하기
