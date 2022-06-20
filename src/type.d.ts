@@ -5,3 +5,10 @@ interface SectionState {
   out: boolean;
   direction: 'up' | 'down';
 }
+
+interface Window {
+  fullpage_api: {
+    moveTo: (target: number) => void;
+    silentMoveTo: (target: number) => void;
+  }
+}

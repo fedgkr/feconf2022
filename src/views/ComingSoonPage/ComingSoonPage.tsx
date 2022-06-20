@@ -1,4 +1,4 @@
-import {FC, useRef, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import FullPage, {fullpageApi as FullPageApi, fullpageOptions as FullPageOptions} from '@fullpage/react-fullpage';
 
 import HeroSection from "~/views/ComingSoonPage/components/HeroSection";
@@ -10,6 +10,7 @@ import ComingSoonSection from "~/views/ComingSoonPage/components/ComingSoonSecti
 import {WarpLine} from "~/views/ComingSoonPage/components/WarpLine";
 import {anchors} from "~/views/ComingSoonPage/data/anchors";
 import ComingSoonMeta from "~/views/ComingSoonPage/components/ComingSoonMeta";
+import {useRouter} from "next/router";
 
 type Section = FC<{ state: SectionState }>;
 
@@ -24,13 +25,20 @@ const sections: Section[] = [
 const ComingSoonPage = () => {
   const [state, setState] = useState<{ origin: number, target: number, direction: 'up' | 'down' }>({
     origin: null,
-    target: 0,
+    target: null,
     direction: 'down'
   });
-  const fpApi = useRef<FullPageApi>(null);
   const onSlideLeave: FullPageOptions['onLeave'] = (origin, target, direction) => {
     setState({ origin: origin.index, target: target.index, direction: direction as 'up' | 'down' });
   };
+  const router = useRouter();
+  useEffect(() => {
+    const hash = router.asPath.split('#')[1];
+    if (hash === anchors[0]) {
+      window.fullpage_api.silentMoveTo(2);
+      window.fullpage_api.moveTo(1);
+    }
+  }, []);
   return (
     <Container>
       <ComingSoonMeta/>
@@ -41,8 +49,7 @@ const ComingSoonPage = () => {
         licenseKey="uobwH@p8"
         anchors={anchors}
         onLeave={onSlideLeave}
-        render={({fullpageApi}) => {
-          fpApi.current = fullpageApi;
+        render={() => {
           return (
             <FullPage.Wrapper>
               { sections.map((Section, index) => {
