@@ -51,14 +51,16 @@ const ComingSoonPage = () => {
         onLeave={onSlideLeave}
         render={() => {
           return (
-            <FullPage.Wrapper>
-              { sections.map((Section, index) => {
-                const key = anchors[index];
-                const visible = state.target === index;
-                const out = state.origin === index;
-                return <Section key={key} state={{ visible, out, direction: state.direction }}/>;
-              })}
-            </FullPage.Wrapper>
+            <>
+              <FullPage.Wrapper>
+                { sections.map((Section, index) => {
+                  const key = anchors[index];
+                  const visible = state.target === index;
+                  const out = state.origin === index;
+                  return <Section key={key} state={{ visible, out, direction: state.direction }}/>;
+                })}
+              </FullPage.Wrapper>
+            </>
           );
         }}
       />

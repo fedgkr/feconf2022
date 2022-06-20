@@ -7,6 +7,7 @@ import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer
 import Center from "~/views/ComingSoonPage/components/Center";
 import {tablet} from "~/views/ComingSoonPage/styles/media-query";
 import {SPONSOR_FORM} from "~/views/ComingSoonPage/data/meta";
+import CircleIcon from "~/views/ComingSoonPage/components/CircleIcon";
 
 interface Props {
   state: SectionState;
@@ -21,7 +22,7 @@ const CallForSponsorSection: FC<Props> = ({ state }) => {
         <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
           <h2>
             개발 문화를 선도하는<br/>
-            후원사가 되어주세요.
+            <span>후원사<CircleIcon visible={state.visible}/></span>가 되어주세요.
           </h2>
           <p>
             FECONF 후원사가 되어 개발 문화를 만들고,<br/>
@@ -45,6 +46,9 @@ const TextWrap = styled.div`
     font-weight: 700;
     line-height: 1.3;
     color: #FFFFFF;
+    span {
+      position: relative;
+    }
   }
   p {
     margin: 24px auto 42px auto;

@@ -6,6 +6,7 @@ import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer
 import Center from "~/views/ComingSoonPage/components/Center";
 import {tablet} from "~/views/ComingSoonPage/styles/media-query";
 import {SPEAKER_FORM} from "~/views/ComingSoonPage/data/meta";
+import CircleIcon from "~/views/ComingSoonPage/components/CircleIcon";
 
 interface Props {
   state: SectionState;
@@ -20,7 +21,7 @@ const CallForSpeakerSection: FC<Props> = ({ state }) => {
         <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
           <h2>
             꾸준 성장하는 <br/>
-            당신이 올해의 주인공.
+            당신이 올해의 <span>주인공<CircleIcon visible={state.visible}/></span>.
           </h2>
           <p>
             FECONF 2022의 스피커가 되어 <br/>
@@ -43,6 +44,9 @@ const TextWrap = styled.div`
     font-size: 60px;
     line-height: 130%;
     color: #FFFFFF;
+    span {
+      position: relative;
+    }
   }
   p {
     margin: 24px auto 48px auto;
