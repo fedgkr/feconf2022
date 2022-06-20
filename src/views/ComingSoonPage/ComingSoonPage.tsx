@@ -54,6 +54,7 @@ const ComingSoonPage = () => {
       <ComingSoonMeta/>
       <FixedContainer>
         <WarpLine/>
+        <div className="gradient"></div>
       </FixedContainer>
       <FullPage
         licenseKey="uobwH@p8"
@@ -83,8 +84,16 @@ const FixedContainer = styled.div`
   top: 0;
   left: 0;
   pointer-events: none;
-`;
 
+  .gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: radial-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  }
+`;
 const Container = styled.div`
   background-color: black;
 `;
