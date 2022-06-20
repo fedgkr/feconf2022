@@ -3,7 +3,6 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 
 import '~/styles/main.scss';
-import NextHead from "next/head";
 
 const cache = createCache({ key: 'next' });
 

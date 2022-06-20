@@ -12,7 +12,7 @@ const Portal: FC<Props> = ({ area, children }) => {
   const ref = useRef<HTMLElement>();
   useEffect(() => {
     ref.current = document.getElementById(area);
-  }, []);
+  }, [area]);
   if (!ref.current) {
     return null;
   }

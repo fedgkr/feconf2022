@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from "react";
+import {FC} from "react";
 import styled from "@emotion/styled";
 import usePathLength from "~/views/ComingSoonPage/hooks/usePathLength";
 import {tablet} from "~/views/ComingSoonPage/styles/media-query";
@@ -33,7 +33,7 @@ const SVG = styled.svg`
   ${tablet`
     width: 124px;
     height: 60px;
-    top: -10px;
+    top: -12px;
     left: -15px;
   `}
 

@@ -36,14 +36,14 @@ export const ThreeCanvas = forwardRef<ThreeCanvasObject, ThreeCanvasProps>((prop
 
         const scene = new THREE.Scene();
         let camera: THREE.OrthographicCamera | THREE.PerspectiveCamera;
-        
-        
+
+
         if (props.perspective) {
             const fov = 60;
             const aspect = width / height;
             const near = 0.1;
             const far = 1000;
-        
+
             camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
         } else {
             camera = new THREE.OrthographicCamera(-aspect, aspect, 1, -1, 0.1, 10000);
@@ -117,3 +117,5 @@ export const ThreeCanvas = forwardRef<ThreeCanvasObject, ThreeCanvasProps>((prop
 
     return <canvas ref={canvasRef}></canvas>;
 });
+
+ThreeCanvas.displayName = 'ThreeCanvas';

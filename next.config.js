@@ -1,5 +1,9 @@
 module.exports = {
   reactStrictMode: true,
+  eslint: {
+    dirs: ['src'],
+
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(glsl|vs|fs|vert|frag)$/,
