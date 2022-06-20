@@ -7,7 +7,7 @@ interface Props {
   visible: boolean;
 }
 
-const animation = 'lineDash 1200ms 600ms cubic-bezier(0.33, 1, 0.68, 1) forwards';
+const animation = 'lineDash 800ms 600ms cubic-bezier(0.33, 1, 0.68, 1) forwards';
 
 const LineIcon: FC<Props> = ({ visible}) => {
   const { ref, length } = usePathLength();
