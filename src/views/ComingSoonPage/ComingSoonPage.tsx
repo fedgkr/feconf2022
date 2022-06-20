@@ -22,15 +22,7 @@ const sections: Section[] = [
   ComingSoonSection,
 ];
 
-const ComingSoonPage = () => {
-  const [state, setState] = useState<{ origin: number, target: number, direction: 'up' | 'down' }>({
-    origin: null,
-    target: null,
-    direction: 'down'
-  });
-  const onSlideLeave: FullPageOptions['onLeave'] = (origin, target, direction) => {
-    setState({ origin: origin.index, target: target.index, direction: direction as 'up' | 'down' });
-  };
+const useFirstPhaseMotion = () => {
   const router = useRouter();
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
@@ -39,6 +31,24 @@ const ComingSoonPage = () => {
       window.fullpage_api.moveTo(1);
     }
   }, []);
+};
+
+const useSlideState = () => {
+  const [state, setState] = useState<{ origin: number, target: number, direction: 'up' | 'down' }>({
+    origin: null,
+    target: null,
+    direction: 'down'
+  });
+  const onLeave: FullPageOptions['onLeave'] = (origin, target, direction) => {
+    setState({ origin: origin.index, target: target.index, direction: direction as 'up' | 'down' });
+  };
+  return { state, onLeave };
+}
+
+const ComingSoonPage = () => {
+  const { state, onLeave } = useSlideState();
+  useFirstPhaseMotion();
+
   return (
     <Container>
       <ComingSoonMeta/>
@@ -48,21 +58,17 @@ const ComingSoonPage = () => {
       <FullPage
         licenseKey="uobwH@p8"
         anchors={anchors}
-        onLeave={onSlideLeave}
-        render={() => {
-          return (
-            <>
-              <FullPage.Wrapper>
-                { sections.map((Section, index) => {
-                  const key = anchors[index];
-                  const visible = state.target === index;
-                  const out = state.origin === index;
-                  return <Section key={key} state={{ visible, out, direction: state.direction }}/>;
-                })}
-              </FullPage.Wrapper>
-            </>
-          );
-        }}
+        onLeave={onLeave}
+        render={() => (
+          <FullPage.Wrapper>
+            { sections.map((Section, index) => {
+              const key = anchors[index];
+              const visible = state.target === index;
+              const out = state.origin === index;
+              return <Section key={key} state={{ visible, out, direction: state.direction }}/>;
+            })}
+          </FullPage.Wrapper>
+        )}
       />
       <div id="content"/>
     </Container>
