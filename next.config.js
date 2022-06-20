@@ -11,7 +11,7 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: '/trailer#main',
+        destination: '/trailer',
         permanent: true,
       },
     ]

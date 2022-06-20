@@ -34,7 +34,7 @@ const ComingSoonPage = () => {
   const router = useRouter();
   useEffect(() => {
     const hash = router.asPath.split('#')[1];
-    if (hash === anchors[0]) {
+    if (hash === anchors[0] || !hash) {
       window.fullpage_api.silentMoveTo(2);
       window.fullpage_api.moveTo(1);
     }
