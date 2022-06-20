@@ -41,8 +41,6 @@ const ComingSoonPage = () => {
         licenseKey="uobwH@p8"
         anchors={anchors}
         onLeave={onSlideLeave}
-        dragAndMove={true}
-        debug={true}
         render={({fullpageApi}) => {
           fpApi.current = fullpageApi;
           return (
