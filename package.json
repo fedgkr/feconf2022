@@ -35,7 +35,7 @@
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@fullpage/react-fullpage": "^0.1.26",
+    "@fullpage/react-fullpage": "^0.1.12",
     "glslify-loader": "^2.0.0",
     "gsap": "^3.10.4",
     "lodash": "^4.17.21",

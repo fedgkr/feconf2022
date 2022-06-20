@@ -4,6 +4,7 @@ import SpaceshipIcon from "~/views/ComingSoonPage/components/SpaceshipIcon";
 import Center from "~/views/ComingSoonPage/components/Center";
 import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
 import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
+import {mobile, tablet} from "~/views/ComingSoonPage/styles/media-query";
 
 interface Props {
   state: SectionState;
@@ -26,22 +27,50 @@ const HeroSection: FC<Props> = ({ state }) => {
 
 const TextWrap = styled.div`
   h2 {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 92px;
     font-weight: 900;
+    line-height: 1.1;
     color: white;
     svg {
       width: 80px;
+      height: 80px;
       margin-left: 24px;
     }
+    ${tablet`
+      font-size: 48px;
+      svg {
+        width: 42px;
+        height: 42px;
+        margin-left: 10px;
+      }
+    `}
+    ${mobile`
+      svg {
+        position: absolute;
+        top: -40px;
+        width: 40px;
+        height: 40px;
+        margin-left: 0;
+        margin-top: -16px;
+      }
+    `}
   }
   h4 {
     margin-top: 24px;
     font-size: 24px;
     font-weight: 600;
     color: #B0BECF;
+    ${tablet`
+      margin-top: 12px;
+      font-size: 16px;
+    `}
+    ${mobile`
+      font-size: 16px;
+    `}
   }
 `;
 

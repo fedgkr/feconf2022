@@ -1,13 +1,12 @@
 import {FC} from "react";
 import styled from "@emotion/styled";
 import SafeLink from "~/views/components/SafeLink";
+import {tablet} from "~/views/ComingSoonPage/styles/media-query";
+import {FACEBOOK_FRONTEND_URL, FECONF_EMAIL} from "~/views/ComingSoonPage/data/meta";
 
 interface Props {
   visible: boolean;
 }
-
-const FACEBOOK_FRONTEND_URL = 'https://www.facebook.com/groups/webfrontend';
-const FECONF_EMAIL = 'feconf@googlegroups.com';
 
 const Footer: FC<Props> = ({ visible }) => {
   return (
@@ -37,8 +36,13 @@ const Container = styled.footer<{ visible: boolean }>`
   justify-content: center;
   height: 120px;
   background-color: black;
+  pointer-events: all;
   transform: translateY(${({ visible }) => visible ? 0 : '100%'});
   transition: transform 300ms ease-in;
+
+  ${tablet`
+    display: none;
+  `}
 `;
 
 const Menu = styled.ul`

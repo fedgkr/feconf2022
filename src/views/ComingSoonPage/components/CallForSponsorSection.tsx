@@ -5,6 +5,8 @@ import Portal from "~/views/components/Portal";
 import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
 import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
 import Center from "~/views/ComingSoonPage/components/Center";
+import {tablet} from "~/views/ComingSoonPage/styles/media-query";
+import {SPONSOR_FORM} from "~/views/ComingSoonPage/data/meta";
 
 interface Props {
   state: SectionState;
@@ -25,32 +27,18 @@ const CallForSponsorSection: FC<Props> = ({ state }) => {
             FECONF 후원사가 되어 개발 문화를 만들고,<br/>
             기업 홍와 채용 활동을 계획하세요.
           </p>
-          <ApplyButton href="#">후원 문의하기</ApplyButton>
+          <ApplyButton href={SPONSOR_FORM} style={{ pointerEvents: state.visible ? 'all' : 'none' }}>
+            후원 문의하기
+          </ApplyButton>
         </TextWrap>
       </Center>
     </SectionContainer>
   );
 };
 
-const Container = styled.section`
-`;
-
-const FixedWrap = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const TextWrap = styled.div`
   width: 100%;
   text-align: center;
-  opacity: 1;
-  transform: scale(1);
 
   h2 {
     font-size: 60px;
@@ -66,6 +54,16 @@ const TextWrap = styled.div`
     line-height: 1.6;
     opacity: 0.9;
   }
+
+  ${tablet`
+    h2 {
+      font-size: 36px;
+    }
+    p {
+      margin: 16px auto 32px auto;
+      font-size: 16px;
+    }
+  `}
 `;
 
 export default CallForSponsorSection;

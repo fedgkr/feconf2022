@@ -178,13 +178,13 @@
   resolved "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@fullpage/react-fullpage@^0.1.26":
-  version "0.1.26"
-  resolved "https://registry.npmjs.org/@fullpage/react-fullpage/-/react-fullpage-0.1.26.tgz#8772a748d1d544181c1f9349630fc9ec48b50fc7"
-  integrity sha512-gUdUusnQzyk9gej4PuY4iSJHvG1yckK1cu8mW0dTj3Y1Z6dH+AUDVllfxZS48pmDLbiLQq++0bW6D0VPkqutfQ==
+"@fullpage/react-fullpage@^0.1.12":
+  version "0.1.12"
+  resolved "https://registry.npmjs.org/@fullpage/react-fullpage/-/react-fullpage-0.1.12.tgz#29c20c7aa7de8a5b06c3feeb1c8e767a6f70ab3f"
+  integrity sha512-lUfKOHJy+gmeXzO96Vul9ytIzCsOTsd0NldcJJQWIBagBGTsL160uQuDJo5xRW/EHVmCLKsGyI6WVzhRZydFIw==
   dependencies:
     "@babel/polyfill" "^7.2.5"
-    fullpage.js "^4.0.9"
+    fullpage.js "^3.0.4"
 
 "@next/env@12.1.6":
   version "12.1.6"
@@ -604,10 +604,10 @@ fsevents@~2.3.2:
   resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
-fullpage.js@^4.0.9:
-  version "4.0.9"
-  resolved "https://registry.npmjs.org/fullpage.js/-/fullpage.js-4.0.9.tgz#1ef0418626dc253171aa6b942bf84fc3f6460720"
-  integrity sha512-/P9P8WqK5B1ZKGqT9PQmDdQY2xTg2lt3ersb+/X1kA47NlBakNyS/W4Zw9otW1loG2Or2OAh15VKaJVPsdMNVw==
+fullpage.js@^3.0.4:
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/fullpage.js/-/fullpage.js-3.1.2.tgz#ee6289f52edb2a9f9c25d09c4022043b701d3cc0"
+  integrity sha512-hv7z6xhbg2StTp1UDq2hi+0oHjhT7cW3zCL3qCIJ3ood5pN0FRBQ2YKIOUobhsp4ATSQlr6sZ2TOcS+Ha+T7Cg==
 
 function-bind@^1.1.1:
   version "1.1.1"

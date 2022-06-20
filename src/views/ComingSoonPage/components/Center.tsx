@@ -27,7 +27,7 @@ const FixedWrap = styled.div<{ visible: boolean }>`
   align-items: center;
   justify-content: center;
   text-align: center;
-  pointer-events: ${({ visible }) => visible ? 'all' : 'none'};
+  pointer-events: none;
 `;
 
 export default Center;
