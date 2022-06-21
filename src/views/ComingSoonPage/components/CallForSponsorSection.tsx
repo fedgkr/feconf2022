@@ -8,6 +8,7 @@ import {tablet} from "~/views/ComingSoonPage/styles/media-query";
 import {SPONSOR_FORM} from "~/views/ComingSoonPage/data/meta";
 import CircleIcon from "~/views/ComingSoonPage/components/CircleIcon";
 import Portal from "~/views/components/Portal";
+import {MBr, PBr, TBr} from "~/views/ComingSoonPage/components/Br";
 
 interface Props {
   state: SectionState;
@@ -21,7 +22,7 @@ const CallForSponsorSection: FC<Props> = ({ state }) => {
       <Center visible={state.visible}>
         <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
           <h2>
-            FE 개발 생태와 함께하는<br/>
+            FE 개발 생태계와 함께하는<br/>
             <span>후원사<CircleIcon visible={state.visible}/></span>가 되어주세요.
           </h2>
           <p>
@@ -29,7 +30,7 @@ const CallForSponsorSection: FC<Props> = ({ state }) => {
             기업 홍보와 채용 활동을 계획하세요.
           </p>
           <ApplyButton href={SPONSOR_FORM} style={{ pointerEvents: state.visible ? 'all' : 'none' }}>
-            후원 문의하기
+            사전 등록하기
           </ApplyButton>
         </TextWrap>
       </Center>
@@ -67,7 +68,7 @@ const TextWrap = styled.div`
 
   ${tablet`
     h2 {
-      font-size: 36px;
+      font-size: 32px;
     }
     p {
       margin: 16px auto 32px auto;
@@ -96,6 +97,12 @@ const AdditionalNote = styled.div`
     line-height: 1.6;
     color: white;
   }
+  ${tablet`
+    bottom: 40px;
+      p {
+      font-size: 14px;
+    }
+  `}
 `;
 
 export default CallForSponsorSection;

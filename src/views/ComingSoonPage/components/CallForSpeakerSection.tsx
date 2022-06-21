@@ -50,8 +50,9 @@ const TextWrap = styled.div`
   }
   p {
     margin: 24px auto 48px auto;
-    color: #C8CCD5;
+    color: #B0BECF;
     font-size: 24px;
+    font-weight: 600;
     line-height: 1.6;
     opacity: 0.9;
   }
