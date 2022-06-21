@@ -7,10 +7,13 @@ import CallForSpeakerSection from "~/views/ComingSoonPage/components/CallForSpea
 import CallForSponsorSection from "~/views/ComingSoonPage/components/CallForSponsorSection";
 import styled from "@emotion/styled";
 import ComingSoonSection from "~/views/ComingSoonPage/components/ComingSoonSection";
-import {WarpLine} from "~/views/ComingSoonPage/components/WarpLine";
 import {anchors} from "~/views/ComingSoonPage/data/anchors";
 import ComingSoonMeta from "~/views/ComingSoonPage/components/ComingSoonMeta";
+import dynamic from 'next/dynamic';
 import {useRouter} from "next/router";
+
+const WarpLine = dynamic(() =>
+  import('~/views/ComingSoonPage/components/WarpLine').then(module => module.WarpLine));
 
 type Section = FC<{ state: SectionState }>;
 

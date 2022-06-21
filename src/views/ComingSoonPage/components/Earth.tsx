@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { EFFECT_COLOR } from "~/views/components/threeConsts";
 import { getAtmosphereMesh, getHaloMesh, getSunriseMesh } from "./Sunrise";
 import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
+import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
 
 
 export function getCloudMesh() {
@@ -58,6 +59,7 @@ export const Earth = (props: EarthProps) => {
 
   const [isReady, setReady] = useState(false);
   const threeCanvasRef = useRef<ThreeCanvasObject>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
 
@@ -160,12 +162,17 @@ export const Earth = (props: EarthProps) => {
   useEffect(() => {
     if (props.fadeIn && isReady) {
       earthScene.setDirection("normal");
-      earthScene.setTime(0);
       earthScene.setPlaySpeed(1);
-      earthScene.play();
+      if (prefersReducedMotion) {
+        earthScene.setTime(earthScene.getDuration());
+      } else {
+        earthScene.setTime(0);
+        earthScene.play();
+      }
 
       return () => {
-        earthScene.setPlaySpeed(5);
+        const playSpeed = prefersReducedMotion ? 100 : 5;
+        earthScene.setPlaySpeed(playSpeed);
         earthScene.setDirection("reverse");
         earthScene.setTime(earthScene.getDuration() - earthScene.getTime());
         earthScene.play();

@@ -1,10 +1,9 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
-// import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
 import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
-import { EFFECT_COLOR } from "~/views/components/threeConsts";
 import { Mesh } from "three";
 import { clamp } from "lodash";
+import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
 
 const DEFAULT_VELOCITY = 0.007;
 const LINE_COUNT = 500;
@@ -108,6 +107,7 @@ export const WarpLine = () => {
   const velocityRef = useRef(DEFAULT_VELOCITY);
   const linesRef = useRef<Mesh[]>([]);
   const nebularsRef = useRef<Mesh[]>([]);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // const [attributes] = useState(() => {
   //     const position = new THREE.BufferAttribute(new Float32Array(6 * LINE_COUNT), 3);
@@ -130,8 +130,9 @@ export const WarpLine = () => {
   // });
   useEffect(() => {
     const scene = threeCanvasRef.current!.sceneRef.current!;
+    const lineCount = prefersReducedMotion ? 20 : LINE_COUNT;
 
-    for (let i = 0; i < LINE_COUNT; ++i) {
+    for (let i = 0; i < lineCount; ++i) {
       const line = getBlurLineMesh();
       const lineRad = Math.random() * Math.PI * 2;
       const lineRadius = 10 + (Math.random() * 20);
