@@ -163,6 +163,7 @@ export const Earth = (props: EarthProps) => {
     if (props.fadeIn && isReady) {
       earthScene.setDirection("normal");
       earthScene.setPlaySpeed(1);
+
       if (prefersReducedMotion) {
         earthScene.setTime(earthScene.getDuration());
       } else {
@@ -171,16 +172,20 @@ export const Earth = (props: EarthProps) => {
       }
 
       return () => {
-        const playSpeed = prefersReducedMotion ? 100 : 5;
-        earthScene.setPlaySpeed(playSpeed);
         earthScene.setDirection("reverse");
-        earthScene.setTime(earthScene.getDuration() - earthScene.getTime());
-        earthScene.play();
+
+        if (prefersReducedMotion) {
+          earthScene.setTime(earthScene.getDuration());
+        } else {
+          earthScene.setPlaySpeed(5);
+          earthScene.setTime(earthScene.getDuration() - earthScene.getTime());
+          earthScene.play();
+        }
       };
     }
-  }, [isReady, props.fadeIn]);
+  }, [isReady, props.fadeIn, prefersReducedMotion]);
   return <ThreeCanvas ref={threeCanvasRef} render={isReady} onRender={() => {
-    if (!earthRef.current) {
+    if (!earthRef.current && prefersReducedMotion) {
       return;
     }
     earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);

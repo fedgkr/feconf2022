@@ -146,27 +146,6 @@ export const WarpLine = () => {
       scene.add(line);
       linesRef.current.push(line);
     }
-
-    // for (let i = 0; i < 100; ++i) {
-    //     const nebularColors = [
-    //         0x4062DD,
-    //         0x8540DD,
-    //         0x6940DD,
-    //     ]
-    //     const nebula = getNebulaMesh(nebularColors[Math.floor(Math.random() * 3)]);
-    //     const nebularRad = i / 40 * Math.PI * 2;
-    //     const nebularRadius = 5 + (Math.random() * 20);
-    //     const nebularX = nebularRadius * Math.cos(nebularRad);
-    //     const nebularY = nebularRadius * Math.sin(nebularRad);
-    //     const nebularZ = -160 + i * 2;
-
-    //     nebula.position.set(nebularX, nebularY, nebularZ);
-
-    //     nebularsRef.current.push(nebula);
-    //     scene.add(nebula);
-    // }
-    // lineObject.matrixAutoUpdate = false;
-
     function onWheel(e?: WheelEvent) {
       const size = threeCanvasRef.current!.rendererRef.current!.getSize(new THREE.Vector2());
       const delta = (e?.deltaY ?? 0) / 50 / size.y;
@@ -177,9 +156,13 @@ export const WarpLine = () => {
     onWheel();
     window.addEventListener("wheel", onWheel);
     return () => {
+      linesRef.current!.forEach(lineMesh => {
+        scene.remove(lineMesh);
+      });
+      linesRef.current = [];
       window.removeEventListener("wheel", onWheel);
     }
-  }, []);
+  }, [prefersReducedMotion]);
 
   return <ThreeCanvas perspective={true} ref={threeCanvasRef} render={true} onRender={() => {
     const velocity = velocityRef.current;
