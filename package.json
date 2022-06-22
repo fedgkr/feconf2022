@@ -32,7 +32,7 @@
     "start": "next start",
     "lint": "next lint --fix",
     "push": "push-dir --dir=out --branch=gh-pages --cleanup --verbose",
-    "export": "next export",
+    "export": "next export && touch out/.nojekyll",
     "deploy": "yarn build && yarn export && yarn push"
   },
   "dependencies": {
