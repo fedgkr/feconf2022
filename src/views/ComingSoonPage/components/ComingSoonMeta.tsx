@@ -3,7 +3,7 @@ import Head from "next/head";
 
 const title = 'FECONF 2022 | Trailer';
 const description = '국내 최대 프론트엔드 개발 컨퍼런스, FECONF 2022가 10월 8일 오프라인으로 찾아옵니다.';
-const host = 'https://feconf2022-test.vercel.app';
+const host = 'https://2022.feconf.kr';
 
 const ComingSoonMeta: FC = () => {
   return (
