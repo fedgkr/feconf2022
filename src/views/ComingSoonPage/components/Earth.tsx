@@ -10,7 +10,7 @@ import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
 export function getCloudMesh() {
   const cloudGeometry = new THREE.SphereGeometry(0.601, 64, 64);
   const cloudMaterial = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load("texture/2k_earth_clouds.jpeg"),
+    map: new THREE.TextureLoader().load("/texture/2k_earth_clouds.jpeg"),
     opacity: 0.5,
     transparent: true,
     depthWrite: false,
@@ -28,8 +28,8 @@ export function getCloudMesh() {
 export function getEarthMesh(onReady: () => void) {
   const earthGeometry = new THREE.SphereGeometry(0.6, 64, 64);
   const earthMaterial = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load("texture/earth.jpeg", onReady),
-    specularMap: new THREE.TextureLoader().load("texture/2k_earth_specular_map.png"),
+    map: new THREE.TextureLoader().load("/texture/earth.jpeg", onReady),
+    specularMap: new THREE.TextureLoader().load("/texture/2k_earth_specular_map.png"),
     // normalMap: new THREE.TextureLoader().load("texture/2k_earth_normal_map.png"),
     // normalScale: new THREE.Vector2(-2, -2),
     // transparent: true,
