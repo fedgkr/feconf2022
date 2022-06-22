@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
 import { Mesh } from "three";
-import { clamp } from "lodash";
 import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
+import { SceneItem } from "scenejs";
 
 const DEFAULT_VELOCITY = 0.007;
 const LINE_COUNT = 500;
@@ -101,33 +101,39 @@ export function getBlurLineMesh() {
 //   return mesh;
 // }
 
+export interface WarpLineProps {
+  target: number;
+}
 
-export const WarpLine = () => {
+
+export const WarpLine = (props: WarpLineProps) => {
   const threeCanvasRef = useRef<ThreeCanvasObject>(null);
   const velocityRef = useRef(DEFAULT_VELOCITY);
   const linesRef = useRef<Mesh[]>([]);
   const nebularsRef = useRef<Mesh[]>([]);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const prevTargetRef = useRef<number>(props.target);
+  const currentTargetRef = useRef<number>(props.target);
 
-  // const [attributes] = useState(() => {
-  //     const position = new THREE.BufferAttribute(new Float32Array(6 * LINE_COUNT), 3);
-  //     const positionArray = position.array as number[];
+  currentTargetRef.current = props.target;
 
-  //     for (let lineIndex = 0; lineIndex < LINE_COUNT; ++lineIndex) {
-  //         const rad = Math.random() * Math.PI * 2;
-  //         const lineRadius = 10 + (Math.random() * 20);
-  //         const lineX = lineRadius * Math.cos(rad);
-  //         const lineY = lineRadius * Math.sin(rad);
-  //         const lineZ = Math.random() * 500 - 100;
-  //         //line start to End
-  //         positionArray[6 * lineIndex + 3] = positionArray[6 * lineIndex] = lineX;
-  //         positionArray[6 * lineIndex + 4] = positionArray[6 * lineIndex + 1] = lineY;
-  //         positionArray[6 * lineIndex + 5] = positionArray[6 * lineIndex + 2] = lineZ;
-  //     }
-  //     return {
-  //         position,
-  //     };
-  // });
+  useEffect(() => {
+    const prevTarget = prevTargetRef.current;
+    const currentTarget = currentTargetRef.current;
+
+    if (prevTarget != null && currentTarget != null && currentTarget !== prevTarget) {
+      const a = (currentTarget - prevTarget > 0 ? 1 : -1) * 0.005;
+
+      new SceneItem({
+        0: {},
+        0.3: {},
+      }).on("animate", () => {
+        velocityRef.current += a;
+      }).play();
+    }
+    prevTargetRef.current = currentTargetRef.current;
+  }, [currentTargetRef.current]);
+
   useEffect(() => {
     const scene = threeCanvasRef.current!.sceneRef.current!;
     const lineCount = prefersReducedMotion ? 20 : LINE_COUNT;
@@ -146,21 +152,11 @@ export const WarpLine = () => {
       scene.add(line);
       linesRef.current.push(line);
     }
-    function onWheel(e?: WheelEvent) {
-      const size = threeCanvasRef.current!.rendererRef.current!.getSize(new THREE.Vector2());
-      const delta = (e?.deltaY ?? 0) / 50 / size.y;
-
-      velocityRef.current += delta >= 0 ? delta : delta * 2;
-      velocityRef.current = clamp(velocityRef.current, -0.05, 0.05);
-    }
-    onWheel();
-    window.addEventListener("wheel", onWheel);
     return () => {
       linesRef.current!.forEach(lineMesh => {
         scene.remove(lineMesh);
       });
       linesRef.current = [];
-      window.removeEventListener("wheel", onWheel);
     }
   }, [prefersReducedMotion]);
 

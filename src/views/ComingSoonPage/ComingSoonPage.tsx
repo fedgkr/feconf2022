@@ -11,8 +11,9 @@ import {anchors} from "~/views/ComingSoonPage/data/anchors";
 import ComingSoonMeta from "~/views/ComingSoonPage/components/ComingSoonMeta";
 import dynamic from 'next/dynamic';
 import {useRouter} from "next/router";
+import { WarpLineProps } from "~/views/ComingSoonPage/components/WarpLine";
 
-const WarpLine = dynamic(() =>
+const WarpLine = dynamic<WarpLineProps>(() =>
   import('~/views/ComingSoonPage/components/WarpLine').then(module => module.WarpLine));
 
 type Section = FC<{ state: SectionState }>;
@@ -56,7 +57,7 @@ const ComingSoonPage = () => {
     <Container>
       <ComingSoonMeta/>
       <FixedContainer>
-        <WarpLine/>
+        <WarpLine target={state.target}/>
         <div className="gradient"></div>
       </FixedContainer>
       <FullPage
