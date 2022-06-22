@@ -106,15 +106,15 @@ const ScrollDown = styled.div`
   @keyframes arrow {
     0% {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
     60% {
       opacity: 0.6;
-      transform: translateY(12px) scale(0.9);
+      transform: translateY(12px);
     }
     0% {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
 `;

@@ -79,6 +79,8 @@ const ComingSoonPage = () => {
   );
 }
 
+const Container = styled.div``;
+
 const FixedContainer = styled.div`
   position: fixed;
   width: 100%;
@@ -96,9 +98,6 @@ const FixedContainer = styled.div`
     left: 0px;
     background: radial-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   }
-`;
-const Container = styled.div`
-  background-color: black;
 `;
 
 export default ComingSoonPage;

@@ -41,7 +41,7 @@ const Container = styled.footer<{ visible: boolean }>`
   transition: transform 300ms ease-in;
 
   ${tablet`
-    display: none;
+    height: 60px;
   `}
 `;
 
@@ -55,6 +55,19 @@ const Menu = styled.ul`
     align-items: center;
     list-style: none;
   }
+  ${tablet`
+    padding: 0 20px;
+    li {
+      &:nth-child(2) {
+        span, a:not(:last-child) {
+          display: none;
+        }
+      }
+      &:last-child {
+        display: none;
+      }
+    }
+  `}
 `;
 
 const Item = styled.li`
