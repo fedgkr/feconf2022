@@ -185,7 +185,7 @@ export const Earth = (props: EarthProps) => {
     }
   }, [isReady, props.fadeIn, prefersReducedMotion]);
   return <ThreeCanvas ref={threeCanvasRef} render={isReady} onRender={() => {
-    if (!earthRef.current && prefersReducedMotion) {
+    if (!earthRef.current) {
       return;
     }
     earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
