@@ -32,7 +32,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "push": "push-dir --dir=out --branch=gh-pages --cleanup --verbose",
-    "export": "next export && touch out/.nojekyll",
+    "domain": "echo '2022.feconf.kr' >> out/CNAME",
+    "export": "next export && touch out/.nojekyll && yarn domain",
     "deploy": "yarn build && yarn export && yarn push"
   },
   "dependencies": {
