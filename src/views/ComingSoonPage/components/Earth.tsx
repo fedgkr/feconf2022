@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { EFFECT_COLOR } from "~/views/components/threeConsts";
 import { getAtmosphereMesh, getHaloMesh, getSunriseMesh } from "./Sunrise";
 import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
+import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
 
 
 export function getCloudMesh() {
@@ -58,6 +59,7 @@ export const Earth = (props: EarthProps) => {
 
   const [isReady, setReady] = useState(false);
   const threeCanvasRef = useRef<ThreeCanvasObject>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
 
@@ -160,20 +162,30 @@ export const Earth = (props: EarthProps) => {
   useEffect(() => {
     if (props.fadeIn && isReady) {
       earthScene.setDirection("normal");
-      earthScene.setTime(0);
       earthScene.setPlaySpeed(1);
-      earthScene.play();
+
+      if (prefersReducedMotion) {
+        earthScene.setTime(earthScene.getDuration());
+      } else {
+        earthScene.setTime(0);
+        earthScene.play();
+      }
 
       return () => {
-        earthScene.setPlaySpeed(5);
         earthScene.setDirection("reverse");
-        earthScene.setTime(earthScene.getDuration() - earthScene.getTime());
-        earthScene.play();
+
+        if (prefersReducedMotion) {
+          earthScene.setTime(earthScene.getDuration());
+        } else {
+          earthScene.setPlaySpeed(5);
+          earthScene.setTime(earthScene.getDuration() - earthScene.getTime());
+          earthScene.play();
+        }
       };
     }
-  }, [isReady, props.fadeIn]);
+  }, [isReady, props.fadeIn, prefersReducedMotion]);
   return <ThreeCanvas ref={threeCanvasRef} render={isReady} onRender={() => {
-    if (!earthRef.current) {
+    if (!earthRef.current && prefersReducedMotion) {
       return;
     }
     earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
