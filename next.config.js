@@ -20,4 +20,5 @@ module.exports = {
       },
     ]
   },
+  trailingSlash: true,
 };
