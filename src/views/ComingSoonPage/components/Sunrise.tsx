@@ -1,5 +1,5 @@
-import * as THREE from "three";
-import { EFFECT_COLOR } from "~/views/components/threeConsts";
+import * as THREE from 'three';
+import { EFFECT_COLOR } from '~/views/components/threeConsts';
 
 const vertexShader = `
 varying vec3 vNormal;
@@ -55,10 +55,7 @@ export function getHaloMesh() {
     transparent: true,
     depthWrite: true,
   });
-  const haloMesh = new THREE.Mesh(
-    haloGeometry,
-    haloMaterial,
-  );
+  const haloMesh = new THREE.Mesh(haloGeometry, haloMaterial);
   haloMesh.position.set(0, -0.46, -0.1);
   haloMesh.scale.set(1.5, 1, 1);
 
@@ -74,10 +71,7 @@ export function getAtmosphereMesh() {
     transparent: true,
     depthWrite: true,
   });
-  const atmosphereMesh = new THREE.Mesh(
-    atmosphereGeometry,
-    atmosphereMaterial,
-  );
+  const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
   atmosphereMesh.position.set(0, 0, 0);
   atmosphereMesh.scale.set(0, 0, 0);
 
@@ -94,10 +88,7 @@ export function getSunriseMesh() {
     transparent: true,
     depthWrite: true,
   });
-  const sunriseMesh = new THREE.Mesh(
-    sunriseGeometry,
-    sunriseMaterial,
-  );
+  const sunriseMesh = new THREE.Mesh(sunriseGeometry, sunriseMaterial);
   sunriseMesh.position.set(0, -0.415, -1);
   return sunriseMesh;
 }

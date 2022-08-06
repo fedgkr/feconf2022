@@ -1,6 +1,6 @@
-import {FC, ReactNode} from "react";
-import Portal from "~/views/components/Portal";
-import styled from "@emotion/styled";
+import { FC, ReactNode } from 'react';
+import Portal from '~/views/components/Portal';
+import styled from '@emotion/styled';
 
 interface Props {
   visible: boolean;
@@ -10,12 +10,10 @@ interface Props {
 const Center: FC<Props> = ({ visible, children }) => {
   return (
     <Portal area="content">
-      <FixedWrap visible={visible}>
-        { children }
-      </FixedWrap>
+      <FixedWrap visible={visible}>{children}</FixedWrap>
     </Portal>
   );
-}
+};
 
 const FixedWrap = styled.div<{ visible: boolean }>`
   position: fixed;

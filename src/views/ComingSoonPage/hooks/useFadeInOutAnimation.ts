@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 const useFadeInOutAnimation = ({ visible, out, direction }: SectionState) => {
   const styles = useRef({ opacity: 0, scale: 0, transition: ' ' });

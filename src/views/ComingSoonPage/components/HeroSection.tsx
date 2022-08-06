@@ -1,11 +1,11 @@
-import {FC, useRef} from "react";
+import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
-import SpaceshipIcon from "~/views/ComingSoonPage/components/SpaceshipIcon";
-import Center from "~/views/ComingSoonPage/components/Center";
-import useFadeInOutAnimation from "~/views/ComingSoonPage/hooks/useFadeInOutAnimation";
-import SectionContainer from "~/views/ComingSoonPage/components/SectionContainer";
-import {mobile, tablet} from "~/views/ComingSoonPage/styles/media-query";
-import Portal from "~/views/components/Portal";
+import SpaceshipIcon from '~/views/ComingSoonPage/components/SpaceshipIcon';
+import Center from '~/views/ComingSoonPage/components/Center';
+import useFadeInOutAnimation from '~/views/ComingSoonPage/hooks/useFadeInOutAnimation';
+import SectionContainer from '~/views/ComingSoonPage/components/SectionContainer';
+import { mobile, tablet } from '~/views/ComingSoonPage/styles/media-query';
+import Portal from '~/views/components/Portal';
 
 interface Props {
   state: SectionState;
@@ -18,15 +18,39 @@ const HeroSection: FC<Props> = ({ state }) => {
     <SectionContainer ref={ref}>
       <Center visible={state.visible}>
         <TextWrap style={{ opacity, transform: `scale(${scale})`, transition }}>
-          <h2><span>올해도 가보자고</span><SpaceshipIcon/></h2>
-          <h4>국내 최대 프론트엔드 개발 컨퍼런스,<br/> FECONF 2022가 찾아옵니다.</h4>
+          <h2>
+            <span>올해도 가보자고</span>
+            <SpaceshipIcon />
+          </h2>
+          <h4>
+            국내 최대 프론트엔드 개발 컨퍼런스,
+            <br /> FECONF 2022가 찾아옵니다.
+          </h4>
         </TextWrap>
       </Center>
       <Portal area="content">
         <ScrollDown style={{ opacity, transition }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M4 8L16 16L28 8" stroke="#B0BECF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M4 18L16 26L28 18" stroke="#B0BECF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <path
+              d="M4 8L16 16L28 8"
+              stroke="#B0BECF"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M4 18L16 26L28 18"
+              stroke="#B0BECF"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </ScrollDown>
       </Portal>
@@ -72,7 +96,7 @@ const TextWrap = styled.div`
     margin-top: 24px;
     font-size: 24px;
     font-weight: 600;
-    color: #B0BECF;
+    color: #b0becf;
     ${tablet`
       margin-top: 12px;
       font-size: 16px;
@@ -120,4 +144,3 @@ const ScrollDown = styled.div`
 `;
 
 export default HeroSection;
-

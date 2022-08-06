@@ -12,6 +12,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Component {...pageProps} />
     </CacheProvider>
   );
-}
+};
 
 export default App;

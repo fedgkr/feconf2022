@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from 'react';
 
 const usePathLength = () => {
   const ref = useRef<SVGPathElement>();

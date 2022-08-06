@@ -10,5 +10,5 @@ interface Window {
   fullpage_api: {
     moveTo: (target: number) => void;
     silentMoveTo: (target: number) => void;
-  }
+  };
 }

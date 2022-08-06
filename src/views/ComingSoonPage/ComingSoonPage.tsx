@@ -1,20 +1,25 @@
-import {FC, useEffect, useState} from "react";
-import FullPage, {fullpageOptions as FullPageOptions} from '@fullpage/react-fullpage';
+import { FC, useEffect, useState } from 'react';
+import FullPage, {
+  fullpageOptions as FullPageOptions,
+} from '@fullpage/react-fullpage';
 
-import HeroSection from "~/views/ComingSoonPage/components/HeroSection";
-import IntroSection from "~/views/ComingSoonPage/components/IntroSection";
-import CallForSpeakerSection from "~/views/ComingSoonPage/components/CallForSpeakerSection";
-import CallForSponsorSection from "~/views/ComingSoonPage/components/CallForSponsorSection";
-import styled from "@emotion/styled";
-import ComingSoonSection from "~/views/ComingSoonPage/components/ComingSoonSection";
-import {anchors} from "~/views/ComingSoonPage/data/anchors";
-import ComingSoonMeta from "~/views/ComingSoonPage/components/ComingSoonMeta";
+import HeroSection from '~/views/ComingSoonPage/components/HeroSection';
+import IntroSection from '~/views/ComingSoonPage/components/IntroSection';
+import CallForSpeakerSection from '~/views/ComingSoonPage/components/CallForSpeakerSection';
+import CallForSponsorSection from '~/views/ComingSoonPage/components/CallForSponsorSection';
+import styled from '@emotion/styled';
+import ComingSoonSection from '~/views/ComingSoonPage/components/ComingSoonSection';
+import { anchors } from '~/views/ComingSoonPage/data/anchors';
+import ComingSoonMeta from '~/views/ComingSoonPage/components/ComingSoonMeta';
 import dynamic from 'next/dynamic';
-import {useRouter} from "next/router";
-import { WarpLineProps } from "~/views/ComingSoonPage/components/WarpLine";
+import { useRouter } from 'next/router';
+import { WarpLineProps } from '~/views/ComingSoonPage/components/WarpLine';
 
 const WarpLine = dynamic<WarpLineProps>(() =>
-  import('~/views/ComingSoonPage/components/WarpLine').then(module => module.WarpLine));
+  import('~/views/ComingSoonPage/components/WarpLine').then(
+    (module) => module.WarpLine
+  )
+);
 
 type Section = FC<{ state: SectionState }>;
 
@@ -38,16 +43,24 @@ const useFirstPhaseMotion = () => {
 };
 
 const useSlideState = () => {
-  const [state, setState] = useState<{ origin: number, target: number, direction: 'up' | 'down' }>({
+  const [state, setState] = useState<{
+    origin: number;
+    target: number;
+    direction: 'up' | 'down';
+  }>({
     origin: null,
     target: null,
-    direction: 'down'
+    direction: 'down',
   });
   const onLeave: FullPageOptions['onLeave'] = (origin, target, direction) => {
-    setState({ origin: origin.index, target: target.index, direction: direction as 'up' | 'down' });
+    setState({
+      origin: origin.index,
+      target: target.index,
+      direction: direction as 'up' | 'down',
+    });
   };
   return { state, onLeave };
-}
+};
 
 const ComingSoonPage = () => {
   const { state, onLeave } = useSlideState();
@@ -55,9 +68,9 @@ const ComingSoonPage = () => {
 
   return (
     <Container>
-      <ComingSoonMeta/>
+      <ComingSoonMeta />
       <FixedContainer>
-        <WarpLine target={state.target}/>
+        <WarpLine target={state.target} />
         <div className="gradient"></div>
       </FixedContainer>
       <FullPage
@@ -66,19 +79,24 @@ const ComingSoonPage = () => {
         onLeave={onLeave}
         render={() => (
           <FullPage.Wrapper>
-            { sections.map((Section, index) => {
+            {sections.map((Section, index) => {
               const key = anchors[index];
               const visible = state.target === index;
               const out = state.origin === index;
-              return <Section key={key} state={{ visible, out, direction: state.direction }}/>;
+              return (
+                <Section
+                  key={key}
+                  state={{ visible, out, direction: state.direction }}
+                />
+              );
             })}
           </FullPage.Wrapper>
         )}
       />
-      <div id="content"/>
+      <div id="content" />
     </Container>
   );
-}
+};
 
 const Container = styled.div``;
 

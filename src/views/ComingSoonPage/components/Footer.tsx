@@ -1,8 +1,11 @@
-import {FC} from "react";
-import styled from "@emotion/styled";
-import SafeLink from "~/views/components/SafeLink";
-import {tablet} from "~/views/ComingSoonPage/styles/media-query";
-import {FACEBOOK_FRONTEND_URL, FECONF_EMAIL} from "~/views/ComingSoonPage/data/meta";
+import { FC } from 'react';
+import styled from '@emotion/styled';
+import SafeLink from '~/views/components/SafeLink';
+import { tablet } from '~/views/ComingSoonPage/styles/media-query';
+import {
+  FACEBOOK_FRONTEND_URL,
+  FECONF_EMAIL,
+} from '~/views/ComingSoonPage/data/meta';
 
 interface Props {
   visible: boolean;
@@ -12,7 +15,11 @@ const Footer: FC<Props> = ({ visible }) => {
   return (
     <Container visible={visible}>
       <Menu>
-        <li><Link href="/"><Logo src="/images/logo.png" alt="FECONF"/></Link></li>
+        <li>
+          <Link href="/">
+            <Logo src="/images/logo.png" alt="FECONF" />
+          </Link>
+        </li>
         <Item>
           <Link href="https://2021.feconf.kr">FECONF 2021</Link>
           <span>|</span>
@@ -20,7 +27,9 @@ const Footer: FC<Props> = ({ visible }) => {
           <span>|</span>
           <Link href={`mailto:${FECONF_EMAIL}`}>{FECONF_EMAIL}</Link>
         </Item>
-        <li><Right>© FEconf. 2022 All rights reserved.</Right></li>
+        <li>
+          <Right>© FEconf. 2022 All rights reserved.</Right>
+        </li>
       </Menu>
     </Container>
   );
@@ -37,7 +46,7 @@ const Container = styled.footer<{ visible: boolean }>`
   height: 120px;
   background-color: black;
   pointer-events: all;
-  transform: translateY(${({ visible }) => visible ? 0 : '100%'});
+  transform: translateY(${({ visible }) => (visible ? 0 : '100%')});
   transition: transform 300ms ease-in;
 
   ${tablet`
@@ -73,7 +82,7 @@ const Menu = styled.ul`
 const Item = styled.li`
   font-size: 14px;
   line-height: 1.6;
-  color: #ACACAC;
+  color: #acacac;
   & > span {
     display: inline-block;
     margin: 0 12px;
@@ -83,7 +92,7 @@ const Item = styled.li`
 const Right = styled.span`
   font-size: 12px;
   line-height: 1.6;
-  color: #595D68;
+  color: #595d68;
 `;
 
 const Logo = styled.img`
@@ -91,7 +100,7 @@ const Logo = styled.img`
 `;
 
 const Link = styled(SafeLink)`
-  color: #ACACAC;
+  color: #acacac;
 `;
 
 export default Footer;

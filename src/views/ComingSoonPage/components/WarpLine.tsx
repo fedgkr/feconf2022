@@ -1,13 +1,12 @@
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
-import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
-import { Mesh } from "three";
-import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
-import { SceneItem } from "scenejs";
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { ThreeCanvas, ThreeCanvasObject } from '~/views/components/ThreeCanvas';
+import { Mesh } from 'three';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
+import { SceneItem } from 'scenejs';
 
 const DEFAULT_VELOCITY = 0.007;
 const LINE_COUNT = 500;
-
 
 const normalVertexShader = `
 varying vec3 vNormal;
@@ -58,10 +57,7 @@ export function getBlurLineMesh() {
     transparent: true,
     depthWrite: false,
   });
-  const blurLineMesh = new THREE.Mesh(
-    blurLineGeometry,
-    blurLineMaterial,
-  );
+  const blurLineMesh = new THREE.Mesh(blurLineGeometry, blurLineMaterial);
   return blurLineMesh;
 }
 
@@ -105,7 +101,6 @@ export interface WarpLineProps {
   target: number;
 }
 
-
 export const WarpLine = (props: WarpLineProps) => {
   const threeCanvasRef = useRef<ThreeCanvasObject>(null);
   const velocityRef = useRef(DEFAULT_VELOCITY);
@@ -121,15 +116,21 @@ export const WarpLine = (props: WarpLineProps) => {
     const prevTarget = prevTargetRef.current;
     const currentTarget = currentTargetRef.current;
 
-    if (prevTarget != null && currentTarget != null && currentTarget !== prevTarget) {
+    if (
+      prevTarget != null &&
+      currentTarget != null &&
+      currentTarget !== prevTarget
+    ) {
       const a = (currentTarget - prevTarget > 0 ? 1 : -1) * 0.005;
 
       new SceneItem({
         0: {},
         0.3: {},
-      }).on("animate", () => {
-        velocityRef.current += a;
-      }).play();
+      })
+        .on('animate', () => {
+          velocityRef.current += a;
+        })
+        .play();
     }
     prevTargetRef.current = currentTargetRef.current;
   }, [currentTargetRef.current]);
@@ -141,7 +142,7 @@ export const WarpLine = (props: WarpLineProps) => {
     for (let i = 0; i < lineCount; ++i) {
       const line = getBlurLineMesh();
       const lineRad = Math.random() * Math.PI * 2;
-      const lineRadius = 10 + (Math.random() * 20);
+      const lineRadius = 10 + Math.random() * 20;
       const lineX = lineRadius * Math.cos(lineRad);
       const lineY = lineRadius * Math.sin(lineRad);
       const lineZ = Math.random() * 200 - 100;
@@ -153,47 +154,53 @@ export const WarpLine = (props: WarpLineProps) => {
       linesRef.current.push(line);
     }
     return () => {
-      linesRef.current!.forEach(lineMesh => {
+      linesRef.current!.forEach((lineMesh) => {
         scene.remove(lineMesh);
       });
       linesRef.current = [];
-    }
+    };
   }, [prefersReducedMotion]);
 
-  return <ThreeCanvas perspective={true} ref={threeCanvasRef} render={true} onRender={() => {
-    const velocity = velocityRef.current;
-    const lines = linesRef.current;
-    const nebulars = nebularsRef.current;
+  return (
+    <ThreeCanvas
+      perspective={true}
+      ref={threeCanvasRef}
+      render={true}
+      onRender={() => {
+        const velocity = velocityRef.current;
+        const lines = linesRef.current;
+        const nebulars = nebularsRef.current;
 
-    velocityRef.current = velocity - (velocity - DEFAULT_VELOCITY) * 0.05;
+        velocityRef.current = velocity - (velocity - DEFAULT_VELOCITY) * 0.05;
 
+        nebulars.forEach((nebular) => {
+          const position = nebular.position;
+          let z = nebular.position.z + 20 * velocity;
 
-    nebulars.forEach(nebular => {
-      const position = nebular.position;
-      let z = nebular.position.z + 20 * velocity;
+          if (z > 20) {
+            z = -80;
+          }
+          if (z < -80) {
+            z = 20;
+          }
+          nebular.position.set(position.x, position.y, z);
+        });
+        lines.forEach((line) => {
+          const position = line.position;
+          let z = line.position.z + 100 * velocity;
+          let scale = 1;
 
-      if (z > 20) {
-        z = -80;
-      }
-      if (z < -80) {
-        z = 20;
-      }
-      nebular.position.set(position.x, position.y, z);
-    });
-    lines.forEach(line => {
-      const position = line.position;
-      let z = line.position.z + 100 * velocity;
-      let scale = 1;
-
-      if (z > 100) {
-        z = -100;
-      }
-      if (z < -100) {
-        z = 100;
-      }
-      scale = 0.5 + 0.5 * velocity / DEFAULT_VELOCITY;
-      line.scale.set(scale, 1, 1);
-      line.position.set(position.x, position.y, z);
-    });
-  }}></ThreeCanvas>;
+          if (z > 100) {
+            z = -100;
+          }
+          if (z < -100) {
+            z = 100;
+          }
+          scale = 0.5 + (0.5 * velocity) / DEFAULT_VELOCITY;
+          line.scale.set(scale, 1, 1);
+          line.position.set(position.x, position.y, z);
+        });
+      }}
+    ></ThreeCanvas>
+  );
 };

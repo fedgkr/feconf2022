@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import {FC, HTMLAttributes, ReactNode} from "react";
-import SafeLink from "~/views/components/SafeLink";
-import {tablet} from "~/views/ComingSoonPage/styles/media-query";
+import styled from '@emotion/styled';
+import { FC, HTMLAttributes, ReactNode } from 'react';
+import SafeLink from '~/views/components/SafeLink';
+import { tablet } from '~/views/ComingSoonPage/styles/media-query';
 
 interface Props extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -10,11 +10,11 @@ interface Props extends HTMLAttributes<HTMLAnchorElement> {
 
 const ApplyButton: FC<Props> = ({ children, ...rest }) => {
   return (
-    <Button target="_blank" rel="noopener noreferrer" { ...rest }>
-      { children }
+    <Button target="_blank" rel="noopener noreferrer" {...rest}>
+      {children}
     </Button>
   );
-}
+};
 
 const Button = styled(SafeLink)`
   display: inline-block;

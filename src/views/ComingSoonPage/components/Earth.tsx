@@ -1,25 +1,21 @@
-import { useEffect, useRef, useState } from "react";
-import { SceneItem } from "scenejs";
-import * as THREE from "three";
-import { EFFECT_COLOR } from "~/views/components/threeConsts";
-import { getAtmosphereMesh, getHaloMesh, getSunriseMesh } from "./Sunrise";
-import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
-import usePrefersReducedMotion from "~/hoooks/usePrefersReducedMotion";
-
+import { useEffect, useRef, useState } from 'react';
+import { SceneItem } from 'scenejs';
+import * as THREE from 'three';
+import { EFFECT_COLOR } from '~/views/components/threeConsts';
+import { getAtmosphereMesh, getHaloMesh, getSunriseMesh } from './Sunrise';
+import { ThreeCanvas, ThreeCanvasObject } from '~/views/components/ThreeCanvas';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
 
 export function getCloudMesh() {
   const cloudGeometry = new THREE.SphereGeometry(0.601, 64, 64);
   const cloudMaterial = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load("/texture/2k_earth_clouds.jpeg"),
+    map: new THREE.TextureLoader().load('/texture/2k_earth_clouds.jpeg'),
     opacity: 0.5,
     transparent: true,
     depthWrite: false,
     side: THREE.DoubleSide,
   });
-  const cloudMesh = new THREE.Mesh(
-    cloudGeometry,
-    cloudMaterial,
-  );
+  const cloudMesh = new THREE.Mesh(cloudGeometry, cloudMaterial);
   cloudMesh.rotateX(-0.4);
   cloudMesh.rotateY(2.4);
 
@@ -28,17 +24,16 @@ export function getCloudMesh() {
 export function getEarthMesh(onReady: () => void) {
   const earthGeometry = new THREE.SphereGeometry(0.6, 64, 64);
   const earthMaterial = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load("/texture/earth.jpeg", onReady),
-    specularMap: new THREE.TextureLoader().load("/texture/2k_earth_specular_map.png"),
+    map: new THREE.TextureLoader().load('/texture/earth.jpeg', onReady),
+    specularMap: new THREE.TextureLoader().load(
+      '/texture/2k_earth_specular_map.png'
+    ),
     // normalMap: new THREE.TextureLoader().load("texture/2k_earth_normal_map.png"),
     // normalScale: new THREE.Vector2(-2, -2),
     // transparent: true,
     // depthWrite: true,
   });
-  const earthMesh = new THREE.Mesh(
-    earthGeometry,
-    earthMaterial,
-  );
+  const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
   earthMesh.rotateX(-0.4);
   earthMesh.rotateY(2.4);
 
@@ -62,7 +57,6 @@ export const Earth = (props: EarthProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-
     const scene = threeCanvasRef.current!.sceneRef.current!;
     const haloMesh = getHaloMesh();
     const sunriseMesh = getSunriseMesh();
@@ -96,18 +90,21 @@ export const Earth = (props: EarthProps) => {
     scene.add(whiteLight);
   }, []);
   const [earthScene] = useState(() => {
-    const earthItem = new SceneItem({
-      0: { t: 0 },
-      0.7: {},
-      1: { deg: -170 },
-      1.5: { atmosphereScale: 0.5, haloScale: 0, },
-      1.6: { t: 100, },
-      2: { sunriseScale: 0 },
-      2.5: { atmosphereScale: 1.07 },
-      3: { deg: -255, sunriseScale: 1, haloScale: 1 },
-    }, {
-      easing: "ease-out",
-    }).on("animate", e => {
+    const earthItem = new SceneItem(
+      {
+        0: { t: 0 },
+        0.7: {},
+        1: { deg: -170 },
+        1.5: { atmosphereScale: 0.5, haloScale: 0 },
+        1.6: { t: 100 },
+        2: { sunriseScale: 0 },
+        2.5: { atmosphereScale: 1.07 },
+        3: { deg: -255, sunriseScale: 1, haloScale: 1 },
+      },
+      {
+        easing: 'ease-out',
+      }
+    ).on('animate', (e) => {
       const earthMesh = earthRef.current!;
       const cloudMesh = cloudRef.current!;
       const atmosphereMesh = atmosphereRef.current!;
@@ -119,40 +116,40 @@ export const Earth = (props: EarthProps) => {
       if (!earthMesh) {
         return;
       }
-      const tick = e.frame.get("t");
-      const rad = e.frame.get("deg") * Math.PI / 180;
+      const tick = e.frame.get('t');
+      const rad = (e.frame.get('deg') * Math.PI) / 180;
       const y = -5.7 + tick * 0.03; // -2.7
       const z = 2;
-      const globeScale = 6.8 - 3 * tick / 100;
-
+      const globeScale = 6.8 - (3 * tick) / 100;
 
       cloudMesh.position.set(0, y, z);
       earthMesh.position.set(0, y, z);
       atmosphereMesh.position.set(0, y, z + 0.1);
 
-      const atmosphereScale = globeScale * e.frame.get("atmosphereScale");
+      const atmosphereScale = globeScale * e.frame.get('atmosphereScale');
 
       cloudMesh.scale.set(globeScale, globeScale, globeScale);
       earthMesh.scale.set(globeScale, globeScale, globeScale);
-      atmosphereMesh.scale.set(atmosphereScale, atmosphereScale, atmosphereScale);
-
+      atmosphereMesh.scale.set(
+        atmosphereScale,
+        atmosphereScale,
+        atmosphereScale
+      );
 
       // light
       const lightZ = 3 * Math.cos(rad);
       const lightY = 3 * Math.sin(rad);
 
-
       effectLight?.position.set(0, y + lightY, z + lightZ);
       whiteLight?.position.set(0, y + lightY, z + lightZ);
 
-      const sunriseScale = e.frame.get("sunriseScale");
-      const haloScale = e.frame.get("haloScale");
+      const sunriseScale = e.frame.get('sunriseScale');
+      const haloScale = e.frame.get('haloScale');
 
       sunriseMesh.scale.set(sunriseScale, 1, 1);
       haloMesh.position.set(0, 2.21 + y, 0);
       haloMesh.scale.set(haloScale * 1.5, haloScale, haloScale);
     });
-
 
     return earthItem;
   });
@@ -161,7 +158,7 @@ export const Earth = (props: EarthProps) => {
   }, []);
   useEffect(() => {
     if (props.fadeIn && isReady) {
-      earthScene.setDirection("normal");
+      earthScene.setDirection('normal');
       earthScene.setPlaySpeed(1);
 
       if (prefersReducedMotion) {
@@ -172,7 +169,7 @@ export const Earth = (props: EarthProps) => {
       }
 
       return () => {
-        earthScene.setDirection("reverse");
+        earthScene.setDirection('reverse');
 
         if (prefersReducedMotion) {
           earthScene.setTime(earthScene.getDuration());
@@ -184,11 +181,17 @@ export const Earth = (props: EarthProps) => {
       };
     }
   }, [isReady, props.fadeIn, prefersReducedMotion]);
-  return <ThreeCanvas ref={threeCanvasRef} render={isReady} onRender={() => {
-    if (!earthRef.current) {
-      return;
-    }
-    earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
-    cloudRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
-  }}></ThreeCanvas>;
+  return (
+    <ThreeCanvas
+      ref={threeCanvasRef}
+      render={isReady}
+      onRender={() => {
+        if (!earthRef.current) {
+          return;
+        }
+        earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
+        cloudRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
+      }}
+    ></ThreeCanvas>
+  );
 };
