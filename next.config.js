@@ -1,8 +1,7 @@
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   eslint: {
     dirs: ['src'],
-
   },
   webpack: (config) => {
     config.module.rules.push({
@@ -12,13 +11,7 @@ module.exports = {
     return config;
   },
   async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/trailer',
-        permanent: true,
-      },
-    ]
+    return [];
   },
   trailingSlash: true,
 };

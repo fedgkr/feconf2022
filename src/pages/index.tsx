@@ -1,13 +1,9 @@
-import Head from 'next/head';
-import ComingSoonMeta from '~/views/ComingSoonPage/components/ComingSoonMeta';
+import HomePage from '~/views/HomePage';
 
 export default function App() {
   return (
     <>
-      <Head>
-        <meta httpEquiv="refresh" content="0; url=/trailer" />
-      </Head>
-      <ComingSoonMeta />
+      <HomePage />
     </>
   );
 }
