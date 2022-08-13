@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import HeroSection from '~/views/pages/HomePage/components/HeroSection';
-import WarpSection from '~/views/pages/HomePage/components/WarpSection';
-import TrackSection from '~/views/pages/HomePage/components/TrackSection';
+import HeroSection from '~/views/pages/HomePage/sections/HeroSection/HeroSection';
+import WarpSection from '~/views/pages/HomePage/sections/WarpSection/WarpSection';
+import TrackSection from '~/views/pages/HomePage/sections/TrackSection';
 import styled from '@emotion/styled';
 import Header from '~/views/pages/HomePage/components/Header';
 

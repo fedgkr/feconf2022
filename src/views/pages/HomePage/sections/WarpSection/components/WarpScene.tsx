@@ -10,43 +10,11 @@ import {
   Shape,
   WebGLRenderer,
 } from 'three';
-import { times } from 'lodash';
-import { gsap, Power1 } from 'gsap';
 import { MeshLine, MeshLineMaterial } from 'three.meshline';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import createGradientTexture from '~/views/pages/HomePage/sections/WarpSection/resources/createGradientTexture';
+import { times } from 'lodash';
+import { Power1 } from 'gsap';
 import { requestAnimationFrame } from '@daybrush/utils';
-
-function generateTexture() {
-  const size = 512;
-
-  // create canvas
-  const canvas = document.createElement('canvas');
-  canvas.width = size;
-  canvas.height = size;
-
-  // get context
-  const context = canvas.getContext('2d');
-
-  // draw gradient
-  context.rect(0, 0, size, size);
-  const gradient = context.createLinearGradient(0, 0, size, 0);
-  const violet = '#8F5FE7';
-  const blue = '#304AB7';
-  gradient.addColorStop(0, violet);
-  gradient.addColorStop(0.25, violet);
-  gradient.addColorStop(0.4, blue);
-  gradient.addColorStop(0.75, blue);
-  gradient.addColorStop(0.95, violet);
-  context.fillStyle = gradient;
-  context.fill();
-
-  // document.body.appendChild(canvas);
-  // canvas.style.position = 'absolute';
-  // canvas.style.left = '0px';
-  // canvas.style.top = '0px';
-
-  return canvas;
-}
 
 function init(canvas: HTMLCanvasElement) {
   const shapeLength = 1;
@@ -69,50 +37,10 @@ function init(canvas: HTMLCanvasElement) {
     .lineTo(shapePoints.startY + shapePoints.height, shapePoints.startX)
     .lineTo(shapePoints.startX, shapePoints.startY);
 
-  // shape
-  //   .moveTo(shapePoints.startX, shapePoints.startY + shapePoints.radius)
-  //   .lineTo(
-  //     shapePoints.startX,
-  //     shapePoints.startY + shapePoints.height - shapePoints.radius
-  //   )
-  //   .quadraticCurveTo(
-  //     shapePoints.startX,
-  //     shapePoints.startY + shapePoints.height,
-  //     shapePoints.startX + shapePoints.radius,
-  //     shapePoints.startY + shapePoints.height
-  //   )
-  //   .lineTo(
-  //     shapePoints.startX + shapePoints.width - shapePoints.radius,
-  //     shapePoints.startY + shapePoints.height
-  //   )
-  //   .quadraticCurveTo(
-  //     shapePoints.startX + shapePoints.width,
-  //     shapePoints.startY + shapePoints.height,
-  //     shapePoints.startX + shapePoints.width,
-  //     shapePoints.startY + shapePoints.height - shapePoints.radius
-  //   )
-  //   .lineTo(
-  //     shapePoints.startX + shapePoints.width,
-  //     shapePoints.startY + shapePoints.radius
-  //   )
-  //   .quadraticCurveTo(
-  //     shapePoints.startX + shapePoints.width,
-  //     shapePoints.startY,
-  //     shapePoints.startX + shapePoints.width - shapePoints.radius,
-  //     shapePoints.startY
-  //   )
-  //   .lineTo(shapePoints.startX + shapePoints.radius, shapePoints.startY)
-  //   .quadraticCurveTo(
-  //     shapePoints.startX,
-  //     shapePoints.startY,
-  //     shapePoints.startX,
-  //     shapePoints.startY + shapePoints.radius
-  //   );
-
   const points = shape.getPoints();
   const bufferGeometry = new BufferGeometry().setFromPoints(points);
   bufferGeometry.center();
-  const texture = new CanvasTexture(generateTexture());
+  const texture = new CanvasTexture(createGradientTexture());
   const material = new MeshLineMaterial({
     useMap: true,
     map: texture,
@@ -160,14 +88,6 @@ function init(canvas: HTMLCanvasElement) {
       targetPositionZ: line.position.z + 25,
       targetRotationZ: line.rotation.z + Math.PI / 2,
     };
-    // gsap.to(line.position, {
-    //   ...animation,
-    //   z: line.position.z + 25,
-    // });
-    // gsap.to(line.rotation, {
-    //   ...animation,
-    //   z: line.rotation.z + Math.PI / 2,
-    // });
     return animation;
   });
 
@@ -201,9 +121,9 @@ function init(canvas: HTMLCanvasElement) {
   };
 }
 
-const WarpSection: FC = () => {
-  const containerEl = useRef<HTMLDivElement>();
+const useScrollEffect = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
+  const containerEl = useRef<HTMLDivElement>();
   useEffect(() => {
     const render = init(canvasEl.current);
     let latestCall = null;
@@ -250,6 +170,14 @@ const WarpSection: FC = () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
+  return {
+    containerEl,
+    canvasEl,
+  };
+};
+
+const WarpScene: FC = () => {
+  const { containerEl, canvasEl } = useScrollEffect();
   return (
     <Container ref={containerEl}>
       <canvas ref={canvasEl} />
@@ -257,10 +185,8 @@ const WarpSection: FC = () => {
   );
 };
 
-const Container = styled.section`
+const Container = styled.div`
   position: relative;
-  height: 10000px;
-
   canvas {
     top: 0;
     left: 0;
@@ -269,4 +195,4 @@ const Container = styled.section`
   }
 `;
 
-export default WarpSection;
+export default WarpScene;

@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
+import { DATE, LOCATION } from '~/data/event';
 
 const Header: FC = () => {
   return (
     <Container>
       <MenuList>
-        <MenuItem>2022.10.02 Sat</MenuItem>
-        <MenuItem>Lotte Tower SKY 31</MenuItem>
+        <MenuItem>{DATE}</MenuItem>
+        <MenuItem>{LOCATION}</MenuItem>
         <MenuItem>
           <Button>티켓 구매하기</Button>
         </MenuItem>
@@ -26,6 +27,7 @@ const Container = styled.div`
 
 const MenuList = styled.ul`
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
 `;
