@@ -11,7 +11,12 @@ const HeroSection: FC = () => {
         {DATE} {LOCATION}
       </Info>
       <Button>티켓 구매하기</Button>
-      <EarthImage src={earthImage.src} alt="Earth" />
+      <EarthImage
+        src={earthImage.src}
+        width={earthImage.width}
+        height={earthImage.height}
+        alt="Earth"
+      />
     </Container>
   );
 };

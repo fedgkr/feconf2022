@@ -16,7 +16,7 @@ const sectionHeight = sectionRatio * 10;
 const Container = styled.section`
   position: relative;
   padding-bottom: ${sectionHeight}%;
-  background-color: white;
+  background-color: black;
 `;
 
 export default WarpSection;
