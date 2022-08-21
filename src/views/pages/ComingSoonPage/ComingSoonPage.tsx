@@ -3,20 +3,20 @@ import FullPage, {
   fullpageOptions as FullPageOptions,
 } from '@fullpage/react-fullpage';
 
-import HeroSection from '~/views/ComingSoonPage/components/HeroSection';
-import IntroSection from '~/views/ComingSoonPage/components/IntroSection';
-import CallForSpeakerSection from '~/views/ComingSoonPage/components/CallForSpeakerSection';
-import CallForSponsorSection from '~/views/ComingSoonPage/components/CallForSponsorSection';
+import HeroSection from '~/views/pages/ComingSoonPage/components/HeroSection';
+import IntroSection from '~/views/pages/ComingSoonPage/components/IntroSection';
+import CallForSpeakerSection from '~/views/pages/ComingSoonPage/components/CallForSpeakerSection';
+import CallForSponsorSection from '~/views/pages/ComingSoonPage/components/CallForSponsorSection';
 import styled from '@emotion/styled';
-import ComingSoonSection from '~/views/ComingSoonPage/components/ComingSoonSection';
-import { anchors } from '~/views/ComingSoonPage/data/anchors';
-import ComingSoonMeta from '~/views/ComingSoonPage/components/ComingSoonMeta';
+import ComingSoonSection from '~/views/pages/ComingSoonPage/components/ComingSoonSection';
+import { anchors } from '~/views/pages/ComingSoonPage/data/anchors';
+import ComingSoonMeta from '~/views/pages/ComingSoonPage/components/ComingSoonMeta';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { WarpLineProps } from '~/views/ComingSoonPage/components/WarpLine';
+import { WarpLineProps } from '~/views/pages/ComingSoonPage/components/WarpLine';
 
 const WarpLine = dynamic<WarpLineProps>(() =>
-  import('~/views/ComingSoonPage/components/WarpLine').then(
+  import('~/views/pages/ComingSoonPage/components/WarpLine').then(
     (module) => module.WarpLine
   )
 );

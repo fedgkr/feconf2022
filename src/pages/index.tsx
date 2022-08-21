@@ -1,9 +1,1 @@
-import HomePage from '~/views/HomePage';
-
-export default function App() {
-  return (
-    <>
-      <HomePage />
-    </>
-  );
-}
+export { default } from '~/views/pages/HomePage';

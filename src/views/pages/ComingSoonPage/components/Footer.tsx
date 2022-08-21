@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import SafeLink from '~/views/components/SafeLink';
-import { tablet } from '~/views/ComingSoonPage/styles/media-query';
+import { tablet } from '~/views/pages/ComingSoonPage/styles/media-query';
 import {
   FACEBOOK_FRONTEND_URL,
   FECONF_EMAIL,
-} from '~/views/ComingSoonPage/data/meta';
+} from '~/views/pages/ComingSoonPage/data/meta';
 
 interface Props {
   visible: boolean;
@@ -16,7 +16,7 @@ const Footer: FC<Props> = ({ visible }) => {
     <Container visible={visible}>
       <Menu>
         <li>
-          <Link href="/">
+          <Link href="/Users/codemilli/codemilli/feconf/feconf2022/src/views/pages">
             <Logo src="/images/logo.png" alt="FECONF" />
           </Link>
         </li>

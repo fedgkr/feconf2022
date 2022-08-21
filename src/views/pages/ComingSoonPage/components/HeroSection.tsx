@@ -1,10 +1,13 @@
 import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
-import SpaceshipIcon from '~/views/ComingSoonPage/components/SpaceshipIcon';
-import Center from '~/views/ComingSoonPage/components/Center';
-import useFadeInOutAnimation from '~/views/ComingSoonPage/hooks/useFadeInOutAnimation';
-import SectionContainer from '~/views/ComingSoonPage/components/SectionContainer';
-import { mobile, tablet } from '~/views/ComingSoonPage/styles/media-query';
+import SpaceshipIcon from '~/views/pages/ComingSoonPage/components/SpaceshipIcon';
+import Center from '~/views/pages/ComingSoonPage/components/Center';
+import useFadeInOutAnimation from '~/views/pages/ComingSoonPage/hooks/useFadeInOutAnimation';
+import SectionContainer from '~/views/pages/ComingSoonPage/components/SectionContainer';
+import {
+  mobile,
+  tablet,
+} from '~/views/pages/ComingSoonPage/styles/media-query';
 import Portal from '~/views/components/Portal';
 
 interface Props {

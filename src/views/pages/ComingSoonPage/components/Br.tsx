@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
-import { mobile, tablet } from '~/views/ComingSoonPage/styles/media-query';
+import {
+  mobile,
+  tablet,
+} from '~/views/pages/ComingSoonPage/styles/media-query';
 
 // PC Br
 export const PBr = styled.br`

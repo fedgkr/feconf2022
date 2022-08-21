@@ -2,12 +2,12 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import Portal from '~/views/components/Portal';
 import { Earth } from './Earth';
-import useFadeInOutAnimation from '~/views/ComingSoonPage/hooks/useFadeInOutAnimation';
-import SectionContainer from '~/views/ComingSoonPage/components/SectionContainer';
-import Center from '~/views/ComingSoonPage/components/Center';
-import Footer from '~/views/ComingSoonPage/components/Footer';
-import { tablet } from '~/views/ComingSoonPage/styles/media-query';
-import LineIcon from '~/views/ComingSoonPage/components/LineIcon';
+import useFadeInOutAnimation from '~/views/pages/ComingSoonPage/hooks/useFadeInOutAnimation';
+import SectionContainer from '~/views/pages/ComingSoonPage/components/SectionContainer';
+import Center from '~/views/pages/ComingSoonPage/components/Center';
+import Footer from '~/views/pages/ComingSoonPage/components/Footer';
+import { tablet } from '~/views/pages/ComingSoonPage/styles/media-query';
+import LineIcon from '~/views/pages/ComingSoonPage/components/LineIcon';
 
 interface Props {
   state: SectionState;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import usePathLength from '~/views/ComingSoonPage/hooks/usePathLength';
-import { tablet } from '~/views/ComingSoonPage/styles/media-query';
+import usePathLength from '~/views/pages/ComingSoonPage/hooks/usePathLength';
+import { tablet } from '~/views/pages/ComingSoonPage/styles/media-query';
 
 interface Props {
   visible: boolean;

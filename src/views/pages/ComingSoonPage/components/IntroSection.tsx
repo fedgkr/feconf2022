@@ -1,10 +1,10 @@
 import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
-import useFadeInOutAnimation from '~/views/ComingSoonPage/hooks/useFadeInOutAnimation';
-import SectionContainer from '~/views/ComingSoonPage/components/SectionContainer';
-import Center from '~/views/ComingSoonPage/components/Center';
-import { tablet } from '~/views/ComingSoonPage/styles/media-query';
-import { MBr, PBr, TBr } from '~/views/ComingSoonPage/components/Br';
+import useFadeInOutAnimation from '~/views/pages/ComingSoonPage/hooks/useFadeInOutAnimation';
+import SectionContainer from '~/views/pages/ComingSoonPage/components/SectionContainer';
+import Center from '~/views/pages/ComingSoonPage/components/Center';
+import { tablet } from '~/views/pages/ComingSoonPage/styles/media-query';
+import { MBr, PBr, TBr } from '~/views/pages/ComingSoonPage/components/Br';
 
 interface Props {
   state: SectionState;

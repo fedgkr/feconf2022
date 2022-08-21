@@ -1,14 +1,14 @@
 import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
 import ApplyButton from '~/views/components/ApplyButton';
-import useFadeInOutAnimation from '~/views/ComingSoonPage/hooks/useFadeInOutAnimation';
-import SectionContainer from '~/views/ComingSoonPage/components/SectionContainer';
-import Center from '~/views/ComingSoonPage/components/Center';
-import { tablet } from '~/views/ComingSoonPage/styles/media-query';
-import { SPONSOR_FORM } from '~/views/ComingSoonPage/data/meta';
-import CircleIcon from '~/views/ComingSoonPage/components/CircleIcon';
+import useFadeInOutAnimation from '~/views/pages/ComingSoonPage/hooks/useFadeInOutAnimation';
+import SectionContainer from '~/views/pages/ComingSoonPage/components/SectionContainer';
+import Center from '~/views/pages/ComingSoonPage/components/Center';
+import { tablet } from '~/views/pages/ComingSoonPage/styles/media-query';
+import { SPONSOR_FORM } from '~/views/pages/ComingSoonPage/data/meta';
+import CircleIcon from '~/views/pages/ComingSoonPage/components/CircleIcon';
 import Portal from '~/views/components/Portal';
-import { MBr, PBr, TBr } from '~/views/ComingSoonPage/components/Br';
+import { MBr, PBr, TBr } from '~/views/pages/ComingSoonPage/components/Br';
 
 interface Props {
   state: SectionState;
