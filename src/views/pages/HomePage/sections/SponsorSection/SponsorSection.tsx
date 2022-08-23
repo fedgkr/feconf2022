@@ -24,7 +24,7 @@ const SponsorSection: FC = () => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.section`
   margin-top: 120px;
 `;
 

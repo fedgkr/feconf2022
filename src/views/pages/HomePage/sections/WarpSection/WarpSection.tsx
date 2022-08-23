@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC } from 'react';
 import styled from '@emotion/styled';
 import WarpScene from '~/views/pages/HomePage/sections/WarpSection/components/WarpScene';
 

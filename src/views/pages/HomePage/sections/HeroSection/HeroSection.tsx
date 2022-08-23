@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { DATE, LOCATION } from '~/data/event';
-import earthImage from './resources/globe.png';
+import earthImage from '../../resources/globe.png';
 
 const HeroSection: FC = () => {
   return (

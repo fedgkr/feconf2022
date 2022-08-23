@@ -5,15 +5,19 @@ import TrackSection from '~/views/pages/HomePage/sections/TrackSection/TrackSect
 import styled from '@emotion/styled';
 import Header from '~/views/pages/HomePage/components/Header';
 import SponsorSection from '~/views/pages/HomePage/sections/SponsorSection/SponsorSection';
+import TicketSection from '~/views/pages/HomePage/sections/TicketSection/TicketSection';
+import CoCSection from '~/views/pages/HomePage/sections/CoCSection/CoCSection';
 
 const HomePage: FC = () => {
   return (
     <Container>
       <Header />
-      {/* <HeroSection /> */}
-      {/* <WarpSection /> */}
+      <HeroSection />
+      <WarpSection />
       <TrackSection />
       <SponsorSection />
+      <TicketSection />
+      <CoCSection />
     </Container>
   );
 };
