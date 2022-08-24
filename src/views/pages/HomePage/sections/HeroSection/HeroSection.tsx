@@ -1,31 +1,61 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { DATE, LOCATION } from '~/data/event';
-import earthImage from '../../resources/globe.png';
+import { Earth } from '../../components/Earth';
+import { useWindowScrollTop, useWindowHeight } from '../../hooks/useWindowScroll';
 
 const HeroSection: FC = () => {
+  const scrollTop = useWindowScrollTop();
+  const height = useWindowHeight();
+
   return (
     <Container>
-      <Title>올해도 가보자고!</Title>
-      <Info>
-        {DATE} {LOCATION}
-      </Info>
-      <Button>티켓 구매하기</Button>
-      <EarthImage
-        src={earthImage.src}
-        width={earthImage.width}
-        height={earthImage.height}
-        alt="Earth"
-      />
+      <TitleArea style={{
+         transform: `translateY(${scrollTop / 2}px)`,
+         opacity: height ? Math.max(0, height - scrollTop) / height : 1,
+      }}>
+        <Title>올해도 가보자고!</Title>
+        <Info>
+          {DATE} {LOCATION}
+        </Info>
+        <Button>티켓 구매하기</Button>
+      </TitleArea>
+      <Earth />
     </Container>
   );
 };
 
 const Container = styled.section`
   position: relative;
-  padding-top: 266px;
-  padding-bottom: 180px;
+  height: 150vh;
   text-align: center;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/images/hero/star.png);
+    pointer-events: none;
+  }
+  canvas {
+    position: absolute;
+    z-index: 0;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+`;
+
+const TitleArea = styled.div`
+  position: relative;
+  width: 100%;
+  top: 266px;
+  z-index: 1;
 `;
 
 const Title = styled.h2`
