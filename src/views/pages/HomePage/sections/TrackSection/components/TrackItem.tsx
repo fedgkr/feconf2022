@@ -1,23 +1,31 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import SponsorSession from '~/views/pages/HomePage/sections/TrackSection/resources/titles/SponsorSession';
+import { Session, Track } from '~/types/event';
+import eq from 'lodash/eq';
 
-const TrackItem: FC = () => {
+interface Props {
+  session: Session;
+  title: FC;
+}
+
+const TrackItem: FC<Props> = ({ session, title }) => {
   return (
     <Container>
       <Time>
-        <span>13:30</span>
+        <span>{session.time[0]}</span>
       </Time>
       <TextWrap>
-        <Title>
-          <SponsorSession />
-        </Title>
+        <Title>{title({})}</Title>
         <Info>
-          <Speaker>문주영</Speaker>
-          <Divider>·</Divider>
-          <Company>네이버웹툰</Company>
+          <Speaker>{session.speaker.name}</Speaker>
+          {session.speaker.company ? (
+            <>
+              <Divider>·</Divider>
+              <Company>{session.speaker.company.name}</Company>
+            </>
+          ) : null}
           <Tag>45min</Tag>
-          <Tag>A Track</Tag>
+          <Tag>{eq(session.track, Track.A) ? 'A' : 'B'} Track</Tag>
         </Info>
       </TextWrap>
     </Container>
@@ -27,6 +35,16 @@ const TrackItem: FC = () => {
 const Container = styled.li`
   display: flex;
   align-items: flex-start;
+  cursor: pointer;
+
+  svg path {
+    opacity: 0.6;
+  }
+  &:hover {
+    svg path {
+      opacity: 1;
+    }
+  }
 `;
 
 const Time = styled.div`
@@ -86,7 +104,7 @@ const Tag = styled.span`
   align-self: center;
   padding: 6px 8px;
   color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 9px;
   font-size: 16px;
   margin-left: 8px;

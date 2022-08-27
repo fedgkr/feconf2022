@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const SponsorSession: FC = () => {
+const Sponsor: FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,4 +19,4 @@ const SponsorSession: FC = () => {
   );
 };
 
-export default SponsorSession;
+export default Sponsor;

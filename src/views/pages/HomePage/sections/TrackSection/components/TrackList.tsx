@@ -1,27 +1,20 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import TrackItem from '~/views/pages/HomePage/sections/TrackSection/components/TrackItem';
+import useSelectedSessions from '~/views/pages/HomePage/sections/TrackSection/hooks/useSelectedSessions';
 
 const TrackList: FC = () => {
+  const { sessions, titles } = useSelectedSessions();
   return (
     <Container>
       <List>
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
-        <TrackItem />
+        {sessions.map((session, index) => (
+          <TrackItem
+            key={session.title}
+            session={session}
+            title={titles[index]}
+          />
+        ))}
       </List>
     </Container>
   );

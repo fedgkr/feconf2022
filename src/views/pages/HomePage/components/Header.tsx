@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import { DATE, LOCATION } from '~/data/event';
+import { DATE, LOCATION } from '~/data/meta';
 
 const Header: FC = () => {
   return (

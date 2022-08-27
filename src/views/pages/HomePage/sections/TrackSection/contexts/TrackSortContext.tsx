@@ -1,10 +1,7 @@
 import { createContext, useContext, useState } from 'react';
+import { Track } from '~/types/event';
 
-export enum TrackSortType {
-  All,
-  A,
-  B,
-}
+export type TrackSortType = Track | 'all';
 
 const TrackSortContext = createContext<{
   currentSort: TrackSortType;
@@ -12,7 +9,7 @@ const TrackSortContext = createContext<{
 }>(null);
 
 export const TrackSortProvider = ({ children }) => {
-  const [currentSort, setCurrentSort] = useState(TrackSortType.All);
+  const [currentSort, setCurrentSort] = useState<TrackSortType>('all');
   return (
     <TrackSortContext.Provider value={{ currentSort, setCurrentSort }}>
       {children}

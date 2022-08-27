@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import {
-  TrackSortType,
-  useTrackSort,
-} from '~/views/pages/HomePage/sections/TrackSection/contexts/TrackSortContext';
-import { isEqual } from 'lodash';
+import { useTrackSort } from '~/views/pages/HomePage/sections/TrackSection/contexts/TrackSortContext';
+import eq from 'lodash/eq';
+import { Track } from '~/types/event';
 
 const TrackSortBar: FC = () => {
   const { currentSort, setCurrentSort } = useTrackSort();
@@ -12,20 +10,20 @@ const TrackSortBar: FC = () => {
     <Container>
       <SortList>
         <SortItem
-          active={isEqual(currentSort, TrackSortType.All)}
-          onClick={() => setCurrentSort(TrackSortType.All)}
+          active={eq(currentSort, 'all')}
+          onClick={() => setCurrentSort('all')}
         >
           All
         </SortItem>
         <SortItem
-          active={isEqual(currentSort, TrackSortType.A)}
-          onClick={() => setCurrentSort(TrackSortType.A)}
+          active={eq(currentSort, Track.A)}
+          onClick={() => setCurrentSort(Track.A)}
         >
           Track A
         </SortItem>
         <SortItem
-          active={isEqual(currentSort, TrackSortType.B)}
-          onClick={() => setCurrentSort(TrackSortType.B)}
+          active={eq(currentSort, Track.B)}
+          onClick={() => setCurrentSort(Track.B)}
         >
           Track B
         </SortItem>
