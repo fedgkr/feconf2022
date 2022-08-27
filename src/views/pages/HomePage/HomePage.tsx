@@ -7,6 +7,8 @@ import Header from '~/views/pages/HomePage/components/Header';
 import SponsorSection from '~/views/pages/HomePage/sections/SponsorSection/SponsorSection';
 import TicketSection from '~/views/pages/HomePage/sections/TicketSection/TicketSection';
 import CoCSection from '~/views/pages/HomePage/sections/CoCSection/CoCSection';
+import NoticeSection from '~/views/pages/HomePage/sections/NoticeSection/NoticeSection';
+import Footer from '~/views/pages/HomePage/components/Footer';
 
 const HomePage: FC = () => {
   return (
@@ -18,6 +20,8 @@ const HomePage: FC = () => {
       <SponsorSection />
       <TicketSection />
       <CoCSection />
+      <NoticeSection />
+      <Footer />
     </Container>
   );
 };

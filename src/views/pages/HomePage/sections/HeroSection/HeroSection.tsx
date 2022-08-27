@@ -2,7 +2,10 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import { DATE, LOCATION } from '~/data/event';
 import { Earth } from '../../components/Earth';
-import { useWindowScrollTop, useWindowHeight } from '../../hooks/useWindowScroll';
+import {
+  useWindowScrollTop,
+  useWindowHeight,
+} from '../../hooks/useWindowScroll';
 
 const HeroSection: FC = () => {
   const scrollTop = useWindowScrollTop();
@@ -10,10 +13,12 @@ const HeroSection: FC = () => {
 
   return (
     <Container>
-      <TitleArea style={{
-         transform: `translateY(${scrollTop / 2}px)`,
-         opacity: height ? Math.max(0, height - scrollTop) / height : 1,
-      }}>
+      <TitleArea
+        style={{
+          transform: `translateY(${scrollTop / 2}px)`,
+          opacity: height ? Math.max(0, height - scrollTop) / height : 1,
+        }}
+      >
         <Title>올해도 가보자고!</Title>
         <Info>
           {DATE} {LOCATION}
@@ -31,7 +36,7 @@ const Container = styled.section`
   text-align: center;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 0;
     top: 0;
@@ -85,10 +90,6 @@ const Button = styled.a`
   border: 3px solid white;
   border-radius: 100px;
   background-color: transparent;
-`;
-
-const EarthImage = styled.img`
-  margin: 84px auto 0 auto;
 `;
 
 export default HeroSection;
