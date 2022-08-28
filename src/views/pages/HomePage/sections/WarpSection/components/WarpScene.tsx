@@ -101,6 +101,7 @@ function init(canvas: HTMLCanvasElement) {
   const renderer = new WebGLRenderer({ canvas, antialias: true });
   renderer.setSize(size.width, size.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
   return (duration: number) => {
     duration = Math.min(Math.max((duration - 0.1) / 0.8, 0), 1);
     const shouldRender = duration !== 0;

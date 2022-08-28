@@ -121,7 +121,7 @@ export const ThreeCanvas = forwardRef<ThreeCanvasObject, ThreeCanvasProps>((prop
         };
     }, [props.render]);
 
-    return <canvas ref={canvasRef}></canvas>;
+    return <canvas ref={canvasRef} className={"three-canvas"}></canvas>;
 });
 
 ThreeCanvas.displayName = 'ThreeCanvas';
