@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import TrackItem from '~/views/pages/HomePage/sections/TrackSection/components/TrackItem';
 import useSelectedSessions from '~/views/pages/HomePage/sections/TrackSection/hooks/useSelectedSessions';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const TrackList: FC = () => {
   const { sessions, titles } = useSelectedSessions();
@@ -25,15 +26,23 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 120px;
+  ${mobile`
+    margin-top: 48px;
+  `}
 `;
 
 const List = styled.ul`
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  & > li:not(:first-child) {
+  & > li:not(:first-of-type) {
     margin-top: 20px;
   }
+  ${mobile`
+    & > li:not(:first-of-type) {
+      margin-top: 32px;
+    }
+  `}
 `;
 
 export default TrackList;

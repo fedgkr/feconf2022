@@ -67,7 +67,7 @@ const Menu = styled.ul`
   ${tablet`
     padding: 0 20px;
     li {
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         span, a:not(:last-child) {
           display: none;
         }

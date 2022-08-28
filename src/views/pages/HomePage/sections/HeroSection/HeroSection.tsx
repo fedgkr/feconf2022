@@ -6,8 +6,11 @@ import {
   useWindowScrollTop,
   useWindowHeight,
 } from '../../hooks/useWindowScroll';
+import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const HeroSection: FC = () => {
+  const { text, props } = useTicketButton();
   const scrollTop = useWindowScrollTop();
   const height = useWindowHeight();
 
@@ -23,7 +26,7 @@ const HeroSection: FC = () => {
         <Info>
           {DATE} {LOCATION}
         </Info>
-        <Button>티켓 구매하기</Button>
+        <Button {...props}>{text}</Button>
       </TitleArea>
       <Earth />
     </Container>
@@ -61,6 +64,9 @@ const TitleArea = styled.div`
   width: 100%;
   top: 266px;
   z-index: 1;
+  ${mobile`
+    top: 160px;
+  `}
 `;
 
 const Title = styled.h2`
@@ -68,6 +74,9 @@ const Title = styled.h2`
   font-size: 100px;
   font-weight: 900;
   letter-spacing: -1px;
+  ${mobile`
+    font-size: 48px;
+  `}
 `;
 
 const Info = styled.h4`
@@ -76,6 +85,10 @@ const Info = styled.h4`
   font-weight: normal;
   line-height: 1.3;
   color: #b5b5b7;
+  ${mobile`
+    margin-top: 24px;
+    font-size: 18px;
+  `}
 `;
 
 const Button = styled.a`
@@ -90,6 +103,13 @@ const Button = styled.a`
   border: 3px solid white;
   border-radius: 100px;
   background-color: transparent;
+  ${mobile`
+    margin-top: 48px;
+    padding: 0 24px;
+    height: 56px;
+    font-size: 16px;
+
+  `}
 `;
 
 export default HeroSection;

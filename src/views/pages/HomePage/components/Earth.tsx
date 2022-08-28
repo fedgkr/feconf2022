@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { SceneItem } from "scenejs";
-import * as THREE from "three";
-import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
+import { useEffect, useRef, useState } from 'react';
+import { SceneItem } from 'scenejs';
+import * as THREE from 'three';
+import { ThreeCanvas, ThreeCanvasObject } from '~/views/components/ThreeCanvas';
 
 const POINT_LIGHT_FRAGMENT_SHADER = `
 varying vec3 vPosition;
@@ -17,8 +17,8 @@ float getPointLightIntensity() {
 }
 `;
 
-const color1 = new THREE.Color(0x304AB7);
-const color2 = new THREE.Color(0x8E5FE6);
+const color1 = new THREE.Color(0x304ab7);
+const color2 = new THREE.Color(0x8e5fe6);
 
 // const color1 = new THREE.Color(0xff0000);
 // const color2 = new THREE.Color(0x00ff00);
@@ -54,9 +54,15 @@ uniform float uOpacity;
 ${POINT_LIGHT_FRAGMENT_SHADER}
 
 void main() {
-  vec4 color1 = vec4(${color1.r.toFixed(10)}, ${color1.g.toFixed(10)}, ${color1.b.toFixed(10)}, 1.0);
-  vec4 color2 = vec4(${color2.r.toFixed(10)}, ${color2.g.toFixed(10)}, ${color2.b.toFixed(10)}, 1.0);
-  vec4 colorEarth = vec4(${color3.r.toFixed(10)}, ${color3.g.toFixed(10)}, ${color3.b.toFixed(10)}, 1.0);
+  vec4 color1 = vec4(${color1.r.toFixed(10)}, ${color1.g.toFixed(
+  10
+)}, ${color1.b.toFixed(10)}, 1.0);
+  vec4 color2 = vec4(${color2.r.toFixed(10)}, ${color2.g.toFixed(
+  10
+)}, ${color2.b.toFixed(10)}, 1.0);
+  vec4 colorEarth = vec4(${color3.r.toFixed(10)}, ${color3.g.toFixed(
+  10
+)}, ${color3.b.toFixed(10)}, 1.0);
   vec4 texture = texture2D(map, vUv);
   float x = (vNormal.x + 1.0) * 0.5;
   float y = (vNormal.y + 1.0) * 0.5 - 0.3;
@@ -76,7 +82,6 @@ void main() {
 	gl_FragColor = vec4(rgb * lightIntensity, screenAlpha * uOpacity);
 }
 `;
-
 
 const atmosphereVertexShader = `
 varying vec3 vNormal;
@@ -127,38 +132,36 @@ export function getAtmosphereMesh(radius = 0.65) {
       },
     },
   });
-  const atmosphereMesh = new THREE.Mesh(
-    atmosphereGeometry,
-    atmosphereMaterial,
-  );
+  const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
 
   return atmosphereMesh;
 }
 
 export async function getEarthTexture() {
-  const image = await new THREE.ImageLoader().loadAsync("/texture/small_earth.png");
+  const image = await new THREE.ImageLoader().loadAsync(
+    '/texture/small_earth.png'
+  );
 
-
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
 
   canvas.width = image.naturalWidth;
   canvas.height = image.naturalHeight;
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d');
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(image, 0, 0);
 
   const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-  const canvas2 = document.createElement("canvas");
+  const canvas2 = document.createElement('canvas');
   const zoom = 8;
   const length = 2;
 
   canvas2.width = image.naturalWidth * zoom;
   canvas2.height = image.naturalHeight * zoom;
-  const ctx2 = canvas2.getContext("2d");
+  const ctx2 = canvas2.getContext('2d');
   ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-  ctx2.fillStyle = "#ffffff";
+  ctx2.fillStyle = '#ffffff';
 
   for (let y = 0; y < data.height; ++y) {
     for (let yZoom = 0; yZoom < length; ++yZoom) {
@@ -172,29 +175,28 @@ export async function getEarthTexture() {
         for (let xZoom = 0; xZoom < length; ++xZoom) {
           ctx2.beginPath();
           ctx2.arc(
-            (x + xZoom / length * 2) * zoom,
-            (y + yZoom / length * 2) * zoom,
+            (x + (xZoom / length) * 2) * zoom,
+            (y + (yZoom / length) * 2) * zoom,
             4 / length,
-            0, 2 * Math.PI);
+            0,
+            2 * Math.PI
+          );
           ctx2.fill();
         }
       }
     }
   }
-  data.data[0]
-
+  data.data[0];
 
   const t = new THREE.CanvasTexture(canvas2);
 
-
-  console.log("?");
-  return t
+  return t;
 }
 export function getImageBitmapTexture(url: string) {
-  return new Promise<THREE.Texture>(resolve => {
+  return new Promise<THREE.Texture>((resolve) => {
     new THREE.ImageBitmapLoader()
-      .setOptions({ imageOrientation: "none" })
-      .setCrossOrigin("*")
+      .setOptions({ imageOrientation: 'none' })
+      .setCrossOrigin('*')
       .load(url, function (image) {
         const texture = new THREE.CanvasTexture(image);
 
@@ -229,7 +231,6 @@ export function getImageBitmapTexture(url: string) {
 // 	return new THREE.CanvasTexture(canvas);
 // }
 
-
 // export function getPlaneMesh() {
 //   const planeGeometry = new THREE.PlaneGeometry(1.4, 1.4, 10, 10);
 //   const planeMaterial = new THREE.MeshStandardMaterial({
@@ -256,7 +257,7 @@ export function getEarthMesh(radius: number, onReady: () => void) {
     depthTest: true,
     lights: true,
     uniforms: {
-      ...THREE.UniformsLib["lights"],
+      ...THREE.UniformsLib['lights'],
       map: {
         value: null,
       },
@@ -269,7 +270,7 @@ export function getEarthMesh(radius: number, onReady: () => void) {
     },
   });
 
-  getEarthTexture().then(texture => {
+  getEarthTexture().then((texture) => {
     earthMaterial.uniforms.map.value = texture;
     // earthMaterial.map = texture;
     onReady();
@@ -277,10 +278,7 @@ export function getEarthMesh(radius: number, onReady: () => void) {
   // getImageBitmapTexture("/texture/2k_earth_specular_map.png").then(texture => {
   //   earthMaterial.specularMap = texture;
   // });
-  const earthMesh = new THREE.Mesh(
-    earthGeometry,
-    earthMaterial,
-  );
+  const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
   // earthMesh.rotateX(-0.4);
   earthMesh.rotateY(2.4);
 
@@ -305,37 +303,37 @@ export const Earth = () => {
       setReady(true);
     });
 
-
-
     const geometry = new THREE.BufferGeometry();
     const vertices = [];
 
     for (let i = 0; i < 200; i++) {
-
       const x = 2000 * Math.random() - 1000;
       const y = 2000 * Math.random() - 1000;
       const z = 2000 * Math.random() - 1000;
 
       vertices.push(x, y, z);
-
     }
 
-    geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(vertices, 3)
+    );
 
-    const material = new THREE.PointsMaterial({ size: 10, sizeAttenuation: true, alphaTest: 0.5, transparent: true });
+    const material = new THREE.PointsMaterial({
+      size: 10,
+      sizeAttenuation: true,
+      alphaTest: 0.5,
+      transparent: true,
+    });
 
     material.color.setRGB(1, 1, 1);
 
     const particles = new THREE.Points(geometry, material);
 
-
     particles.matrixAutoUpdate = false;
     particles.matrix.makePerspective(-1, 1, 1, -1, 1, -100);
 
-
     scene.add(particles);
-
-
 
     earthRef.current = earthMesh;
     atmosphereRef.current = atmosphereMesh;
@@ -348,30 +346,32 @@ export const Earth = () => {
     earthMesh.scale.set(1, 1, 1);
     atmosphereMesh.scale.set(1.1, 1.1, 1.1);
 
-    const item = new SceneItem({
-      0: {
-        pos: -1.25,
-        uOpacity: 1,
-        scale: 1,
+    const item = new SceneItem(
+      {
+        0: {
+          pos: -1.25,
+          uOpacity: 1,
+          scale: 1,
+        },
+        10: {
+          pos: -0.5,
+          uOpacity: 0,
+          scale: 1.3,
+        },
       },
-      10: {
-        pos: -0.5,
-        uOpacity: 0,
-        scale: 1.3,
-      },
-    }, {
-      easing: "ease-out",
-      iterationCount: "infinite",
-    }).on("animate", ({ frame }) => {
-      const {
-        uOpacity,
-        scale,
-        pos,
-      } = frame.get();
+      {
+        easing: 'ease-out',
+        iterationCount: 'infinite',
+      }
+    ).on('animate', ({ frame }) => {
+      const { uOpacity, scale, pos } = frame.get();
       earthMesh.scale.set(scale, scale, scale);
       atmosphereMesh.scale.set(scale * 1.1, scale * 1.1, scale * 1.1);
-      (earthMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value = uOpacity;
-      (atmosphereMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value = uOpacity;
+      (earthMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value =
+        uOpacity;
+      (
+        atmosphereMesh.material as THREE.ShaderMaterial
+      ).uniforms.uOpacity.value = uOpacity;
       earthMesh.position.set(0, pos, 0);
       atmosphereMesh.position.set(0, pos, 0.1);
     });
@@ -380,28 +380,34 @@ export const Earth = () => {
     scene.add(earthMesh);
     // scene.add(whiteLight);
 
-
     const onScroll = () => {
       const height = threeCanvasRef.current.sizeRef.current.height;
 
-      item.setTime(document.documentElement.scrollTop / height * 10);
+      item.setTime((document.documentElement.scrollTop / height) * 10);
     };
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
-  return <ThreeCanvas ref={threeCanvasRef} render={isReady} onRender={() => {
-    if (!earthRef.current) {
-      return;
-    }
-    earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, 0), 0.0003);
+  return (
+    <ThreeCanvas
+      ref={threeCanvasRef}
+      render={isReady}
+      onRender={() => {
+        if (!earthRef.current) {
+          return;
+        }
+        earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, 0), 0.0003);
 
-    const height = threeCanvasRef.current.sizeRef.current.height;
-    (earthRef.current!.material as any).uniforms.uHeight.value = height;
-    (atmosphereRef.current!.material as any).uniforms.uHeight.value = height;
-    // cloudRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
-  }}></ThreeCanvas>;
+        const height = threeCanvasRef.current.sizeRef.current.height;
+        (earthRef.current!.material as any).uniforms.uHeight.value = height;
+        (atmosphereRef.current!.material as any).uniforms.uHeight.value =
+          height;
+        // cloudRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
+      }}
+    ></ThreeCanvas>
+  );
 };

@@ -2,8 +2,10 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import earthImage from '../../resources/globe.png';
 import { DATE, LOCATION } from '~/resources/meta';
+import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 
 const TicketSection: FC = () => {
+  const { text, props } = useTicketButton();
   return (
     <Container>
       <EarthImage
@@ -22,7 +24,7 @@ const TicketSection: FC = () => {
         <SubText>
           {DATE} {LOCATION}
         </SubText>
-        <Button>티켓 구매하기</Button>
+        <Button {...props}>{text}</Button>
       </TextWrap>
     </Container>
   );

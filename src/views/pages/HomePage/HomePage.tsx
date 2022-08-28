@@ -9,10 +9,12 @@ import TicketSection from '~/views/pages/HomePage/sections/TicketSection/TicketS
 import CoCSection from '~/views/pages/HomePage/sections/CoCSection/CoCSection';
 import NoticeSection from '~/views/pages/HomePage/sections/NoticeSection/NoticeSection';
 import Footer from '~/views/pages/HomePage/components/Footer';
+import HomePageMeta from '~/views/pages/HomePage/components/HomePageMeta';
 
 const HomePage: FC = () => {
   return (
     <Container>
+      <HomePageMeta />
       <Header />
       <HeroSection />
       <WarpSection />

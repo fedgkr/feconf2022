@@ -6,6 +6,7 @@ import TrackList from '~/views/pages/HomePage/sections/TrackSection/components/T
 import TitleBadge from '~/views/pages/HomePage/components/TitleBadge';
 import SectionTitle from '~/views/pages/HomePage/components/SectionTitle';
 import SectionHeader from '~/views/pages/HomePage/components/SectionHeader';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const TrackSection: FC = () => {
   return (
@@ -29,6 +30,10 @@ const Container = styled.section`
   position: relative;
   margin-top: 240px;
   padding-bottom: 240px;
+  ${mobile`
+    margin-top: 80px;
+    padding-bottom: 100px;
+  `}
 `;
 
 export default TrackSection;

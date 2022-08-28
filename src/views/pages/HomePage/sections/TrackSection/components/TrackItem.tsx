@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import { Session, Track } from '~/types/event';
 import eq from 'lodash/eq';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 interface Props {
   session: Session;
@@ -15,7 +16,8 @@ const TrackItem: FC<Props> = ({ session, title }) => {
         <span>{session.time[0]}</span>
       </Time>
       <TextWrap>
-        <Title>{title({})}</Title>
+        <TitleSVG>{title({})}</TitleSVG>
+        <Title>{session.title}</Title>
         <Info>
           <Speaker>{session.speaker.name}</Speaker>
           {session.speaker.company ? (
@@ -66,18 +68,49 @@ const Time = styled.div`
       transform: translateX(100%);
     }
   }
+  ${mobile`
+    span::after {
+      display: none;
+    }
+    span {
+      font-size: 13px;
+    }
+  `}
 `;
 
 const TextWrap = styled.div`
   margin-left: 112px;
+  ${mobile`
+    margin-left: 14px;
+  `}
 `;
 
-const Title = styled.div``;
+const TitleSVG = styled.div`
+  ${mobile`
+    display: none;
+  `}
+`;
+
+const Title = styled.div`
+  display: none;
+  ${mobile`
+    display: block;
+    max-width: 220px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: white;
+    word-break: keep-all;
+  `}
+`;
 
 const Info = styled.div`
   margin-top: 16px;
   display: flex;
   align-items: center;
+  ${mobile`
+    margin-top: 8px;
+  `}
 `;
 
 const Divider = styled.div`
@@ -86,6 +119,10 @@ const Divider = styled.div`
   color: white;
   text-align: center;
   margin: 0 12px;
+  ${mobile`
+    font-size: 14px;
+    margin: 0 4px;
+  `}
 `;
 
 const SpeakerStyle = styled.h4`
@@ -93,6 +130,9 @@ const SpeakerStyle = styled.h4`
   font-size: 32px;
   font-weight: 600;
   color: white;
+  ${mobile`
+    font-size: 14px;
+  `}
 `;
 
 const Speaker = styled(SpeakerStyle)``;
@@ -111,6 +151,16 @@ const Tag = styled.span`
   &:first-of-type {
     margin-left: 16px;
   }
+  ${mobile`
+    font-size: 10px;
+    border-radius: 5px;
+    padding: 5px 4px;
+    margin-left: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    &:first-of-type {
+      margin-left: 10px;
+    }
+  `}
 `;
 
 export default TrackItem;

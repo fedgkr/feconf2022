@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { Sponsor } from '~/types/event';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 interface Props {
   grade: 'diamond' | 'gold' | 'platinum' | 'rookie';
@@ -31,6 +32,9 @@ const Title = styled.h4`
   font-weight: 700;
   color: rgba(255, 255, 255, 0.4);
   text-transform: capitalize;
+  ${mobile`
+    font-size: 16px;
+  `}
 `;
 
 const List = styled.div`
@@ -39,13 +43,16 @@ const List = styled.div`
   justify-content: center;
   margin-top: 17px;
   font-size: 0;
+  ${mobile`
+    font-size: 16px;
+  `}
 `;
 
 const Item = styled.a`
   img {
     height: 100%;
   }
-  &:not(:first-child) {
+  &:not(:first-of-type) {
     margin-left: 56px;
   }
 `;

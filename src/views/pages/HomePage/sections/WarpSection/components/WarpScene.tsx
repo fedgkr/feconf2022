@@ -15,6 +15,7 @@ import createGradientTexture from '~/views/pages/HomePage/sections/WarpSection/r
 import { times } from 'lodash';
 import { Power1 } from 'gsap';
 import { requestAnimationFrame } from '@daybrush/utils';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 function init(canvas: HTMLCanvasElement) {
   const shapeLength = 1;
@@ -264,6 +265,9 @@ const Title = styled.h2`
   transform: scale(0.5);
   z-index: 1;
   pointer-events: none;
+  ${mobile`
+    font-size: 28px;
+  `}
 `;
 
 export default WarpScene;

@@ -42,7 +42,7 @@ const Button = styled.a`
   font-weight: 600;
   border-radius: 20px;
   background-color: #20232c;
-  &:not(:first-child) {
+  &:not(:first-of-type) {
     margin-left: 24px;
   }
 `;

@@ -10,6 +10,7 @@ import {
   platinumSponsors,
   rookieSponsors,
 } from '~/views/pages/HomePage/sections/SponsorSection/resources/sponsors';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const SponsorSection: FC = () => {
   return (
@@ -17,8 +18,8 @@ const SponsorSection: FC = () => {
       <SectionHeader>
         <TitleBadge>후원사</TitleBadge>
         <SectionTitle>
-          FEConf 2022를
-          <br /> 함께 만드는 회사를 소개합니다.
+          FEConf 2022를 함께 만드는 <br />
+          회사를 소개합니다.
         </SectionTitle>
       </SectionHeader>
       <List>
@@ -33,12 +34,20 @@ const SponsorSection: FC = () => {
 
 const Container = styled.section`
   margin-top: 120px;
+  ${mobile`
+    margin-top: 80px;
+  `}
 `;
 
 const List = styled.div`
   & > div:not(:last-child) {
     margin-bottom: 86px;
   }
+  ${mobile`
+    & > div:not(:last-child) {
+      margin-bottom: 40px;
+    }
+  `}
 `;
 
 export default SponsorSection;

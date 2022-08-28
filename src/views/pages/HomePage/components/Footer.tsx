@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import logo from '../resources/logo.png';
 import { EMAIL } from '~/resources/meta';
+import { tablet } from '~/views/pages/HomePage/styles/media-query';
 
 const Footer: FC = () => {
   return (
@@ -26,6 +27,7 @@ const Container = styled.div`
   max-width: 1100px;
   height: 120px;
   margin: 120px auto 0 auto;
+  padding: 0 24px;
 `;
 
 const Logo = styled.img``;
