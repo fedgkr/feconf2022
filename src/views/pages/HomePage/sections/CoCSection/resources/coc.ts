@@ -1,4 +1,4 @@
-import { EMAIL } from '~/data/meta';
+import { EMAIL } from '~/resources/meta';
 
 const COC = [
   {

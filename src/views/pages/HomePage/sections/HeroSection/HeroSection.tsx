@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import { DATE, LOCATION } from '~/data/meta';
+import { DATE, LOCATION } from '~/resources/meta';
 import { Earth } from '../../components/Earth';
 import {
   useWindowScrollTop,

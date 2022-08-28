@@ -4,6 +4,12 @@ import TitleBadge from '~/views/pages/HomePage/components/TitleBadge';
 import SectionTitle from '~/views/pages/HomePage/components/SectionTitle';
 import SectionHeader from '~/views/pages/HomePage/components/SectionHeader';
 import SponsorList from '~/views/pages/HomePage/sections/SponsorSection/components/SponsorList';
+import {
+  diamondSponsors,
+  goldSponsors,
+  platinumSponsors,
+  rookieSponsors,
+} from '~/views/pages/HomePage/sections/SponsorSection/resources/sponsors';
 
 const SponsorSection: FC = () => {
   return (
@@ -16,9 +22,10 @@ const SponsorSection: FC = () => {
         </SectionTitle>
       </SectionHeader>
       <List>
-        <SponsorList grade="diamond" />
-        <SponsorList grade="platinum" />
-        <SponsorList grade="gold" />
+        <SponsorList grade="diamond" list={diamondSponsors} />
+        <SponsorList grade="platinum" list={platinumSponsors} />
+        <SponsorList grade="gold" list={goldSponsors} />
+        <SponsorList grade="rookie" list={rookieSponsors} />
       </List>
     </Container>
   );

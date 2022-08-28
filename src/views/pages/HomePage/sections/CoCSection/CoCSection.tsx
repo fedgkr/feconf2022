@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import COC from '~/data/coc';
+import COC from '~/views/pages/HomePage/sections/CoCSection/resources/coc';
 import CoCBanner from '~/views/pages/HomePage/sections/CoCSection/components/CoCBanner';
 
 const CoCSection: FC = () => {

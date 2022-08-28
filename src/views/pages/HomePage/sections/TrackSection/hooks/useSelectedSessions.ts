@@ -9,7 +9,7 @@ import {
   TrackSortType,
   useTrackSort,
 } from '~/views/pages/HomePage/sections/TrackSection/contexts/TrackSortContext';
-import sessionList from '~/data/event';
+import sessionList from '~/views/pages/HomePage/sections/TrackSection/resources/event';
 
 const getFilteredSessions = (sort: TrackSortType) =>
   sessionList.filter((session) =>

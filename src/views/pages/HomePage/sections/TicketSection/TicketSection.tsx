@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import earthImage from '../../resources/globe.png';
-import { DATE, LOCATION } from '~/data/meta';
+import { DATE, LOCATION } from '~/resources/meta';
 
 const TicketSection: FC = () => {
   return (

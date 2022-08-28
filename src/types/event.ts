@@ -12,8 +12,6 @@ type Timetable = Time[];
 
 interface Company {
   name: string;
-  homepage: string;
-  image?: string;
 }
 
 interface Speaker {
@@ -30,5 +28,11 @@ interface Session {
   time: Time;
 }
 
-export type { Session, Company, Speaker, Timetable };
+interface Sponsor {
+  name: string;
+  homepage: string;
+  image: string;
+}
+
+export type { Session, Company, Speaker, Timetable, Sponsor };
 export { Track };

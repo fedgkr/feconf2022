@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import logo from '../resources/logo.png';
-import { EMAIL } from '~/data/meta';
+import { EMAIL } from '~/resources/meta';
 
 const Footer: FC = () => {
   return (

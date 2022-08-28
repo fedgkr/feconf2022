@@ -18,7 +18,6 @@ const sessionList: Session[] = [
       name: '정미량',
       company: {
         name: '그린랩스',
-        homepage: '',
       },
       image: '',
     },
@@ -32,7 +31,6 @@ const sessionList: Session[] = [
       name: '김혜성',
       company: {
         name: '당근마켓',
-        homepage: '',
       },
       image: '',
     },
@@ -46,7 +44,6 @@ const sessionList: Session[] = [
       name: '박신연',
       company: {
         name: '구글 쇼핑 UX',
-        homepage: '',
       },
       image: '',
     },
@@ -60,7 +57,6 @@ const sessionList: Session[] = [
       name: '이동현',
       company: {
         name: '네이버웹툰',
-        homepage: '',
       },
       image: '',
     },
@@ -74,7 +70,6 @@ const sessionList: Session[] = [
       name: '노용구',
       company: {
         name: '네이버 스마트에디터',
-        homepage: '',
       },
       image: '',
     },
@@ -88,7 +83,6 @@ const sessionList: Session[] = [
       name: '이소영',
       company: {
         name: 'flex',
-        homepage: '',
       },
       image: '',
     },
@@ -102,7 +96,6 @@ const sessionList: Session[] = [
       name: '오창영',
       company: {
         name: '토스',
-        homepage: '',
       },
       image: '',
     },
@@ -116,7 +109,6 @@ const sessionList: Session[] = [
       name: '박세문',
       company: {
         name: '라포랩',
-        homepage: '',
       },
       image: '',
     },
@@ -130,7 +122,6 @@ const sessionList: Session[] = [
       name: '최수형',
       company: {
         name: '메가테라',
-        homepage: '',
       },
       image: '',
     },
@@ -144,7 +135,6 @@ const sessionList: Session[] = [
       name: '박서진',
       company: {
         name: '토스',
-        homepage: '',
       },
       image: '',
     },
