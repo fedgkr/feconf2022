@@ -6,6 +6,7 @@ import {
   useWindowScrollTop,
   useWindowHeight,
 } from '../../hooks/useWindowScroll';
+import { StarCanvas } from '../../components/StarCanvas';
 
 const HeroSection: FC = () => {
   const scrollTop = useWindowScrollTop();
@@ -13,6 +14,9 @@ const HeroSection: FC = () => {
 
   return (
     <Container>
+      <StarContainer>
+        <StarCanvas />
+      </StarContainer>
       <TitleArea
         style={{
           transform: `translateY(${scrollTop / 2}px)`,
@@ -35,18 +39,7 @@ const Container = styled.section`
   height: 150vh;
   text-align: center;
 
-  &:before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(/images/hero/star.png);
-    pointer-events: none;
-  }
-  canvas {
+  .three-canvas {
     position: absolute;
     z-index: 0;
     top: -100px;
@@ -55,7 +48,23 @@ const Container = styled.section`
     height: 100vh;
   }
 `;
+const StarContainer = styled.div`
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 150vh;
+padding-bottom: 56.25%;
+box-sizing: content-box;
+pointer-events: none;
+background: linear-gradient(#000000, #0a132a);
 
+.star-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+`;
 const TitleArea = styled.div`
   position: relative;
   width: 100%;

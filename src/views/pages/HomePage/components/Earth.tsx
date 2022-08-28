@@ -8,10 +8,10 @@ varying vec3 vPosition;
 
 // lights
 float getPointLightIntensity() {
-  vec3 lightPos = vec3(0.7, 0.3, 1.2);
-  vec3 lightColor = vec3(0.9, 0.9, 1.0);
+  vec3 lightPos = vec3(0.7, 0.5, 1.2);
+  vec3 lightColor = vec3(1.0, 1.0, 1.0);
   vec3 lightDirection = normalize(lightPos - vPosition);
-  float lightIntensity = 1.0 + pow(max(dot(lightDirection, normalize(vNormal)), 0.0), 4.0) * 10.0;
+  float lightIntensity = 1.0 + pow(max(dot(lightDirection, normalize(vNormal)), 0.0), 10.0) * 5.0;
 
   return lightIntensity;
 }
@@ -70,7 +70,7 @@ void main() {
 
 
   float lightIntensity = getPointLightIntensity();
-  float screenAlpha = min(1.0, gl_FragCoord.y / (uHeight * 0.5) - 0.1);
+  float screenAlpha = min(1.0, gl_FragCoord.y / (uHeight * 0.5));
   vec3 rgb = blended.rgb * a + (1.0 - a) * colorEarth.rgb;
 
 	gl_FragColor = vec4(rgb * lightIntensity, screenAlpha * uOpacity);
@@ -104,7 +104,7 @@ void main() {
   // float screenAlpha = pow(gl_FragCoord.y / (uHeight * 0.3) - 0.05, 2.0);
 
   float lightIntensity = getPointLightIntensity();
-  float screenAlpha = min(1.0, gl_FragCoord.y / (uHeight * 0.5) - 0.1);
+  float screenAlpha = min(1.0, gl_FragCoord.y / (uHeight * 0.5) - 0.05);
 	gl_FragColor = vec4(vec3(${blurColor.r}, ${blurColor.g}, ${blurColor.b}) * lightIntensity, screenAlpha * uOpacity) * intensity;
 }
 `;
@@ -181,14 +181,10 @@ export async function getEarthTexture() {
       }
     }
   }
-  data.data[0]
+
+  return new THREE.CanvasTexture(canvas2);
 
 
-  const t = new THREE.CanvasTexture(canvas2);
-
-
-  console.log("?");
-  return t
 }
 export function getImageBitmapTexture(url: string) {
   return new Promise<THREE.Texture>(resolve => {
@@ -305,35 +301,6 @@ export const Earth = () => {
       setReady(true);
     });
 
-
-
-    const geometry = new THREE.BufferGeometry();
-    const vertices = [];
-
-    for (let i = 0; i < 200; i++) {
-
-      const x = 2000 * Math.random() - 1000;
-      const y = 2000 * Math.random() - 1000;
-      const z = 2000 * Math.random() - 1000;
-
-      vertices.push(x, y, z);
-
-    }
-
-    geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
-
-    const material = new THREE.PointsMaterial({ size: 10, sizeAttenuation: true, alphaTest: 0.5, transparent: true });
-
-    material.color.setRGB(1, 1, 1);
-
-    const particles = new THREE.Points(geometry, material);
-
-
-    particles.matrixAutoUpdate = false;
-    particles.matrix.makePerspective(-1, 1, 1, -1, 1, -100);
-
-
-    scene.add(particles);
 
 
 
