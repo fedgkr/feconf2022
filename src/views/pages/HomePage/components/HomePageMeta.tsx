@@ -25,7 +25,7 @@ const HomePageMeta: FC = () => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${host}/trailer`} />
+      <meta property="og:url" content={`${host}`} />
       <meta
         property="og:image:url"
         content={`${host}/images/meta/preview.png`}

@@ -10,6 +10,7 @@ import CoCSection from '~/views/pages/HomePage/sections/CoCSection/CoCSection';
 import NoticeSection from '~/views/pages/HomePage/sections/NoticeSection/NoticeSection';
 import Footer from '~/views/pages/HomePage/components/Footer';
 import HomePageMeta from '~/views/pages/HomePage/components/HomePageMeta';
+import { BackgroundContextProvider } from '~/views/pages/HomePage/sections/WarpSection/contexts/BackgroundContext';
 
 const HomePage: FC = () => {
   return (
@@ -17,7 +18,9 @@ const HomePage: FC = () => {
       <HomePageMeta />
       <Header />
       <HeroSection />
-      <WarpSection />
+      <BackgroundContextProvider>
+        <WarpSection />
+      </BackgroundContextProvider>
       <TrackSection />
       <SponsorSection />
       <TicketSection />

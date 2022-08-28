@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useContext, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import {
   BufferGeometry,
@@ -12,10 +12,12 @@ import {
 } from 'three';
 import { MeshLine, MeshLineMaterial } from 'three.meshline';
 import createGradientTexture from '~/views/pages/HomePage/sections/WarpSection/resources/createGradientTexture';
-import { times } from 'lodash';
+import times from 'lodash/times';
+import gte from 'lodash/gte';
 import { Power1 } from 'gsap';
 import { requestAnimationFrame } from '@daybrush/utils';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import BackgroundContext from '~/views/pages/HomePage/sections/WarpSection/contexts/BackgroundContext';
 
 function init(canvas: HTMLCanvasElement) {
   const shapeLength = 1;
@@ -49,7 +51,7 @@ function init(canvas: HTMLCanvasElement) {
     lineWidth: 0.02,
   });
 
-  const lineStandZ = 0;
+  const lineStandZ = 5;
   const lineTargetZ = 25;
   const lineCount = 15;
   const lineStep = 1;
@@ -83,9 +85,9 @@ function init(canvas: HTMLCanvasElement) {
   const animationList = lineList.map((line, index) => {
     const order = lineCount - index;
     const animation = {
-      delay: index / lineList.length + 1,
+      delay: index / lineList.length - 1,
       duration: 4,
-      ease: Power1.easeIn,
+      ease: Power1.easeInOut,
       originalPositionZ: line.position.z,
       originalRotationZ: line.rotation.z,
       targetPositionZ: lineTargetZ + order * lineStep,
@@ -102,7 +104,28 @@ function init(canvas: HTMLCanvasElement) {
   renderer.setSize(size.width, size.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
-  return (duration: number) => {
+
+  /**
+   * Resize
+   */
+  function onResize() {
+    // Update sizes
+    size.width = window.innerWidth;
+    size.height = window.innerHeight;
+
+    // Update camera
+    camera.aspect = size.width / size.height;
+    camera.updateProjectionMatrix();
+
+    // Update renderer
+    renderer.setSize(size.width, size.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    renderer.render(scene, camera);
+  }
+  window.addEventListener('resize', onResize);
+
+  return (duration: number, setActiveBG: (val: boolean) => void) => {
     duration = Math.min(Math.max((duration - 0.1) / 0.8, 0), 1);
     const shouldRender = duration !== 0;
     animationList.forEach((animation, index) => {
@@ -127,6 +150,7 @@ function init(canvas: HTMLCanvasElement) {
       line.material.transparent = true;
       line.material.opacity = shouldRender ? line.position.z / 15 : 0;
     });
+    setActiveBG(gte(duration, 0.83));
     renderer.render(scene, camera);
   };
 }
@@ -150,6 +174,7 @@ function hideTitle(title: HTMLHeadingElement, isBehind: boolean) {
 }
 
 const useScrollEffect = () => {
+  const { setActive } = useContext(BackgroundContext);
   const titleEl = useRef<HTMLHeadingElement>();
   const canvasEl = useRef<HTMLCanvasElement>();
   const containerEl = useRef<HTMLDivElement>();
@@ -199,7 +224,7 @@ const useScrollEffect = () => {
         hideTitle(titleEl.current, true);
         canvasEl.current.style.opacity = '0';
       }
-      render(duration);
+      render(duration, setActive);
     };
     const onScroll = () => {
       latestCall = tick;

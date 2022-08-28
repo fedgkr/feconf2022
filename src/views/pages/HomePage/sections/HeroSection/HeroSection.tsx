@@ -8,8 +8,10 @@ import {
 } from '../../hooks/useWindowScroll';
 import { StarCanvas } from '../../components/StarCanvas';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 
 const HeroSection: FC = () => {
+  const { text, props } = useTicketButton();
   const scrollTop = useWindowScrollTop();
   const height = useWindowHeight();
 
@@ -28,7 +30,7 @@ const HeroSection: FC = () => {
         <Info>
           {DATE} {LOCATION}
         </Info>
-        <Button>티켓 구매하기</Button>
+        <Button {...props}>{text}</Button>
       </TitleArea>
       <Earth />
     </Container>
@@ -58,7 +60,7 @@ const StarContainer = styled.div`
   padding-bottom: 56.25%;
   box-sizing: content-box;
   pointer-events: none;
-  background: linear-gradient(#000000, #0a132a);
+  //background: linear-gradient(#000000, #0a132a);
 
   .star-canvas {
     position: absolute;
