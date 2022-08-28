@@ -20,8 +20,8 @@ const HeroSection: FC = () => {
       </StarContainer>
       <TitleArea
         style={{
-          transform: `translateY(${scrollTop / 2}px)`,
-          opacity: height ? Math.max(0, height - scrollTop) / height : 1,
+          // transform: `translateY(${scrollTop / 2}px)`,
+          opacity: height ? Math.max(0, height - scrollTop * 5) / height : 1,
         }}
       >
         <Title>올해도 가보자고!</Title>
@@ -62,6 +62,8 @@ const StarContainer = styled.div`
 
   .star-canvas {
     position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
   }
