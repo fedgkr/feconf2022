@@ -18,8 +18,8 @@ const SponsorSection: FC = () => {
       <SectionHeader>
         <TitleBadge>후원사</TitleBadge>
         <SectionTitle>
-          FEConf 2022를 함께 만드는 <br />
-          회사를 소개합니다.
+          FEConf와 함께 하는 <br />
+          기업을 소개합니다.
         </SectionTitle>
       </SectionHeader>
       <List>

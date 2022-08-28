@@ -17,8 +17,8 @@ const TrackSection: FC = () => {
         <SectionHeader>
           <TitleBadge>프로그램</TitleBadge>
           <SectionTitle>
-            문구가 정해진다면
-            <br /> 여기에 넣는게 좋겠어요.
+            FEConf를 빛낼 스피커와
+            <br /> 프로그램을 소개합니다.
           </SectionTitle>
         </SectionHeader>
         <TrackSortBar />
