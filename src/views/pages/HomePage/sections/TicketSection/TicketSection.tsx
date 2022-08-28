@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import earthImage from '../../resources/globe.png';
 import { DATE, LOCATION } from '~/resources/meta';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const TicketSection: FC = () => {
   const { text, props } = useTicketButton();
@@ -17,9 +18,9 @@ const TicketSection: FC = () => {
       />
       <TextWrap>
         <Title>
-          당신의 다음 모험을
+          다양한 기술을 익히며
           <br />
-          펼쳐보세요
+          함께 성장해요
         </Title>
         <SubText>
           {DATE} {LOCATION}
@@ -31,16 +32,23 @@ const TicketSection: FC = () => {
 };
 
 const Container = styled.section`
+  position: relative;
+  width: 100%;
   padding: 200px 0 160px 0;
   text-align: center;
+  overflow: hidden;
+  ${mobile`
+    padding: 80px 0 100px 0;
+  `}
 `;
 
 const EarthImage = styled.img`
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
+  max-width: none;
   margin: auto;
   user-select: none;
+  transform: translateX(-50%);
 `;
 
 const TextWrap = styled.div`
@@ -54,6 +62,9 @@ const Title = styled.h2`
   font-weight: 900;
   line-height: 1.3;
   color: white;
+  ${mobile`
+    font-size: 28px;
+  `}
 `;
 
 const SubText = styled.p`
@@ -61,6 +72,10 @@ const SubText = styled.p`
   font-size: 28px;
   line-height: 1.4;
   color: #dfdfdf;
+  ${mobile`
+    margin-top: 16px;
+    font-size: 18px;
+  `}
 `;
 
 const Button = styled.a`
@@ -74,6 +89,13 @@ const Button = styled.a`
   font-size: 24px;
   font-weight: 700;
   color: white;
+  ${mobile`
+    margin-top: 48px;
+    padding: 0 24px;
+    height: 56px;
+    font-size: 16px;
+    border: 2px solid #ffffff;
+  `}
 `;
 
 export default TicketSection;

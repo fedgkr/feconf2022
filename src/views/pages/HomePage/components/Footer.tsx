@@ -2,12 +2,12 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import logo from '../resources/logo.png';
 import { EMAIL } from '~/resources/meta';
-import { tablet } from '~/views/pages/HomePage/styles/media-query';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const Footer: FC = () => {
   return (
     <Container>
-      <Logo src={logo.src} width={56} height={33} alt="FEConf" />
+      <Logo src={logo.src} alt="FEConf" />
       <LinkWrap>
         <Link>FEConf 2021</Link>
         <Divider>|</Divider>
@@ -28,14 +28,26 @@ const Container = styled.div`
   height: 120px;
   margin: 120px auto 0 auto;
   padding: 0 24px;
+  ${mobile`
+    width: 100%;
+    height: 100px;
+  `}
 `;
 
-const Logo = styled.img``;
+const Logo = styled.img`
+  width: 86px;
+  height: 38px;
+`;
 
 const LinkWrap = styled.div`
   display: flex;
   align-items: center;
   color: #acacac;
+  ${mobile`
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  `}
 `;
 
 const Link = styled.a`
@@ -47,12 +59,18 @@ const Link = styled.a`
 const Divider = styled.span`
   display: inline-block;
   margin: 0 12px;
+  ${mobile`
+    display: none;
+  `}
 `;
 
 const Right = styled.span`
   font-size: 12px;
   line-height: 1.6;
   color: #595d68;
+  ${mobile`
+    display: none;
+  `}
 `;
 
 export default Footer;

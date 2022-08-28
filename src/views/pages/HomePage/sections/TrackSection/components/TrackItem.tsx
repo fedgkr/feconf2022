@@ -154,7 +154,7 @@ const Tag = styled.span`
   ${mobile`
     font-size: 10px;
     border-radius: 5px;
-    padding: 5px 4px;
+    padding: 4px 5px;
     margin-left: 6px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     &:first-of-type {

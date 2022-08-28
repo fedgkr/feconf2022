@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 interface Props {
   title: string;
@@ -21,6 +22,10 @@ const Container = styled.div`
   padding: 32px 40px 40px 40px;
   background-color: rgba(44, 32, 44, 0.6);
   border-radius: 20px;
+  ${mobile`
+    padding: 24px;
+    margin: 0 20px;
+  `}
 `;
 
 const Title = styled.h3`
@@ -28,6 +33,9 @@ const Title = styled.h3`
   font-weight: 600;
   line-height: 1.6;
   color: white;
+  ${mobile`
+    font-size: 16px;
+  `}
 `;
 
 const Text = styled.p`
@@ -36,11 +44,13 @@ const Text = styled.p`
   line-height: 1.6;
   letter-spacing: -1px;
   color: #a3aab1;
-
   a {
     color: #3092f7;
     text-decoration: none;
   }
+  ${mobile`
+    font-size: 14px;
+  `}
 `;
 
 export default CoCBanner;

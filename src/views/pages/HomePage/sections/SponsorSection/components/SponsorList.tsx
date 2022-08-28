@@ -1,7 +1,10 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { Sponsor } from '~/types/event';
-import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import { mobile, tablet } from '~/views/pages/HomePage/styles/media-query';
+import slice from 'lodash/slice';
+import size from 'lodash/size';
+import gt from 'lodash/gt';
 
 interface Props {
   grade: 'diamond' | 'gold' | 'platinum' | 'rookie';
@@ -9,16 +12,36 @@ interface Props {
 }
 
 const SponsorList: FC<Props> = ({ grade, list }) => {
+  const firstRow = slice(list, 0, 3);
+  const secondRow = slice(list, 3, list.length);
   return (
     <Container>
       <Title>{grade}</Title>
       <List>
-        {list.map((sponsor) => (
+        {[...firstRow, ...secondRow].map((sponsor) => (
           <Item key={sponsor.name} href={sponsor.homepage} target="_blank">
             <img src={sponsor.image} alt={sponsor.name} />
           </Item>
         ))}
       </List>
+      <MobileList>
+        <MobileRow>
+          {firstRow.map((sponsor) => (
+            <Item key={sponsor.name} href={sponsor.homepage} target="_blank">
+              <img src={sponsor.image} alt={sponsor.name} />
+            </Item>
+          ))}
+        </MobileRow>
+        {gt(size(secondRow), 0) ? (
+          <MobileRow>
+            {secondRow.map((sponsor) => (
+              <Item key={sponsor.name} href={sponsor.homepage} target="_blank">
+                <img src={sponsor.image} alt={sponsor.name} />
+              </Item>
+            ))}
+          </MobileRow>
+        ) : null}
+      </MobileList>
     </Container>
   );
 };
@@ -39,22 +62,67 @@ const Title = styled.h4`
 
 const List = styled.div`
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   height: 80px;
   justify-content: center;
   margin-top: 17px;
   font-size: 0;
   ${mobile`
-    font-size: 16px;
+    height: 40px;
+    margin-top: 16px;
+  `}
+  ${tablet`
+    display: none;
+  `}
+`;
+
+const MobileList = styled.div`
+  display: none;
+  ${tablet`
+    display: flex;
+    flex-direction: column;
+  `}
+`;
+
+const MobileRow = styled(List)`
+  ${tablet`
+    display: flex;
+    &:nth-of-type(2) {
+      margin-top: 12px;
+    }
+  `}
+  ${mobile`
+    &:nth-of-type(2) {
+      margin-top: 10px;
+    }
   `}
 `;
 
 const Item = styled.a`
+  height: 100%;
+  padding: 0 24px;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: background-color 100ms ease-in;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
   img {
     height: 100%;
   }
   &:not(:first-of-type) {
-    margin-left: 56px;
+    margin-left: 8px;
   }
+  ${mobile`
+    padding: 0 12px;
+    &:hover {
+      background-color: none;
+    }
+    &:not(:first-of-type) {
+      margin-left: 0;
+    }
+  `}
 `;
 
 export default SponsorList;

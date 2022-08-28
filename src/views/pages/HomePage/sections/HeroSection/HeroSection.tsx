@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
+import logo from '../../resources/main-logo.png';
 import { DATE, LOCATION } from '~/resources/meta';
 import { Earth } from '../../components/Earth';
 import {
@@ -9,6 +10,7 @@ import {
 import { StarCanvas } from '../../components/StarCanvas';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
+import preventDefault from '~/views/pages/HomePage/utils/preventDefault';
 
 const HeroSection: FC = () => {
   const { text, props } = useTicketButton();
@@ -26,7 +28,7 @@ const HeroSection: FC = () => {
           opacity: height ? Math.max(0, height - scrollTop * 5) / height : 1,
         }}
       >
-        <Title>올해도 가보자고!</Title>
+        <Title src={logo.src} onMouseDown={preventDefault} />
         <Info>
           {DATE} {LOCATION}
         </Info>
@@ -45,12 +47,13 @@ const Container = styled.section`
   .three-canvas {
     position: absolute;
     z-index: 0;
-    top: -100px;
+    top: 0px;
     left: 0;
     width: 100%;
     height: 100vh;
   }
 `;
+
 const StarContainer = styled.div`
   position: absolute;
   top: 0;
@@ -60,7 +63,6 @@ const StarContainer = styled.div`
   padding-bottom: 56.25%;
   box-sizing: content-box;
   pointer-events: none;
-  //background: linear-gradient(#000000, #0a132a);
 
   .star-canvas {
     position: absolute;
@@ -80,13 +82,13 @@ const TitleArea = styled.div`
   `}
 `;
 
-const Title = styled.h2`
-  color: white;
-  font-size: 100px;
-  font-weight: 900;
-  letter-spacing: -1px;
+const Title = styled.img`
+  width: 735px;
+  height: 240px;
+  margin: 0 auto;
   ${mobile`
-    font-size: 48px;
+    width: 280px;
+    height: 91px;
   `}
 `;
 
@@ -114,6 +116,12 @@ const Button = styled.a`
   border: 3px solid white;
   border-radius: 100px;
   background-color: transparent;
+  ${mobile`
+    margin-top: 48px;
+    padding: 0 24px;
+    height: 56px;
+    font-size: 16px;
+  `}
 `;
 
 export default HeroSection;
