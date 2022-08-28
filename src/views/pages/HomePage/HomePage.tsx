@@ -20,8 +20,8 @@ const HomePage: FC = () => {
       <HeroSection />
       <BackgroundContextProvider>
         <WarpSection />
+        <TrackSection />
       </BackgroundContextProvider>
-      <TrackSection />
       <SponsorSection />
       <TicketSection />
       <CoCSection />

@@ -1,3 +1,4 @@
+import todayHouse from './today-house.png';
 import banksalad from './banksalad.png';
 import ably from './ably.png';
 import yanolja from './yanolja.png';
@@ -9,9 +10,16 @@ import greenlabs from './greenlabs.png';
 import yogiyo from './yogiyo.png';
 import nc from './nc.png';
 import imWeb from './im-web.png';
+import aaant from './aaant.png';
+import iamdt from './iamdt.png';
 import { Sponsor } from '~/types/event';
 
 const diamondSponsors: Sponsor[] = [
+  {
+    name: 'todayHouse',
+    image: todayHouse.src,
+    homepage: '',
+  },
   {
     name: 'banksalad',
     image: banksalad.src,
@@ -72,6 +80,17 @@ const goldSponsors: Sponsor[] = [
     homepage: '',
   },
 ];
-const rookieSponsors: Sponsor[] = [];
+const rookieSponsors: Sponsor[] = [
+  {
+    name: 'aaant',
+    image: aaant.src,
+    homepage: '',
+  },
+  {
+    name: 'iamdt',
+    image: iamdt.src,
+    homepage: '',
+  },
+];
 
 export { diamondSponsors, platinumSponsors, goldSponsors, rookieSponsors };
