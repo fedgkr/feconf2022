@@ -28,10 +28,11 @@ const TrackSection: FC = () => {
 
 const Container = styled.section`
   position: relative;
-  margin-top: 240px;
+  padding-top: 240px;
   padding-bottom: 240px;
+  background-image: linear-gradient(#304ab7, #5e53ce);
   ${mobile`
-    margin-top: 80px;
+    padding-top: 80px;
     padding-bottom: 100px;
   `}
 `;

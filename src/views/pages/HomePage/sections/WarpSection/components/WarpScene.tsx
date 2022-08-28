@@ -51,7 +51,7 @@ function init(canvas: HTMLCanvasElement) {
     lineWidth: 0.02,
   });
 
-  const lineStandZ = 5;
+  const lineStandZ = 7;
   const lineTargetZ = 25;
   const lineCount = 15;
   const lineStep = 1;
@@ -85,7 +85,7 @@ function init(canvas: HTMLCanvasElement) {
   const animationList = lineList.map((line, index) => {
     const order = lineCount - index;
     const animation = {
-      delay: index / lineList.length - 1,
+      delay: index / lineList.length - 1.5,
       duration: 4,
       ease: Power1.easeInOut,
       originalPositionZ: line.position.z,
@@ -126,7 +126,7 @@ function init(canvas: HTMLCanvasElement) {
   window.addEventListener('resize', onResize);
 
   return (duration: number, setActiveBG: (val: boolean) => void) => {
-    duration = Math.min(Math.max((duration - 0.1) / 0.8, 0), 1);
+    duration = Math.min(Math.max((duration - 0.1) / 0.9, 0), 1);
     const shouldRender = duration !== 0;
     animationList.forEach((animation, index) => {
       const line = lineList[index];
@@ -150,7 +150,7 @@ function init(canvas: HTMLCanvasElement) {
       line.material.transparent = true;
       line.material.opacity = shouldRender ? line.position.z / 15 : 0;
     });
-    setActiveBG(gte(duration, 0.83));
+    setActiveBG(gte(duration, 0.95));
     renderer.render(scene, camera);
   };
 }

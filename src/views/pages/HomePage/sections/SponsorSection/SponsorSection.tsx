@@ -33,9 +33,10 @@ const SponsorSection: FC = () => {
 };
 
 const Container = styled.section`
-  margin-top: 120px;
+  padding-top: 120px;
+  background-image: linear-gradient(#5e53ce, #8a5ee2);
   ${mobile`
-    margin-top: 80px;
+    padding-top: 80px;
   `}
 `;
 
