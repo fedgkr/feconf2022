@@ -37,8 +37,8 @@ const Container = styled.section`
   padding: 200px 0 160px 0;
   text-align: center;
   overflow: hidden;
-  background-image: linear-gradient(#8a5ee2, #000);
-  mix-blend-mode: screen;
+  //background-image: linear-gradient(#8a5ee2, #000);
+  //mix-blend-mode: screen;
   ${mobile`
     padding: 80px 0 100px 0;
   `}
