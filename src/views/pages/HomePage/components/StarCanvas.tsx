@@ -45,12 +45,12 @@ export function StarCanvas() {
             canvas.height = boxSize.blockSize;
         }
     
-        let scrollTop = 0;
-        const onScroll = () => {
-            // scrollTop = document.documentElement.scrollTop;
-        };
+        const scrollTop = 0;
+        // const onScroll = () => {
+        //     // scrollTop = document.documentElement.scrollTop;
+        // };
 
-        onScroll();
+        // onScroll();
         function onRender() {
             const width = canvas.width;
             const height = canvas.height;
@@ -95,12 +95,12 @@ export function StarCanvas() {
         const observer = new ResizeObserver(onResize);
         
         observer.observe(canvas);
-        window.addEventListener("scroll", onScroll);
+        // window.addEventListener("scroll", onScroll);
 
         return () => {
             cancelAnimationFrame(raqId);
 
-            window.removeEventListener("scroll", onScroll);
+            // window.removeEventListener("scroll", onScroll);
             observer.disconnect();
         };
     }, []);

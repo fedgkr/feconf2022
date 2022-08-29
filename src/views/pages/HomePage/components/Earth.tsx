@@ -5,15 +5,22 @@ import { ThreeCanvas, ThreeCanvasObject } from "~/views/components/ThreeCanvas";
 
 const POINT_LIGHT_FRAGMENT_SHADER = `
 varying vec3 vPosition;
+uniform float uScrollTop;
 
 // lights
 float getPointLightIntensity() {
-  vec3 lightPos = vec3(0.7, 0.5, 1.2);
+  vec3 lightPos = vec3(0.7, 0.5 - uScrollTop / uHeight, 1.2);
   vec3 lightColor = vec3(1.0, 1.0, 1.0);
   vec3 lightDirection = normalize(lightPos - vPosition);
   float lightIntensity = 1.0 + pow(max(dot(lightDirection, normalize(vNormal)), 0.0), 10.0) * 5.0;
 
   return lightIntensity;
+}
+
+float getScreenAlpha() {
+  float screenAlpha = min(1.0, (gl_FragCoord.y + uScrollTop * 0.1) / (uHeight * 0.5));
+
+  return screenAlpha;
 }
 `;
 
@@ -70,7 +77,7 @@ void main() {
 
 
   float lightIntensity = getPointLightIntensity();
-  float screenAlpha = min(1.0, gl_FragCoord.y / (uHeight * 0.5));
+  float screenAlpha = getScreenAlpha();
   vec3 rgb = blended.rgb * a + (1.0 - a) * colorEarth.rgb;
 
 	gl_FragColor = vec4(rgb * lightIntensity, screenAlpha * uOpacity);
@@ -104,7 +111,7 @@ void main() {
   // float screenAlpha = pow(gl_FragCoord.y / (uHeight * 0.3) - 0.05, 2.0);
 
   float lightIntensity = getPointLightIntensity();
-  float screenAlpha = min(1.0, gl_FragCoord.y / (uHeight * 0.5) - 0.05);
+  float screenAlpha = getScreenAlpha() - 0.05;
 	gl_FragColor = vec4(vec3(${blurColor.r}, ${blurColor.g}, ${blurColor.b}) * lightIntensity, screenAlpha * uOpacity) * intensity;
 }
 `;
@@ -124,6 +131,9 @@ export function getAtmosphereMesh(radius = 0.65) {
       },
       uOpacity: {
         value: 1,
+      },
+      uScrollTop: {
+        value: 0,
       },
     },
   });
@@ -198,50 +208,6 @@ export function getImageBitmapTexture(url: string) {
       });
   });
 }
-
-// function getGradientTexture() {
-// 	const size = 512;
-
-// 	// create canvas
-// 	const canvas = document.createElement( 'canvas' );
-// 	canvas.width = size;
-// 	canvas.height = size;
-
-// 	// get context
-// 	const context = canvas.getContext( '2d' );
-
-// 	// draw gradient
-// 	context.rect( 0, 0, size, size );
-// 	// const gradient = context.createConicGradient(0, size / 2, size / 2);
-//   const gradient = context.createLinearGradient(0, 0, size, size);
-// 	gradient.addColorStop(0, "#506CFB");
-// 	// gradient.addColorStop(0.25, "#36246A");
-//   // gradient.addColorStop(0.5, "#130C19");
-//   gradient.addColorStop(0.25, "#1C173A");
-//   gradient.addColorStop(1, "#000");
-// 	context.fillStyle = gradient;
-// 	context.fillRect(0, 0, size, size);
-
-// 	return new THREE.CanvasTexture(canvas);
-// }
-
-
-// export function getPlaneMesh() {
-//   const planeGeometry = new THREE.PlaneGeometry(1.4, 1.4, 10, 10);
-//   const planeMaterial = new THREE.MeshStandardMaterial({
-//     map: getGradientTexture(),
-//     transparent: true,
-//     depthWrite: false,
-//     side: THREE.DoubleSide,
-//   });
-
-//   const planeMesh = new THREE.Mesh(
-//     planeGeometry,
-//     planeMaterial,
-//   );
-
-//   return planeMesh;
-// }
 export function getEarthMesh(radius: number, onReady: () => void) {
   const earthGeometry = new THREE.SphereGeometry(radius, 64, 64);
   const earthMaterial = new THREE.ShaderMaterial({
@@ -261,6 +227,9 @@ export function getEarthMesh(radius: number, onReady: () => void) {
       },
       uOpacity: {
         value: 1,
+      },
+      uScrollTop: {
+        value: 0,
       },
     },
   });
@@ -284,9 +253,10 @@ export function getEarthMesh(radius: number, onReady: () => void) {
 }
 
 export interface EarthProps {
-  fadeIn: boolean;
+  useScroll?: boolean;
+  offset?: number;
 }
-export const Earth = () => {
+export const Earth = (props: EarthProps) => {
   const earthRef = useRef<THREE.Mesh>();
   const atmosphereRef = useRef<THREE.Mesh>();
   const [isReady, setReady] = useState(false);
@@ -315,6 +285,9 @@ export const Earth = () => {
     earthMesh.scale.set(1, 1, 1);
     atmosphereMesh.scale.set(1.1, 1.1, 1.1);
 
+    scene.add(atmosphereMesh);
+    scene.add(earthMesh);
+    const offset = props.offset || 0;
     const item = new SceneItem({
       0: {
         pos: -1.25,
@@ -339,25 +312,25 @@ export const Earth = () => {
       atmosphereMesh.scale.set(scale * 1.1, scale * 1.1, scale * 1.1);
       (earthMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value = uOpacity;
       (atmosphereMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value = uOpacity;
-      earthMesh.position.set(0, pos, 0);
-      atmosphereMesh.position.set(0, pos, 0.1);
+      earthMesh.position.set(0, pos + offset, 0);
+      atmosphereMesh.position.set(0, pos + offset, 0.1);
     });
 
-    scene.add(atmosphereMesh);
-    scene.add(earthMesh);
-    // scene.add(whiteLight);
+    item.setTime(0);
+    if (props.useScroll) {
+      const onScroll = () => {
+        const height = threeCanvasRef.current.sizeRef.current.height;
+        const scrollTop = document.documentElement.scrollTop;
+        item.setTime(scrollTop / height * 10);
+        (earthMesh.material as THREE.ShaderMaterial).uniforms.uScrollTop.value = scrollTop;
+        (atmosphereMesh.material as THREE.ShaderMaterial).uniforms.uScrollTop.value = scrollTop;
+      };
+      window.addEventListener("scroll", onScroll);
 
-
-    const onScroll = () => {
-      const height = threeCanvasRef.current.sizeRef.current.height;
-
-      item.setTime(document.documentElement.scrollTop / height * 10);
-    };
-    window.addEventListener("scroll", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+      };
+    }
   }, []);
 
   return <ThreeCanvas ref={threeCanvasRef} render={isReady} onRender={() => {

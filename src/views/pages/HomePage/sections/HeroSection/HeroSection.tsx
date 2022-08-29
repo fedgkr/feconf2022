@@ -30,7 +30,7 @@ const HeroSection: FC = () => {
         </Info>
         <Button {...props}>{text}</Button>
       </TitleArea>
-      <Earth />
+      <Earth useScroll={true}/>
     </Container>
   );
 };

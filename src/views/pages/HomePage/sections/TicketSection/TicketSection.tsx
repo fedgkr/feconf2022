@@ -4,18 +4,13 @@ import earthImage from '../../resources/globe.png';
 import { DATE, LOCATION } from '~/resources/meta';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import { Earth } from '../../components/Earth';
 
 const TicketSection: FC = () => {
   const { text, props } = useTicketButton();
   return (
     <Container>
-      <EarthImage
-        src={earthImage.src}
-        width={1196}
-        height={754}
-        alt="Earth"
-        onMouseDown={(evt) => evt.preventDefault()}
-      />
+      <Earth offset={0.4}/>
       <TextWrap>
         <Title>
           다양한 기술을 익히며
@@ -37,20 +32,16 @@ const Container = styled.section`
   padding: 200px 0 160px 0;
   text-align: center;
   overflow: hidden;
-  //background-image: linear-gradient(#8a5ee2, #000);
-  //mix-blend-mode: screen;
+  background-image: linear-gradient(#000, #000);
+  mix-blend-mode: screen;
   ${mobile`
     padding: 80px 0 100px 0;
   `}
-`;
-
-const EarthImage = styled.img`
-  position: absolute;
-  left: 50%;
-  max-width: none;
-  margin: auto;
-  user-select: none;
-  transform: translateX(-50%);
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 `;
 
 const TextWrap = styled.div`
