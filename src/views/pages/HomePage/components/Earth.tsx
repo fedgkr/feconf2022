@@ -9,7 +9,7 @@ uniform float uScrollTop;
 
 // lights
 float getPointLightIntensity() {
-  vec3 lightPos = vec3(0.7, 0.5 - uScrollTop / uHeight, 1.2);
+  vec3 lightPos = vec3(0.7, 0.5 - uScrollTop * 1.5 / uHeight, 1.2);
   vec3 lightColor = vec3(1.0, 1.0, 1.0);
   vec3 lightDirection = normalize(lightPos - vPosition);
   float lightIntensity = 1.0 + pow(max(dot(lightDirection, normalize(vNormal)), 0.0), 10.0) * 5.0;
@@ -18,7 +18,7 @@ float getPointLightIntensity() {
 }
 
 float getScreenAlpha() {
-  float screenAlpha = min(1.0, (gl_FragCoord.y + uScrollTop * 0.1) / (uHeight * 0.5));
+  float screenAlpha = min(1.0, (gl_FragCoord.y + uScrollTop * 0.15) / (uHeight * 0.5));
 
   return screenAlpha;
 }

@@ -23,8 +23,9 @@ const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100px;
+  height: 60px;
   background-color: rgba(255, 255, 255, 0.08);
   z-index: 1;
   ${mobile`
@@ -34,19 +35,17 @@ const Container = styled.div`
 `;
 
 const MenuList = styled.ul`
-  display: flex;
+  display: flex;  
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
   width: 100%;
+  max-width: 960px;
 `;
 
 const MenuItem = styled.li`
-  color: #7d8288;
-  font-size: 24px;
-  line-height: 1.6;
-  &:not(:last-child) {
-    margin-right: 191px;
-  }
+  color: #cfcfcf;
+  font-size: 15px;
+  line-height: 24px;
   ${mobile`
     font-size: 15px;
     &:not(:last-child) {
@@ -60,15 +59,15 @@ const MenuItem = styled.li`
 
 const Button = styled.a`
   display: flex;
-  align-items: center;
-  padding: 0 20px;
-  height: 48px;
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
-  border: none;
-  border-radius: 100px;
-  background-color: #2f69ff;
+  padding: 0 12px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #cfcfcf;
+  border-radius: 18px;
+  line-height: 32px;
+  box-sizing: boder-box;
+  border: 1px solid #cfcfcf;
   ${mobile`
     height: 40px;
     padding: 0 16px;

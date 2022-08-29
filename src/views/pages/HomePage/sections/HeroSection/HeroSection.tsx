@@ -41,6 +41,7 @@ const Container = styled.section`
   text-align: center;
   background: linear-gradient(#000, #000);
   mix-blend-mode: screen;
+  margin-top: -60px;
 
   .three-canvas {
     position: absolute;
@@ -54,47 +55,50 @@ const Container = styled.section`
 const TitleArea = styled.div`
   position: relative;
   width: 100%;
-  top: 266px;
+  top: 20vh;
   z-index: 1;
   ${mobile`
-    top: 160px;
+    top: 16vh;
   `}
 `;
 
 const Title = styled.img`
-  width: 735px;
-  height: 240px;
+  width: 600px;
+  height: auto;
   margin: 0 auto;
+
   ${mobile`
     width: 280px;
-    height: 91px;
+    height: auto;
   `}
 `;
 
 const Info = styled.h4`
-  margin-top: 32px;
-  font-size: 40px;
-  font-weight: normal;
-  line-height: 1.3;
-  color: #b5b5b7;
+  margin-top: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 31.2px;
+  color: #fff;
+
   ${mobile`
-    margin-top: 24px;
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 20.8px;
   `}
 `;
 
 const Button = styled.a`
-  margin-top: 80px;
+  margin-top: 48px;
   display: inline-flex;
   align-items: center;
-  padding: 0 48px;
-  height: 100px;
-  font-size: 24px;
+  padding: 0 32px;
+  height: 72px;
+  font-size: 20px;
   font-weight: 700;
   color: white;
   border: 3px solid white;
   border-radius: 100px;
   background-color: transparent;
+  
   ${mobile`
     margin-top: 48px;
     padding: 0 24px;
