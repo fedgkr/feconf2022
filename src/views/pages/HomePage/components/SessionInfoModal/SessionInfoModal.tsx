@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
 import SessionInfoHeader from '~/views/pages/HomePage/components/SessionInfoModal/components/SessionInfoHeader';
 import SpeakerBadge from '~/views/pages/HomePage/components/SessionInfoModal/components/SpeakerBadge';
+import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const SessionInfoModal: FC = () => {
   const { session, setSession } = useSessionInfoModal();
@@ -54,6 +55,15 @@ const Container = styled.div<{ visible: boolean }>`
   pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
   border-radius: 16px;
   z-index: 1000;
+  transition: opacity 300ms ease-in-out;
+  ${mobile`
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    padding: 42px 24px 60px 24px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  `}
 `;
 
 const Title = styled.h2`
@@ -64,6 +74,11 @@ const Title = styled.h2`
   color: #333333;
   margin: 32px 0 24px 0;
   word-break: keep-all;
+  ${mobile`
+    max-width: auto;
+    font-size: 24px;
+    margin: 16px 0 20px 0;
+  `}
 `;
 
 const Description = styled.p`
@@ -71,6 +86,10 @@ const Description = styled.p`
   font-size: 18px;
   line-height: 1.5;
   color: rgba(33, 33, 33, 0.8);
+  ${mobile`
+    margin-top: 20px;
+    font-size: 14px;
+  `}
 `;
 
 export default SessionInfoModal;
