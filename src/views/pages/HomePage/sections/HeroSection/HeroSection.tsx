@@ -39,7 +39,7 @@ const Container = styled.section`
   position: relative;
   height: 150vh;
   text-align: center;
-  background: linear-gradient(#000, #0a132a);
+  background: linear-gradient(#000, #000);
   mix-blend-mode: screen;
 
   .three-canvas {

@@ -20,7 +20,7 @@ const Container = styled.section<{ active: boolean }>`
   position: relative;
   padding-bottom: ${sectionHeight}%;
   transition: background-image 800ms ease-in;
-  background: linear-gradient(#0a132a, #304AB7);
+  background: #000;
   mix-blend-mode: screen;
   &::before {
     position: absolute;
@@ -30,7 +30,7 @@ const Container = styled.section<{ active: boolean }>`
     right: 0;
     bottom: 0;
     z-index: -1;
-    // background-image: linear-gradient(transparent 0%, #0a132a 10%, #304ab7);
+    background-image: linear-gradient(transparent 0%, #0a132a 10%, #304ab7);
     opacity: ${({ active }) => (active ? 1 : 0)};
     transition: opacity 300ms ease-out;
   }

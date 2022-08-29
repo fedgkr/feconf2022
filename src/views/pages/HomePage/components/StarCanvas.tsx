@@ -47,7 +47,7 @@ export function StarCanvas() {
     
         let scrollTop = 0;
         const onScroll = () => {
-            scrollTop = document.documentElement.scrollTop;
+            // scrollTop = document.documentElement.scrollTop;
         };
 
         onScroll();
@@ -55,7 +55,7 @@ export function StarCanvas() {
             const width = canvas.width;
             const height = canvas.height;
             const distTime = Date.now() - startTime;
-            
+
             ctx.clearRect(0, 0, width, height);
             vertices.forEach(({ pos, velocity, distance, size }) => {
                 const scalar = Math.sqrt(velocity[0] * velocity[0] + velocity[1] * velocity[1]);
