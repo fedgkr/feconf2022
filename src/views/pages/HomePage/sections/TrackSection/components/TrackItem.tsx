@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import styled from '@emotion/styled';
 import { Session, Track } from '~/types/event';
 import eq from 'lodash/eq';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
 
 interface Props {
   session: Session;
@@ -10,8 +11,12 @@ interface Props {
 }
 
 const TrackItem: FC<Props> = ({ session, title }) => {
+  const { setSession } = useSessionInfoModal();
+  const handleClickItem: MouseEventHandler = () => {
+    setSession(session);
+  };
   return (
-    <Container>
+    <Container onClick={handleClickItem}>
       <Time>
         <span>{session.time[0]}</span>
       </Time>
@@ -19,11 +24,13 @@ const TrackItem: FC<Props> = ({ session, title }) => {
         <TitleSVG>{title({})}</TitleSVG>
         <Title>{session.title}</Title>
         <Info>
-          <Speaker>{session.speaker.name}</Speaker>
-          {session.speaker.company ? (
+          {session.speakers.map((speaker) => (
+            <Speaker key={speaker.name}>{speaker.name}</Speaker>
+          ))}
+          {session.speakers[0].company ? (
             <>
               <Divider>·</Divider>
-              <Company>{session.speaker.company.name}</Company>
+              <Company>{session.speakers[0].company.name}</Company>
             </>
           ) : null}
           <Tag>45min</Tag>

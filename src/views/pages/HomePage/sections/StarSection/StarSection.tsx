@@ -1,22 +1,12 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import logo from '../../resources/main-logo.png';
-import { DATE, LOCATION } from '~/resources/meta';
-import { Earth } from '../../components/Earth';
-import {
-  useWindowScrollTop,
-  useWindowHeight,
-} from '../../hooks/useWindowScroll';
 import { StarCanvas } from '../../components/StarCanvas';
-import { mobile } from '~/views/pages/HomePage/styles/media-query';
-import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
-import preventDefault from '~/views/pages/HomePage/utils/preventDefault';
 
 const StarSection: FC = () => {
   return (
-      <Container>
-        <StarCanvas />
-      </Container>
+    <Container>
+      <StarCanvas />
+    </Container>
   );
 };
 

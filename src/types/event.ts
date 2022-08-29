@@ -23,7 +23,7 @@ interface Speaker {
 interface Session {
   title: string;
   description: string;
-  speaker: Speaker;
+  speakers: Speaker[];
   track: Track;
   time: Time;
 }

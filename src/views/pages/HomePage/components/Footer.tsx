@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import logo from '../resources/logo.png';
+import logo from '../resources/images/logo.png';
 import { EMAIL } from '~/resources/meta';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 

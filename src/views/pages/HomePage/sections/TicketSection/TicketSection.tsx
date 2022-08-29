@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import earthImage from '../../resources/globe.png';
+import earthImage from '../../resources/images/globe.png';
 import { DATE, LOCATION } from '~/resources/meta';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
@@ -10,7 +10,7 @@ const TicketSection: FC = () => {
   const { text, props } = useTicketButton();
   return (
     <Container>
-      <Earth offset={0.4}/>
+      <Earth offset={0.4} />
       <TextWrap>
         <Title>
           다양한 기술을 익히며

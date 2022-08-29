@@ -12,24 +12,29 @@ import NoticeSection from '~/views/pages/HomePage/sections/NoticeSection/NoticeS
 import Footer from '~/views/pages/HomePage/components/Footer';
 import HomePageMeta from '~/views/pages/HomePage/components/HomePageMeta';
 import { BackgroundContextProvider } from '~/views/pages/HomePage/sections/WarpSection/contexts/BackgroundContext';
+import { SessionInfoModalProvider } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
+import SessionInfoModal from '~/views/pages/HomePage/components/SessionInfoModal/SessionInfoModal';
 
 const HomePage: FC = () => {
   return (
-    <Container>
-      <HomePageMeta />
-      <Header />
-      <StarSection />
-      <HeroSection />
-      <BackgroundContextProvider>
-        <WarpSection />
-        <TrackSection />
-      </BackgroundContextProvider>
-      <SponsorSection />
-      <TicketSection />
-      <CoCSection />
-      <NoticeSection />
-      <Footer />
-    </Container>
+    <SessionInfoModalProvider>
+      <Container>
+        <HomePageMeta />
+        <Header />
+        <StarSection />
+        {/* <HeroSection /> */}
+        <BackgroundContextProvider>
+          {/* <WarpSection /> */}
+          <TrackSection />
+        </BackgroundContextProvider>
+        <SponsorSection />
+        <TicketSection />
+        <CoCSection />
+        <NoticeSection />
+        <Footer />
+        <SessionInfoModal />
+      </Container>
+    </SessionInfoModalProvider>
   );
 };
 

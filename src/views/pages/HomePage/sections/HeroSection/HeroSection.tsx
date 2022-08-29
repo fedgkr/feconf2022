@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import logo from '../../resources/main-logo.png';
+import logo from '../../resources/images/main-logo.png';
 import { DATE, LOCATION } from '~/resources/meta';
 import { Earth } from '../../components/Earth';
 import {
@@ -30,7 +30,7 @@ const HeroSection: FC = () => {
         </Info>
         <Button {...props}>{text}</Button>
       </TitleArea>
-      <Earth useScroll={true}/>
+      <Earth useScroll={true} />
     </Container>
   );
 };
@@ -98,7 +98,7 @@ const Button = styled.a`
   border: 3px solid white;
   border-radius: 100px;
   background-color: transparent;
-  
+
   ${mobile`
     margin-top: 48px;
     padding: 0 24px;
