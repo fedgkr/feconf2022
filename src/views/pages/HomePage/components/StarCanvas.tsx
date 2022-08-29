@@ -45,14 +45,18 @@ export function StarCanvas() {
             canvas.height = boxSize.blockSize;
         }
     
+        let scrollTop = 0;
+        const onScroll = () => {
+            scrollTop = document.documentElement.scrollTop;
+        };
+
+        onScroll();
         function onRender() {
             const width = canvas.width;
             const height = canvas.height;
-
-            ctx.clearRect(0, 0, width, height);
-
             const distTime = Date.now() - startTime;
-
+            
+            ctx.clearRect(0, 0, width, height);
             vertices.forEach(({ pos, velocity, distance, size }) => {
                 const scalar = Math.sqrt(velocity[0] * velocity[0] + velocity[1] * velocity[1]);
                 const totalDistance = distTime * scalar / 1000;
@@ -62,15 +66,14 @@ export function StarCanvas() {
                 if (isReverse) {
                     nextDistance = distance - nextDistance;
                 }
-
-                const halfHeight = height / 2;
                 const x = (pos[0] + nextDistance / scalar * velocity[0]) * width / 100;
-                const y = (pos[1] + nextDistance / scalar * velocity[1]) * height / 100;
-                let a = 1 - pos[2];
+                let y = ((pos[1] + nextDistance / scalar * velocity[1]) * height / 100 - scrollTop) % height;
 
-                if (y > halfHeight) {
-                    a *= (height - y) / halfHeight;
+                if (y < 0) {
+                    y = height + y;
                 }
+                const a = 1 - pos[2];
+
                 ctx.beginPath();
                 ctx.fillStyle = `rgba(255, 255, 255, ${a})`;
                 ctx.arc(
@@ -92,10 +95,12 @@ export function StarCanvas() {
         const observer = new ResizeObserver(onResize);
         
         observer.observe(canvas);
-        
+        window.addEventListener("scroll", onScroll);
+
         return () => {
             cancelAnimationFrame(raqId);
 
+            window.removeEventListener("scroll", onScroll);
             observer.disconnect();
         };
     }, []);

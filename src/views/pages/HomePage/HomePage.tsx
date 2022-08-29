@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import StarSection from '~/views/pages/HomePage/sections/StarSection/StarSection';
 import HeroSection from '~/views/pages/HomePage/sections/HeroSection/HeroSection';
 import WarpSection from '~/views/pages/HomePage/sections/WarpSection/WarpSection';
 import TrackSection from '~/views/pages/HomePage/sections/TrackSection/TrackSection';
@@ -17,6 +18,7 @@ const HomePage: FC = () => {
     <Container>
       <HomePageMeta />
       <Header />
+      <StarSection />
       <HeroSection />
       <BackgroundContextProvider>
         <WarpSection />

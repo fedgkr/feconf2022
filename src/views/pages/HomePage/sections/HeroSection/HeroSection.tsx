@@ -7,7 +7,6 @@ import {
   useWindowScrollTop,
   useWindowHeight,
 } from '../../hooks/useWindowScroll';
-import { StarCanvas } from '../../components/StarCanvas';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import preventDefault from '~/views/pages/HomePage/utils/preventDefault';
@@ -19,12 +18,9 @@ const HeroSection: FC = () => {
 
   return (
     <Container>
-      <StarContainer>
-        <StarCanvas />
-      </StarContainer>
       <TitleArea
         style={{
-          // transform: `translateY(${scrollTop / 2}px)`,
+          transform: `translateY(${-scrollTop / 2}px)`,
           opacity: height ? Math.max(0, height - scrollTop * 5) / height : 1,
         }}
       >
@@ -43,6 +39,8 @@ const Container = styled.section`
   position: relative;
   height: 150vh;
   text-align: center;
+  background: linear-gradient(#000, #0a132a);
+  mix-blend-mode: screen;
 
   .three-canvas {
     position: absolute;
@@ -51,25 +49,6 @@ const Container = styled.section`
     left: 0;
     width: 100%;
     height: 100vh;
-  }
-`;
-
-const StarContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150vh;
-  padding-bottom: 56.25%;
-  box-sizing: content-box;
-  pointer-events: none;
-
-  .star-canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
   }
 `;
 const TitleArea = styled.div`
