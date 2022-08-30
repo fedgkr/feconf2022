@@ -3,11 +3,12 @@ import { AnchorHTMLAttributes, HTMLAttributes } from 'react';
 const inactiveProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
   onClick: (event) => {
     event.preventDefault();
-    alert('오픈 전 입니다.');
+    alert('티켓 예매는 9월 6일 오픈 예정입니다.');
   },
 };
 
 const activeProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
+  rel: 'noopener noreferrer',
   target: '_blank',
   href: '#',
 };

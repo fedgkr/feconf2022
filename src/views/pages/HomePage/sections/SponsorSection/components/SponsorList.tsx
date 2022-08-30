@@ -17,17 +17,10 @@ const SponsorList: FC<Props> = ({ grade, list }) => {
   return (
     <Container>
       <Title>{grade}</Title>
-      {/* <List> */}
-      {/*   {[...firstRow, ...secondRow].map((sponsor) => ( */}
-      {/*     <Item key={sponsor.name} href={sponsor.homepage} target="_blank"> */}
-      {/*       <img src={sponsor.image} alt={sponsor.name} /> */}
-      {/*     </Item> */}
-      {/*   ))} */}
-      {/* </List> */}
       <MobileList>
         <MobileRow>
           {firstRow.map((sponsor) => (
-            <Item key={sponsor.name} href={sponsor.homepage} target="_blank">
+            <Item key={sponsor.name} href={sponsor.homepage}>
               <img src={sponsor.image} alt={sponsor.name} />
             </Item>
           ))}
@@ -35,7 +28,7 @@ const SponsorList: FC<Props> = ({ grade, list }) => {
         {gt(size(secondRow), 0) ? (
           <MobileRow>
             {secondRow.map((sponsor) => (
-              <Item key={sponsor.name} href={sponsor.homepage} target="_blank">
+              <Item key={sponsor.name} href={sponsor.homepage}>
                 <img src={sponsor.image} alt={sponsor.name} />
               </Item>
             ))}
@@ -125,5 +118,9 @@ const Item = styled.a`
     }
   `}
 `;
+Item.defaultProps = {
+  target: '_blank',
+  rel: 'noopener noreferrer',
+};
 
 export default SponsorList;
