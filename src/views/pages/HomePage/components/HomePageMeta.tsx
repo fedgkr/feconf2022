@@ -4,7 +4,8 @@ import Head from 'next/head';
 const title = 'FECONF 2022';
 const description =
   '국내 최대 프론트엔드 개발 컨퍼런스, FECONF 2022가 10월 8일 오프라인으로 찾아옵니다.';
-const host = 'https://2022.feconf.kr';
+// const host = 'https://2022.feconf.kr';
+const host = 'https://feconf2022.vercel.app';
 
 const HomePageMeta: FC = () => {
   return (
@@ -28,7 +29,7 @@ const HomePageMeta: FC = () => {
       <meta property="og:url" content={`${host}`} />
       <meta
         property="og:image:url"
-        content={`${host}/images/meta/preview.png`}
+        content={`${host}/images/releases/og.png`}
       />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1200" />
@@ -36,7 +37,7 @@ const HomePageMeta: FC = () => {
       <meta property="og:image:alt" content={title} />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={`${host}/images/meta/preview.png`} />
+      <meta name="twitter:image" content={`${host}/images/releases/og.png`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:creator" content="@FeConf" />
@@ -44,25 +45,7 @@ const HomePageMeta: FC = () => {
       <link
         rel="icon"
         type="image/png"
-        href={`${host}/images/favicon/96x96.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`${host}/images/favicon/16x16.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href={`${host}/images/favicon/32x32.png`}
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="96x96"
-        href={`${host}/images/favicon/96x96.png`}
+        href={`${host}/images/releases/favicon.png`}
       />
     </Head>
   );

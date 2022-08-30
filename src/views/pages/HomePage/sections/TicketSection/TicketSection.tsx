@@ -34,19 +34,19 @@ const Container = styled.section`
   overflow: hidden;
   background-image: linear-gradient(#000, #000);
   mix-blend-mode: screen;
-  ${mobile`
-    padding: 60px 0 80px 0;
-  `}
   canvas {
     position: absolute;
     top: 0;
     left: 0;
   }
+  ${mobile`
+    padding: 60px 0 80px 0;
+  `}
 `;
 
 const TextWrap = styled.div`
   position: relative;
-  margin-top: 546px;
+  margin-top: 526px;
   z-index: 1;
 `;
 

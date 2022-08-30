@@ -20,7 +20,7 @@ const Container = styled.div`
   max-width: 960px;
   margin: 0 auto;
   padding: 32px 40px 40px 40px;
-  background-color: rgba(44, 32, 44, 0.6);
+  background-color: #13151a;
   border-radius: 20px;
   ${mobile`
     padding: 24px;

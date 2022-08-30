@@ -34,7 +34,7 @@ const TrackItem: FC<Props> = ({ session, title }) => {
               <Company>{session.speakers[0].company.name}</Company>
             </>
           ) : null}
-          <Tag>45min</Tag>
+          <Tag>40min</Tag>
           <Tag>{eq(session.track, Track.A) ? 'A' : 'B'} Track</Tag>
         </Info>
       </TextWrap>

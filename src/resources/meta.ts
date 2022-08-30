@@ -1,4 +1,4 @@
-const DATE = '2022.10.02.Sat';
+const DATE = '2022.10.08.Sat';
 const LOCATION = 'Lotte Tower Sky 31';
 const EMAIL = 'feconf@googlegroups.com';
 

@@ -16,6 +16,7 @@ const NoticeSection: FC = () => {
 };
 
 const Container = styled.section`
+  position: relative;
   padding: 120px 0 160px 0;
   text-align: center;
   ${mobile`

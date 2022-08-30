@@ -26,7 +26,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 60px;
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgb(20, 20, 20);
   z-index: 1;
   ${mobile`
     height: 68px;
@@ -35,7 +35,7 @@ const Container = styled.div`
 `;
 
 const MenuList = styled.ul`
-  display: flex;  
+  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -59,6 +59,7 @@ const MenuItem = styled.li`
 
 const Button = styled.a`
   display: flex;
+  align-items: center;
   padding: 0 12px;
   height: 36px;
   font-size: 14px;
@@ -66,7 +67,7 @@ const Button = styled.a`
   color: #cfcfcf;
   border-radius: 18px;
   line-height: 32px;
-  box-sizing: boder-box;
+  box-sizing: border-box;
   border: 1px solid #cfcfcf;
   ${mobile`
     height: 40px;

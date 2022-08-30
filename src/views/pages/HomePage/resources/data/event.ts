@@ -25,7 +25,7 @@ const sessionList: Session[] = [
     time: timetable[0],
     title: 'ReScript 같이 해요',
     description:
-      '처음 함수형 프로그래밍 와 ReScript를 접했을 때 어렵게만 느껴졌습니다. 사용에 익숙해진 후론 ReScript를 사용한 간결하고 명료한 코드 작성의 매력에 빠졌습니다. ReScript가 어떤 장점을 가지고 있는지 그리고 React에 어떻게 사용하는지에 대해 얘기해 보겠습니다.',
+      '처음 함수형 프로그래밍과 ReScript를 접했을 때 어렵게만 느껴졌습니다. 사용에 익숙해진 후론 ReScript를 사용한 간결하고 명료한 코드 작성의 매력에 빠졌습니다. ReScript가 어떤 장점을 가지고 있는지 그리고 React에 어떻게 사용하는지에 대해 얘기해 보겠습니다.',
     speakers: [
       {
         name: '정미량',
@@ -152,7 +152,7 @@ const sessionList: Session[] = [
       {
         name: '박세문',
         company: {
-          name: '라포랩',
+          name: '라포랩스',
         },
         image: 박세문.src,
       },
