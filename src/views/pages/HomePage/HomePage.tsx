@@ -22,9 +22,9 @@ const HomePage: FC = () => {
         <HomePageMeta />
         <Header />
         <StarSection />
-        {/* <HeroSection /> */}
+        <HeroSection />
         <BackgroundContextProvider>
-          {/* <WarpSection /> */}
+          <WarpSection />
           <TrackSection />
         </BackgroundContextProvider>
         <SponsorSection />

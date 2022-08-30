@@ -14,10 +14,10 @@ import { MeshLine, MeshLineMaterial } from 'three.meshline';
 import createGradientTexture from '~/views/pages/HomePage/sections/WarpSection/resources/createGradientTexture';
 import times from 'lodash/times';
 import gte from 'lodash/gte';
-import { Power1 } from 'gsap';
 import { requestAnimationFrame } from '@daybrush/utils';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import BackgroundContext from '~/views/pages/HomePage/sections/WarpSection/contexts/BackgroundContext';
+import clamp from 'lodash/clamp';
 
 function init(canvas: HTMLCanvasElement) {
   const shapeLength = 1;
@@ -79,27 +79,24 @@ function init(canvas: HTMLCanvasElement) {
   const camera = new PerspectiveCamera(75, size.width / size.height, 0.1, 50);
   camera.position.x = 0;
   camera.position.y = 0;
-  camera.position.z = 25;
+  camera.position.z = 23;
   scene.add(camera);
 
   const animationList = lineList.map((line, index) => {
     const order = lineCount - index;
-    const animation = {
+    return {
       delay: index / lineList.length - 1.5,
       duration: 4,
-      ease: Power1.easeInOut,
       originalPositionZ: line.position.z,
       originalRotationZ: line.rotation.z,
       targetPositionZ: lineTargetZ + order * lineStep,
       targetRotationZ: line.rotation.z + Math.PI / 2,
     };
-    return animation;
   });
 
   /**
    * Renderer
    */
-  // new OrbitControls(camera, canvas).enableDamping = true;
   const renderer = new WebGLRenderer({ canvas, antialias: true });
   renderer.setSize(size.width, size.height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -134,43 +131,33 @@ function init(canvas: HTMLCanvasElement) {
         const {
           delay,
           duration: dur,
-          ease,
           originalPositionZ,
           originalRotationZ,
           targetPositionZ,
           targetRotationZ,
         } = animation;
         const delayRatio = delay / dur;
-        const delayedDuration = ease(Math.max(duration + delayRatio, 0));
+        const delayedDuration = duration + delayRatio;
         const posZ = (targetPositionZ - originalPositionZ) * delayedDuration;
         const rotZ = (targetRotationZ - originalRotationZ) * delayedDuration;
         line.position.z = originalPositionZ + posZ;
         line.rotation.z = targetRotationZ + rotZ;
       }
       line.material.transparent = true;
-      line.material.opacity = shouldRender ? line.position.z / 15 : 0;
+      line.material.opacity = line.position.z / 15;
     });
-    setActiveBG(gte(duration, 0.95));
+    setActiveBG(gte(duration, 0.94));
     renderer.render(scene, camera);
   };
 }
 
-function showTitle(title: HTMLHeadingElement) {
-  title.style.opacity = '1';
-  title.style.transform = 'scale(1)';
-  title.style.transition =
-    'opacity 400ms 300ms ease-out, transform 400ms 300ms ease-out';
-}
-
-function hideTitle(title: HTMLHeadingElement, isBehind: boolean) {
-  if (isBehind) {
-    title.style.transform = 'scale(0.5)';
-    title.style.transition = 'opacity 100ms ease-out, transform 100ms ease-out';
+function animateText(title: HTMLHeadingElement, duration: number) {
+  title.style.transform = `scale(${1 + 0.2 * duration})`;
+  if (duration === 0) {
+    title.style.opacity = '0';
   } else {
-    title.style.transform = 'scale(1.5)';
-    title.style.transition = 'opacity 600ms ease-out, transform 600ms ease-out';
+    title.style.opacity = duration < 1 ? '1' : '0';
   }
-  title.style.opacity = '0';
 }
 
 const useScrollEffect = () => {
@@ -190,47 +177,44 @@ const useScrollEffect = () => {
       // TODO: 리팩터링 예정
       if (containerTop <= windowHeight) {
         const top = containerTop - windowHeight;
+        const windowHeightHalf = windowHeight / 2;
+        const textTop = containerTop - windowHeightHalf;
         duration = Math.min(top / -containerHeight, 1);
 
-        if (duration <= 0) {
-          hideTitle(titleEl.current, true);
-          canvasEl.current.style.opacity = '0';
-        } else if (duration > 0 && duration <= 0.2) {
-          showTitle(titleEl.current);
-          canvasEl.current.style.opacity = '0';
-        } else if (duration > 0.2) {
-          hideTitle(titleEl.current, false);
-          canvasEl.current.style.opacity = '1';
-        }
-
+        const textDuration = clamp(
+          -textTop / (windowHeight + windowHeightHalf),
+          0,
+          1
+        );
+        animateText(titleEl.current, textDuration);
         if (containerTop > 0) {
-          // After start animation
+          // Before start animation
           canvasEl.current.style.position = 'absolute';
           canvasEl.current.style.top = '0px';
           canvasEl.current.style.bottom = 'auto';
+          canvasEl.current.style.opacity = '0';
         } else if (top < -containerHeight) {
           // After end animation
-          canvasEl.current.style.position = 'absolute';
-          canvasEl.current.style.top = 'auto';
-          canvasEl.current.style.bottom = '0px';
+          // canvasEl.current.style.position = 'absolute';
+          // canvasEl.current.style.top = 'auto';
+          // canvasEl.current.style.bottom = '0px';
         } else {
           // During animation
           canvasEl.current.style.position = 'fixed';
           canvasEl.current.style.top = '0px';
           canvasEl.current.style.bottom = 'auto';
+          canvasEl.current.style.opacity = '1';
         }
-      } else {
-        duration = 0;
-        hideTitle(titleEl.current, true);
-        canvasEl.current.style.opacity = '0';
       }
       render(duration, setActive);
     };
     const onScroll = () => {
       latestCall = tick;
       requestAnimationFrame(() => {
-        latestCall?.();
-        latestCall = null;
+        if (latestCall) {
+          latestCall();
+          latestCall = null;
+        }
       });
     };
     onScroll();
@@ -270,7 +254,6 @@ const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 0;
   }
 `;
 

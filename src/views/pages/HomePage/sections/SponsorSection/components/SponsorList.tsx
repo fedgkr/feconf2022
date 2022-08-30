@@ -17,13 +17,13 @@ const SponsorList: FC<Props> = ({ grade, list }) => {
   return (
     <Container>
       <Title>{grade}</Title>
-      <List>
-        {[...firstRow, ...secondRow].map((sponsor) => (
-          <Item key={sponsor.name} href={sponsor.homepage} target="_blank">
-            <img src={sponsor.image} alt={sponsor.name} />
-          </Item>
-        ))}
-      </List>
+      {/* <List> */}
+      {/*   {[...firstRow, ...secondRow].map((sponsor) => ( */}
+      {/*     <Item key={sponsor.name} href={sponsor.homepage} target="_blank"> */}
+      {/*       <img src={sponsor.image} alt={sponsor.name} /> */}
+      {/*     </Item> */}
+      {/*   ))} */}
+      {/* </List> */}
       <MobileList>
         <MobileRow>
           {firstRow.map((sponsor) => (
@@ -78,7 +78,8 @@ const List = styled.div`
 `;
 
 const MobileList = styled.div`
-  display: none;
+  display: flex;
+  flex-direction: column;
   ${tablet`
     display: flex;
     flex-direction: column;

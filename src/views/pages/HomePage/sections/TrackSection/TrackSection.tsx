@@ -30,8 +30,8 @@ const TrackSection: FC = () => {
 
 const Container = styled.section<{ active: boolean }>`
   position: relative;
-  padding-top: 240px;
-  padding-bottom: 240px;
+  padding-top: 120px;
+  padding-bottom: 160px;
   &::before {
     position: absolute;
     content: '';
@@ -45,8 +45,8 @@ const Container = styled.section<{ active: boolean }>`
     transition: opacity 300ms ease-out;
   }
   ${mobile`
-    padding-top: 80px;
-    padding-bottom: 100px;
+    padding-top: 60px;
+    padding-bottom: 80px;
   `}
 `;
 

@@ -37,7 +37,7 @@ const HeroSection: FC = () => {
 
 const Container = styled.section`
   position: relative;
-  height: 150vh;
+  height: 100vh;
   text-align: center;
   background: linear-gradient(#000, #000);
   mix-blend-mode: screen;
@@ -64,12 +64,12 @@ const TitleArea = styled.div`
 
 const Title = styled.img`
   width: 600px;
-  height: auto;
+  height: 196px;
   margin: 0 auto;
 
   ${mobile`
     width: 280px;
-    height: auto;
+    height: 91px;
   `}
 `;
 

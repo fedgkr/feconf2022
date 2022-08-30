@@ -65,7 +65,7 @@ const SortItem = styled.li<{ active: boolean }>`
   color: ${({ active }) => (active ? '#333333' : 'rgba(255, 255, 255, 0.6)')};
   background-color: ${({ active }) => (active ? 'white' : 'transparent')};
   transition: ${({ active }) =>
-    active ? 'background-color 300ms ease-in, color 300ms ease-in' : 'none'};
+    active ? 'background-color 100ms ease-in, color 100ms ease-in' : 'none'};
   ${mobile`
     height: 26px;
     font-size: 12px;

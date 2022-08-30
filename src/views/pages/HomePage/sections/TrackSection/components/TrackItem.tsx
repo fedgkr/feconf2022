@@ -11,9 +11,10 @@ interface Props {
 }
 
 const TrackItem: FC<Props> = ({ session, title }) => {
-  const { setSession } = useSessionInfoModal();
+  const { setSession, setVisible } = useSessionInfoModal();
   const handleClickItem: MouseEventHandler = () => {
     setSession(session);
+    setVisible(true);
   };
   return (
     <Container onClick={handleClickItem}>

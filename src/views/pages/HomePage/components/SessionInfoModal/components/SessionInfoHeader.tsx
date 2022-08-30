@@ -9,11 +9,11 @@ interface Props {
 }
 
 const SessionInfoHeader: FC<Props> = ({ session }) => {
-  const { setSession } = useSessionInfoModal();
+  const { setVisible } = useSessionInfoModal();
   const trackLabel = `${session?.track === Track.A ? 'A' : 'B'} Track`;
   const [start, end] = session?.time || [];
   const handleClickClose: MouseEventHandler = () => {
-    setSession(null);
+    setVisible(false);
   };
   return (
     <Container>

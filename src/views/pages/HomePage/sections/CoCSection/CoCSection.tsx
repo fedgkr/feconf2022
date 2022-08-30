@@ -19,9 +19,9 @@ const CoCSection: FC = () => {
 };
 
 const Container = styled.section`
-  padding: 240px 0 160px 0;
+  padding: 120px 0 160px 0;
   ${mobile`
-    padding: 80px 0 100px 0;
+    padding: 60px 0 80px 0;
   `}
 `;
 

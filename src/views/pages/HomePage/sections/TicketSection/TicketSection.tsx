@@ -29,13 +29,13 @@ const TicketSection: FC = () => {
 const Container = styled.section`
   position: relative;
   width: 100%;
-  padding: 200px 0 160px 0;
+  padding: 200px 0;
   text-align: center;
   overflow: hidden;
   background-image: linear-gradient(#000, #000);
   mix-blend-mode: screen;
   ${mobile`
-    padding: 80px 0 100px 0;
+    padding: 60px 0 80px 0;
   `}
   canvas {
     position: absolute;

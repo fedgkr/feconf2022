@@ -6,11 +6,10 @@ import SpeakerBadge from '~/views/pages/HomePage/components/SessionInfoModal/com
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const SessionInfoModal: FC = () => {
-  const { session, setSession } = useSessionInfoModal();
+  const { session, visible, setVisible } = useSessionInfoModal();
   const handleClickOverlay: MouseEventHandler = () => {
-    setSession(null);
+    setVisible(false);
   };
-  const visible = !!session;
   return (
     <>
       <Overlay visible={visible} onClick={handleClickOverlay} />
@@ -37,7 +36,8 @@ const Overlay = styled.div<{ visible: boolean }>`
   background-color: rgba(0, 0, 0);
   opacity: ${({ visible }) => (visible ? 0.6 : 0)};
   pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
-  transition: opacity 300ms ease-in-out;
+  transition: ${({ visible }) =>
+    visible ? 'opacity 300ms ease-in-out' : 'none'};
   z-index: 999;
 `;
 
@@ -51,11 +51,12 @@ const Container = styled.div<{ visible: boolean }>`
   padding: 34px 40px 72px 40px;
   background-color: white;
   box-sizing: border-box;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  pointer-events: ${(props) => (props.visible ? 'all' : 'none')};
   border-radius: 16px;
   z-index: 1000;
-  transition: opacity 300ms ease-in-out;
+  transition: ${(props) =>
+    props.visible ? 'opacity 300ms ease-in-out' : 'none'};
   ${mobile`
     top: auto;
     bottom: 0;
