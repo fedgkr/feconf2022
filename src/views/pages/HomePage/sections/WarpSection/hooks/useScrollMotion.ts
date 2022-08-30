@@ -1,58 +1,14 @@
 import { useContext, useEffect, useRef } from 'react';
-import clamp from 'lodash/clamp';
-import gte from 'lodash/gte';
 
 import animateText from '../utils/animateText';
 import BackgroundContext from '../contexts/BackgroundContext';
-import WarpMotionScene from '../utils/WarpMotionScene';
-import WarpRenderer from '../utils/WarpRenderer';
-import WarpMotion from '../utils/WarpMotion';
+import Warp from '~/views/pages/HomePage/sections/WarpSection/utils/Warp';
 
-function init(canvas: HTMLCanvasElement) {
-  const windowSize = (): WindowDimension => ({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  const scene = new WarpMotionScene();
-  const renderer = new WarpRenderer(canvas, scene, windowSize());
-  const motion = new WarpMotion(scene);
-
-  function onResize() {
-    renderer.resize(windowSize());
-    renderer.render();
-  }
-  window.addEventListener('resize', onResize, { passive: true });
-
-  return (duration: number, onUpdateStage: (val: boolean) => void) => {
-    duration = clamp((duration - 0.1) / 0.9, 0, 1);
-    onUpdateStage(gte(duration, 0.94));
-    motion.run(duration);
-    renderer.render();
-  };
+interface Refs {
+  container: HTMLDivElement;
+  title: HTMLHeadingElement;
+  canvas: HTMLCanvasElement;
 }
-
-const onFrame = (
-  container: HTMLDivElement,
-  title: HTMLHeadingElement,
-  canvas: HTMLCanvasElement,
-  render: ReturnType<typeof init>,
-  setActive: (val: boolean) => void
-) => {
-  const windowHeight = window.innerHeight;
-  const { top: containerTop, height: containerHeight } =
-    container.getBoundingClientRect();
-  animateText(title, containerTop, windowHeight);
-  if (containerTop > 0) {
-    prepareAnimation(canvas);
-  } else {
-    animate(canvas);
-  }
-
-  const top = containerTop - windowHeight;
-  const duration = Math.min(top / -containerHeight, 1);
-  render(duration, setActive);
-};
 
 function prepareAnimation(canvas: HTMLCanvasElement) {
   canvas.style.position = 'absolute';
@@ -68,6 +24,25 @@ function animate(canvas: HTMLCanvasElement) {
   canvas.style.opacity = '1';
 }
 
+const onFrame = (
+  { container, title, canvas }: Refs,
+  warp: Warp,
+  setActive: (val: boolean) => void
+) => {
+  const windowHeight = window.innerHeight;
+  const { top, height } = container.getBoundingClientRect();
+  animateText(title, top, windowHeight);
+  if (top > 0) {
+    prepareAnimation(canvas);
+  } else {
+    animate(canvas);
+  }
+
+  const cursor = top - windowHeight;
+  const duration = Math.min(cursor / -height, 1);
+  warp.run(duration, setActive);
+};
+
 const useScrollMotion = () => {
   const { setActive } = useContext(BackgroundContext);
   const titleEl = useRef<HTMLHeadingElement>();
@@ -75,30 +50,30 @@ const useScrollMotion = () => {
   const containerEl = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const render = init(canvasEl.current);
+    const warp = new Warp(canvasEl.current);
+    const refs = {
+      container: containerEl.current,
+      title: titleEl.current,
+      canvas: canvasEl.current,
+    };
     let tick = null;
-
+    const frame = () => onFrame(refs, warp, setActive);
+    const cb = () => {
+      if (tick) {
+        tick();
+        tick = null;
+      }
+    };
     const onScroll = () => {
-      tick = () =>
-        onFrame(
-          containerEl.current,
-          titleEl.current,
-          canvasEl.current,
-          render,
-          setActive
-        );
-      requestAnimationFrame(() => {
-        if (tick) {
-          tick();
-          tick = null;
-        }
-      });
+      tick = frame;
+      requestAnimationFrame(cb);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       tick = null;
       window.removeEventListener('scroll', onScroll);
+      warp.removeResizeHandler();
     };
   }, []);
   return {
