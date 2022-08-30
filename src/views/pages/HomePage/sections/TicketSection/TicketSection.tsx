@@ -4,13 +4,13 @@ import { DATE, LOCATION } from '~/resources/meta';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import { Earth } from '../../components/Earth';
+import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 
 const TicketSection: FC = () => {
-  const { text, props } = useTicketButton();
   return (
     <Container>
       <EarthContainer>
-        <Earth offset={0.4} scaleOffset={-0.1}  />
+        <Earth offset={0.4} scaleOffset={-0.1} />
       </EarthContainer>
       <TextWrap>
         <Title>
@@ -21,7 +21,7 @@ const TicketSection: FC = () => {
         <SubText>
           {DATE} {LOCATION}
         </SubText>
-        <Button {...props}>{text}</Button>
+        <ReserveButton />
       </TextWrap>
     </Container>
   );
@@ -89,26 +89,6 @@ const SubText = styled.p`
   ${mobile`
     margin-top: 16px;
     font-size: 18px;
-  `}
-`;
-
-const Button = styled.a`
-  display: inline-flex;
-  align-items: center;
-  margin-top: 48px;
-  padding: 0 32px;
-  height: 72px;
-  border: 3px solid #ffffff;
-  border-radius: 33px;
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  ${mobile`
-    margin-top: 48px;
-    padding: 0 24px;
-    height: 56px;
-    font-size: 16px;
-    border: 2px solid #ffffff;
   `}
 `;
 

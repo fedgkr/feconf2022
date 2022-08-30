@@ -8,11 +8,10 @@ import {
   useWindowHeight,
 } from '../../hooks/useWindowScroll';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
-import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import preventDefault from '~/views/pages/HomePage/utils/preventDefault';
+import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 
 const HeroSection: FC = () => {
-  const { text, props } = useTicketButton();
   const scrollTop = useWindowScrollTop();
   const height = useWindowHeight();
 
@@ -28,7 +27,7 @@ const HeroSection: FC = () => {
         <Info>
           {DATE} {LOCATION}
         </Info>
-        <Button {...props}>{text}</Button>
+        <ReserveButton />
       </TitleArea>
       <Earth useScroll={true} />
     </Container>
@@ -39,7 +38,6 @@ const Container = styled.section`
   position: relative;
   height: 100vh;
   text-align: center;
-  // mix-blend-mode: screen;
   margin-top: -60px;
 
   .three-canvas {
@@ -56,6 +54,7 @@ const TitleArea = styled.div`
   width: 100%;
   top: 20vh;
   z-index: 1;
+
   ${mobile`
     top: 16vh;
   `}
@@ -82,27 +81,6 @@ const Info = styled.h4`
   ${mobile`
     font-size: 16px;
     line-height: 20.8px;
-  `}
-`;
-
-const Button = styled.a`
-  margin-top: 48px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 32px;
-  height: 72px;
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  border: 3px solid white;
-  border-radius: 100px;
-  background-color: transparent;
-
-  ${mobile`
-    margin-top: 48px;
-    padding: 0 24px;
-    height: 56px;
-    font-size: 16px;
   `}
 `;
 
