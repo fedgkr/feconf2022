@@ -1,4 +1,4 @@
-import todayHouse from './today-house.png';
+import todayHouse from './today-house1.png';
 import banksalad from './banksalad.png';
 import ably from './ably.png';
 import yanolja from './yanolja.png';
@@ -18,78 +18,80 @@ const diamondSponsors: Sponsor[] = [
   {
     name: 'todayHouse',
     image: todayHouse.src,
-    homepage: '',
+    homepage: 'https://www.bucketplace.com/recruit/?team=dev',
   },
   {
     name: 'banksalad',
     image: banksalad.src,
-    homepage: '',
+    homepage: 'https://career.banksalad.com/',
   },
 ];
 const platinumSponsors: Sponsor[] = [
   {
     name: 'ably',
     image: ably.src,
-    homepage: '',
+    homepage: 'https://ably.team/',
   },
   {
     name: 'yanolja',
     image: yanolja.src,
-    homepage: '',
+    homepage: 'https://careers.yanolja.co/',
   },
   {
     name: 'toss',
     image: toss.src,
-    homepage: '',
+    homepage: 'https://toss.im/career',
   },
   {
     name: 'fastcampus',
     image: fastcampus.src,
-    homepage: '',
+    homepage: 'https://fastcampus.co.kr/info/about',
   },
   {
     name: 'superbAi',
     image: superbAi.src,
-    homepage: '',
+    homepage: 'https://www.superb-ai.com/careers',
   },
 ];
 const goldSponsors: Sponsor[] = [
   {
     name: 'musinsa',
     image: musinsa.src,
-    homepage: '',
+    homepage: 'https://newsroom.musinsa.com/company/interview',
   },
   {
     name: 'greenlabs',
     image: greenlabs.src,
-    homepage: '',
+    homepage:
+      'https://greenlabs.co.kr/%ec%b1%84%ec%9a%a9%ec%a0%95%eb%b3%b4/%ec%b1%84%ec%9a%a9%ec%a0%95%eb%b3%b4/',
   },
   {
     name: 'yogiyo',
     image: yogiyo.src,
-    homepage: '',
+    homepage:
+      'https://techrecruiting.wesang.com/join-us.do/?utm_source=fecon&utm_medium=2209r&utm_campaign=recruit&utm_term=social',
   },
   {
     name: 'nc',
     image: nc.src,
-    homepage: '',
+    homepage: 'https://careers.ncsoft.com/',
   },
   {
     name: 'imWeb',
     image: imWeb.src,
-    homepage: '',
+    homepage: 'https://team.imweb.me',
   },
 ];
 const rookieSponsors: Sponsor[] = [
   {
     name: 'aaant',
     image: aaant.src,
-    homepage: '',
+    homepage: 'https://www.labnote.co',
   },
   {
     name: 'iamdt',
     image: iamdt.src,
-    homepage: '',
+    homepage: 'http://www.vethonors.com/',
   },
 ];
 
