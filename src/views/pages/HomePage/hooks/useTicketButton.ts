@@ -14,7 +14,7 @@ const activeProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
 
 const useTicketButton = () => {
   return {
-    text: '티켓 오픈예정',
+    text: '티켓 구매하기',
     props: inactiveProps,
   };
 };

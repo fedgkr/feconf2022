@@ -255,6 +255,7 @@ export function getEarthMesh(radius: number, onReady: () => void) {
 export interface EarthProps {
   useScroll?: boolean;
   offset?: number;
+  scaleOffset?: number;
 }
 export const Earth = (props: EarthProps) => {
   const earthRef = useRef<THREE.Mesh>();
@@ -308,8 +309,10 @@ export const Earth = (props: EarthProps) => {
         scale,
         pos,
       } = frame.get();
-      earthMesh.scale.set(scale, scale, scale);
-      atmosphereMesh.scale.set(scale * 1.1, scale * 1.1, scale * 1.1);
+
+      const nextScale = scale + (props.scaleOffset || 0);
+      earthMesh.scale.set(nextScale, nextScale, nextScale);
+      atmosphereMesh.scale.set(nextScale * 1.1, nextScale * 1.1, nextScale * 1.1);
       (earthMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value = uOpacity;
       (atmosphereMesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value = uOpacity;
       earthMesh.position.set(0, pos + offset, 0);
