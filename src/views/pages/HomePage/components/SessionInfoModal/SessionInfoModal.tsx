@@ -3,7 +3,10 @@ import styled from '@emotion/styled';
 import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
 import SessionInfoHeader from '~/views/pages/HomePage/components/SessionInfoModal/components/SessionInfoHeader';
 import SpeakerBadge from '~/views/pages/HomePage/components/SessionInfoModal/components/SpeakerBadge';
-import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import {
+  mobile,
+  mobileSelect,
+} from '~/views/pages/HomePage/styles/media-query';
 
 const SessionInfoModal: FC = () => {
   const { session, visible, setVisible } = useSessionInfoModal();
@@ -43,9 +46,10 @@ const Overlay = styled.div<{ visible: boolean }>`
 
 const Container = styled.div<{ visible: boolean }>`
   position: fixed;
-  top: 280px;
   right: 0;
   left: 0;
+  top: ${(props) => (props.visible ? '280px' : 'auto')};
+  bottom: ${(props) => (props.visible ? 'auto' : '0')};
   margin: 0 auto;
   width: 640px;
   padding: 34px 40px 72px 40px;
@@ -55,16 +59,19 @@ const Container = styled.div<{ visible: boolean }>`
   pointer-events: ${(props) => (props.visible ? 'all' : 'none')};
   border-radius: 16px;
   z-index: 1000;
+  transform: translateY(${(props) => (props.visible ? '0' : '100%')});
   transition: ${(props) =>
-    props.visible ? 'opacity 300ms ease-in-out' : 'none'};
-  ${mobile`
+    props.visible
+      ? 'opacity 300ms ease-in-out, transform 300ms ease-out'
+      : 'none'};
+  ${mobileSelect} {
     top: auto;
     bottom: 0;
     width: 100%;
     padding: 42px 24px 60px 24px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-  `}
+  }
 `;
 
 const Title = styled.h2`

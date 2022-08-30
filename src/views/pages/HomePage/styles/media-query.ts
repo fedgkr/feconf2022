@@ -1,6 +1,10 @@
-import { css, CSSObject } from '@emotion/react';
+import { css, CSSObject, SerializedStyles } from '@emotion/react';
 
-export const mobile = (cssContent: TemplateStringsArray | CSSObject) =>
+export const mobileSelect = '@media only screen and (max-width: 1024px)';
+
+export const mobile = (
+  cssContent: TemplateStringsArray | CSSObject | SerializedStyles
+) =>
   css(`
   @media only screen and (max-width: 1024px) {
     ${cssContent}

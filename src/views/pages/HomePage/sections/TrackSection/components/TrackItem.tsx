@@ -2,7 +2,10 @@ import { FC, MouseEventHandler } from 'react';
 import styled from '@emotion/styled';
 import { Session, Track } from '~/types/event';
 import eq from 'lodash/eq';
-import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import {
+  mobile,
+  mobileSelect,
+} from '~/views/pages/HomePage/styles/media-query';
 import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
 
 interface Props {
@@ -42,29 +45,22 @@ const TrackItem: FC<Props> = ({ session, title }) => {
   );
 };
 
-const Container = styled.li`
-  display: flex;
-  align-items: flex-start;
-  cursor: pointer;
-
-  svg path {
-    opacity: 0.6;
-  }
-  &:hover {
-    svg path {
-      opacity: 1;
-    }
-  }
+const TitleSVG = styled.div`
+  opacity: 0.6;
+  ${mobile`
+    display: none;
+  `}
 `;
 
 const Time = styled.div`
   display: flex;
   align-items: center;
   padding: 17px 0;
+  opacity: 0.3;
   span {
     position: relative;
     font-size: 32px;
-    color: rgba(255, 255, 255, 0.3);
+    color: white;
     &::after {
       position: absolute;
       top: 14px;
@@ -72,11 +68,12 @@ const Time = styled.div`
       height: 3px;
       width: 48px;
       content: '';
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: white;
       transform: translateX(100%);
     }
   }
   ${mobile`
+    padding: 5px 0;
     span::after {
       display: none;
     }
@@ -90,12 +87,6 @@ const TextWrap = styled.div`
   margin-left: 112px;
   ${mobile`
     margin-left: 14px;
-  `}
-`;
-
-const TitleSVG = styled.div`
-  ${mobile`
-    display: none;
   `}
 `;
 
@@ -127,6 +118,7 @@ const Divider = styled.div`
   color: white;
   text-align: center;
   margin: 0 12px;
+  opacity: 0.3;
   ${mobile`
     font-size: 14px;
     margin: 0 4px;
@@ -138,6 +130,7 @@ const SpeakerStyle = styled.h4`
   font-size: 32px;
   font-weight: 600;
   color: white;
+  opacity: 0.3;
   ${mobile`
     font-size: 14px;
   `}
@@ -156,6 +149,7 @@ const Tag = styled.span`
   border-radius: 9px;
   font-size: 16px;
   margin-left: 8px;
+  opacity: 0.3;
   &:first-of-type {
     margin-left: 16px;
   }
@@ -169,6 +163,50 @@ const Tag = styled.span`
       margin-left: 10px;
     }
   `}
+`;
+
+const Container = styled.li`
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  &:hover ${TitleSVG} {
+    opacity: 1;
+  }
+  &:hover ${Time} {
+    opacity: 1;
+  }
+  &:hover ${Speaker} {
+    opacity: 0.8;
+  }
+  &:hover ${Divider} {
+    opacity: 0.8;
+  }
+  &:hover ${Company} {
+    opacity: 0.8;
+  }
+  &:hover ${Tag} {
+    opacity: 1;
+  }
+  ${mobileSelect} {
+    ${TitleSVG} {
+      opacity: 1;
+    }
+    ${Time} {
+      opacity: 1;
+    }
+    ${Speaker} {
+      opacity: 0.8;
+    }
+    ${Divider} {
+      opacity: 0.8;
+    }
+    ${Company} {
+      opacity: 0.8;
+    }
+    ${Tag} {
+      opacity: 1;
+    }
+  }
 `;
 
 export default TrackItem;
