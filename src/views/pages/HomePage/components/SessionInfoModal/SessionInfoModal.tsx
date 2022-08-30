@@ -94,6 +94,7 @@ const Description = styled.p`
   font-size: 18px;
   line-height: 1.5;
   color: rgba(33, 33, 33, 0.8);
+  word-break: keep-all;
   ${mobile`
     margin-top: 20px;
     font-size: 14px;

@@ -7,6 +7,7 @@ import {
   mobileSelect,
 } from '~/views/pages/HomePage/styles/media-query';
 import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
+import gt from 'lodash/gt';
 
 interface Props {
   session: Session;
@@ -15,7 +16,8 @@ interface Props {
 
 const TrackItem: FC<Props> = ({ session, title }) => {
   const { setSession, setVisible } = useSessionInfoModal();
-  const handleClickItem: MouseEventHandler = () => {
+  const handleClickItem: MouseEventHandler = (evt) => {
+    evt.preventDefault();
     setSession(session);
     setVisible(true);
   };
@@ -28,8 +30,11 @@ const TrackItem: FC<Props> = ({ session, title }) => {
         <TitleSVG>{title({})}</TitleSVG>
         <Title>{session.title}</Title>
         <Info>
-          {session.speakers.map((speaker) => (
-            <Speaker key={speaker.name}>{speaker.name}</Speaker>
+          {session.speakers.map((speaker, index) => (
+            <Speaker key={speaker.name}>
+              {gt(index, 0) ? '/' : ''}
+              {speaker.name}
+            </Speaker>
           ))}
           {session.speakers[0].company ? (
             <>
