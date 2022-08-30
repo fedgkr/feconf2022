@@ -12,3 +12,8 @@ interface Window {
     silentMoveTo: (target: number) => void;
   };
 }
+
+interface WindowDimension {
+  width: number;
+  height: number;
+}
