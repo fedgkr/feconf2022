@@ -165,29 +165,34 @@ export async function getEarthTexture() {
 
   const canvas2 = document.createElement('canvas');
   const zoom = 8;
-  const length = 2;
+  const length = 1;
 
   canvas2.width = image.naturalWidth * zoom;
   canvas2.height = image.naturalHeight * zoom;
   const ctx2 = canvas2.getContext('2d');
   ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-  ctx2.fillStyle = '#ffffff';
 
-  for (let y = 0; y < data.height; ++y) {
+  const dataWidth = data.width;
+  const dataheight = data.height;
+
+  for (let y = 0; y < dataheight; ++y) {
     for (let yZoom = 0; yZoom < length; ++yZoom) {
-      for (let x = 0; x < data.width; ++x) {
-        if (!data.data[(x + y * data.width) * 4 + 3]) {
+      for (let x = 0; x < dataWidth; ++x) {
+        const alpha = data.data[(x + y * dataWidth) * 4 + 3];
+
+        if (alpha < 50) {
           continue;
         }
-        if (x % 2 || y % 2) {
-          continue;
-        }
+        // if (x % 2 || y % 2) {
+        //   continue;
+        // }
         for (let xZoom = 0; xZoom < length; ++xZoom) {
           ctx2.beginPath();
+          ctx2.fillStyle = `rgba(255, 255, 255, ${Math.max(0.8, alpha / 255)})`;
           ctx2.arc(
             (x + (xZoom / length) * 2) * zoom,
             (y + (yZoom / length) * 2) * zoom,
-            4 / length,
+            1.5 / length,
             0,
             2 * Math.PI
           );
@@ -256,6 +261,7 @@ export interface EarthProps {
   useScroll?: boolean;
   offset?: number;
   scaleOffset?: number;
+  onReady?: () => void;
 }
 export const Earth = (props: EarthProps) => {
   const earthRef = useRef<THREE.Mesh>();
@@ -270,6 +276,7 @@ export const Earth = (props: EarthProps) => {
     const atmosphereMesh = getAtmosphereMesh(0.9);
     const earthMesh = getEarthMesh(0.9, () => {
       setReady(true);
+      props.onReady?.();
     });
 
     earthRef.current = earthMesh;
