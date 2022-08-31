@@ -4,7 +4,7 @@ import 김혜성 from '../images/speakers/김혜성.png';
 import 노용구 from '../images/speakers/노용구.png';
 import 박세문 from '../images/speakers/박세문.png';
 import 박서진 from '../images/speakers/박서진.png';
-import 박신연 from '../images/speakers/박신연.png';
+import 박신연 from '../images/speakers/박신연.gif';
 import 오창영 from '../images/speakers/오창영.png';
 import 이동현 from '../images/speakers/이동현.png';
 import 이소영 from '../images/speakers/이소영.png';
@@ -25,7 +25,8 @@ const sessionList: Session[] = [
     time: timetable[0],
     title: 'ReScript 같이 해요',
     description:
-      '처음 함수형 프로그래밍과 ReScript를 접했을 때 어렵게만 느껴졌습니다. 사용에 익숙해진 후론 ReScript를 사용한 간결하고 명료한 코드 작성의 매력에 빠졌습니다.<br/><br/> ReScript가 어떤 장점을 가지고 있는지 그리고 React에 어떻게 사용하는지에 대해 얘기해 보겠습니다.',
+      "함수형의 '함' 자도 몰랐던 저는 함수형 프로그래밍과 ReScript를 처음 접했을 때 어렵게만 느껴졌습니다. 어떤 부분이 생소했는지, 달랐는지, ReScript의 안전하고 명료한 코드 작성의 매력에 어쩌다 빠지게 되었는지 얘기해 보려 합니다.<br/><br/>" +
+      '그리고 우리 ReScript 같이 해요!',
     speakers: [
       {
         name: '정미량',
@@ -57,12 +58,13 @@ const sessionList: Session[] = [
     time: timetable[2],
     title: 'UX 개발자, 대형 서비스 빠르게 프로토타입하기',
     description:
-      '다소 생소할 수 있는 UX 개발자에 대해 설명하고 구글에서 UX 개발자들이 담당하는 일들과 그 중요성을 설명하겠습니다.<br/><br/> 최근에 사용되고 있는 프로토타이핑의 유형들을 대략적으로 설명하고 각각에 유형에 맞는 UXR 유저 리서치 방법들을 소개합니다.<br/><br/> 마지막으로 각각의 유형들을 예제와 함께 보여주는 방식으로 진행하겠습니다.',
+      '다소 생소할 수 있는 UX 개발자와 그 역할 중 프로토타입 제작에 대해 이야기합니다.<br/>' +
+      '최근에 구글 검색, 쇼핑에서 주로 사용하는 프로토타입 유형들을 알아보고 그중 대형 서비스의 특성상 발견하게 된 특별한 프로토타입 유형을 자세히 소개 합니다.',
     speakers: [
       {
         name: '박신연',
         company: {
-          name: '구글 쇼핑 UX',
+          name: '구글 검색',
         },
         image: 박신연.src,
       },
@@ -101,7 +103,7 @@ const sessionList: Session[] = [
       {
         name: '노용구',
         company: {
-          name: '네이버 스마트에디터',
+          name: '네이버',
         },
         image: 노용구.src,
       },
