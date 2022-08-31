@@ -1,11 +1,12 @@
 import { FC, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { DATE, LOCATION } from '~/resources/meta';
+import { DATE, LOCATION, LOCATION_LINK } from '~/resources/meta';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import { Earth } from '../../components/Earth';
 import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 import { useIntersection } from 'use-intersection';
 import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
+import SafeLink from '~/views/components/SafeLink';
 
 const TicketSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>();
@@ -41,7 +42,9 @@ const TicketSection: FC = () => {
         </FadeInUp>
         <FadeInUp visible={visible} delay={100}>
           <SubText>
-            {DATE} {LOCATION}
+            <SafeLink href={LOCATION_LINK}>
+              {DATE} {LOCATION}
+            </SafeLink>
           </SubText>
         </FadeInUp>
         <FadeInUp visible={visible} delay={200}>
@@ -117,6 +120,9 @@ const SubText = styled.p`
   font-size: 28px;
   line-height: 1.4;
   color: #dfdfdf;
+  a {
+    color: inherit;
+  }
   ${mobile`
     margin-top: 16px;
     font-size: 18px;

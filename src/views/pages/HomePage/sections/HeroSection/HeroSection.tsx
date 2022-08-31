@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import logo from '../../resources/images/main-logo.png';
-import { DATE, LOCATION } from '~/resources/meta';
+import { DATE, LOCATION, LOCATION_LINK } from '~/resources/meta';
 import { Earth } from '../../components/Earth';
 import {
   useWindowScrollTop,
@@ -12,6 +12,7 @@ import preventDefault from '~/views/pages/HomePage/utils/preventDefault';
 import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 import { useIntersection } from 'use-intersection';
 import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
+import SafeLink from '~/views/components/SafeLink';
 
 const HeroSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>();
@@ -39,7 +40,9 @@ const HeroSection: FC = () => {
         </FadeInUp>
         <FadeInUp visible={visible} delay={100} range={80}>
           <Info>
-            {DATE} {LOCATION}
+            <SafeLink href={LOCATION_LINK}>
+              {DATE} {LOCATION}
+            </SafeLink>
           </Info>
         </FadeInUp>
         <FadeInUp visible={visible} delay={200} range={80}>
@@ -115,6 +118,9 @@ const Info = styled.h4`
   font-weight: 500;
   line-height: 31.2px;
   color: #fff;
+  a {
+    color: inherit;
+  }
 
   ${mobile`
     font-size: 16px;

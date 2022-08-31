@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import { DATE, LOCATION } from '~/resources/meta';
+import { DATE, LOCATION, LOCATION_LINK } from '~/resources/meta';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import SafeLink from '~/views/components/SafeLink';
 
 const Header: FC = () => {
   const { text, props } = useTicketButton();
@@ -10,7 +11,9 @@ const Header: FC = () => {
     <Container>
       <MenuList>
         <MenuItem>{DATE}</MenuItem>
-        <MenuItem>{LOCATION}</MenuItem>
+        <MenuItem>
+          <SafeLink href={LOCATION_LINK}>{LOCATION}</SafeLink>
+        </MenuItem>
         <MenuItem>
           <Button {...props}>{text}</Button>
         </MenuItem>
@@ -46,6 +49,9 @@ const MenuItem = styled.li`
   color: #cfcfcf;
   font-size: 15px;
   line-height: 24px;
+  a {
+    color: inherit;
+  }
   ${mobile`
     font-size: 15px;
     &:not(:last-child) {
