@@ -14,7 +14,9 @@ import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 const HeroSection: FC = () => {
   const scrollTop = useWindowScrollTop();
   const height = useWindowHeight();
-  const opacity = height ? Math.min(1, Math.max(0, height - scrollTop * 0.5) / height) : 1;
+  const opacity = height
+    ? Math.min(1, Math.max(0, height - scrollTop * 0.5) / height)
+    : 1;
   const [isReady, setReady] = useState(false);
 
   return (
@@ -22,7 +24,7 @@ const HeroSection: FC = () => {
       <TitleArea
         style={{
           // transform: opacity ? `translateY(${-scrollTop / 2}px)` : "none",
-          display: opacity ? "block" : "none",
+          display: opacity ? 'block' : 'none',
           opacity,
         }}
       >
@@ -32,13 +34,18 @@ const HeroSection: FC = () => {
         </Info>
         <ReserveButton />
       </TitleArea>
-      <EarthArea style={{
-        opacity: isReady ? opacity : 0,
-        transition: isReady && opacity !== 1 ? "none" : "",
-      }}>
-        <Earth useScroll={false} onReady={() => {
-          setReady(true);
-        }} />
+      <EarthArea
+        style={{
+          opacity: isReady ? opacity : 0,
+          transition: isReady && opacity !== 1 ? 'none' : undefined,
+        }}
+      >
+        <Earth
+          useScroll={false}
+          onReady={() => {
+            setReady(true);
+          }}
+        />
       </EarthArea>
     </Container>
   );
