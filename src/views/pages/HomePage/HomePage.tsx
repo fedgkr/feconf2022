@@ -26,8 +26,8 @@ const HomePage: FC = () => {
         <BackgroundContextProvider>
           <WarpSection />
           <TrackSection />
+          <SponsorSection />
         </BackgroundContextProvider>
-        <SponsorSection />
         <TicketSection />
         <CoCSection />
         <NoticeSection />

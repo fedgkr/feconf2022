@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
 import TitleBadge from '~/views/pages/HomePage/components/TitleBadge';
 import SectionTitle from '~/views/pages/HomePage/components/SectionTitle';
@@ -11,22 +11,41 @@ import {
   rookieSponsors,
 } from '~/views/pages/HomePage/sections/SponsorSection/resources/sponsors';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import { useIntersection } from 'use-intersection';
+import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 
 const SponsorSection: FC = () => {
+  const containerRef = useRef<HTMLDivElement>();
+  const visible = useIntersection(containerRef, {
+    once: true,
+    rootMargin: '-200px 0px',
+  });
   return (
-    <Container>
+    <Container ref={containerRef}>
       <SectionHeader>
-        <TitleBadge>후원사</TitleBadge>
-        <SectionTitle>
-          FEConf와 함께 하는 <br />
-          기업을 소개합니다.
-        </SectionTitle>
+        <FadeInUp visible={visible} delay={0}>
+          <TitleBadge>후원사</TitleBadge>
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={100}>
+          <SectionTitle>
+            FEConf와 함께 하는 <br />
+            기업을 소개합니다.
+          </SectionTitle>
+        </FadeInUp>
       </SectionHeader>
       <List>
-        <SponsorList grade="diamond" list={diamondSponsors} />
-        <SponsorList grade="platinum" list={platinumSponsors} />
-        <SponsorList grade="gold" list={goldSponsors} />
-        <SponsorList grade="rookie" list={rookieSponsors} />
+        <FadeInUp visible={visible} delay={200}>
+          <SponsorList grade="diamond" list={diamondSponsors} />
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={300}>
+          <SponsorList grade="platinum" list={platinumSponsors} />
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={400}>
+          <SponsorList grade="gold" list={goldSponsors} />
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={500}>
+          <SponsorList grade="rookie" list={rookieSponsors} />
+        </FadeInUp>
       </List>
     </Container>
   );

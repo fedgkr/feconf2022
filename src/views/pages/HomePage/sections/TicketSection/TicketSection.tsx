@@ -1,35 +1,52 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { DATE, LOCATION } from '~/resources/meta';
-import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import { Earth } from '../../components/Earth';
 import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
+import { useIntersection } from 'use-intersection';
+import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 
 const TicketSection: FC = () => {
+  const containerRef = useRef<HTMLDivElement>();
+  const visible = useIntersection(containerRef, {
+    once: true,
+    rootMargin: '-200px 0px',
+  });
   const [isReady, setReady] = useState(false);
-
   return (
-    <Container>
-      <EarthContainer style={{
+    <Container ref={containerRef}>
+      <EarthContainer
+        style={{
           opacity: isReady ? 1 : 0,
-        }}>
+        }}
+      >
         <EarthWrapper>
-          <Earth offset={0.4} scaleOffset={-0.1} onReady={() => {
-            setReady(true);
-          }} />
+          <Earth
+            offset={0.4}
+            scaleOffset={-0.1}
+            onReady={() => {
+              setReady(true);
+            }}
+          />
         </EarthWrapper>
       </EarthContainer>
       <TextWrap>
-        <Title>
-          다양한 기술을 익히며
-          <br />
-          함께 성장해요
-        </Title>
-        <SubText>
-          {DATE} {LOCATION}
-        </SubText>
-        <ReserveButton />
+        <FadeInUp visible={visible} delay={0}>
+          <Title>
+            다양한 기술을 익히며
+            <br />
+            함께 성장해요
+          </Title>
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={100}>
+          <SubText>
+            {DATE} {LOCATION}
+          </SubText>
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={200}>
+          <ReserveButton />
+        </FadeInUp>
       </TextWrap>
     </Container>
   );
@@ -57,22 +74,22 @@ const EarthContainer = styled.div`
   `}
 `;
 const EarthWrapper = styled.div`
-left: 0;
-pointer-events: none;
-opacity: 0.7;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.7;
 
-position: absolute;
-bottom: 190px;
-width: 100%;
-height: 1400px;
-${mobile`
+  position: absolute;
+  bottom: 190px;
+  width: 100%;
+  height: 1400px;
+  ${mobile`
   bottom: 104px;
   height: 1200px;
 `}
-canvas {
-  width: 100%;
-  height: 100%;
-}
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const TextWrap = styled.div`

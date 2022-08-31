@@ -1,16 +1,27 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
+import { useIntersection } from 'use-intersection';
 
 const NoticeSection: FC = () => {
+  const containerRef = useRef<HTMLDivElement>();
+  const visible = useIntersection(containerRef, {
+    once: true,
+    rootMargin: '-200px 0px',
+  });
   return (
-    <Container>
-      <Title>Notice</Title>
-      <ButtonWrap>
-        <Button href="#">Facebook</Button>
-        <Button href="#">YouTube</Button>
-        <Button href="#">Email</Button>
-      </ButtonWrap>
+    <Container ref={containerRef}>
+      <FadeInUp visible={visible} delay={0}>
+        <Title>Notice</Title>
+      </FadeInUp>
+      <FadeInUp visible={visible} delay={100}>
+        <ButtonWrap>
+          <Button href="#">Facebook</Button>
+          <Button href="#">YouTube</Button>
+          <Button href="#">Email</Button>
+        </ButtonWrap>
+      </FadeInUp>
     </Container>
   );
 };

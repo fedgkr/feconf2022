@@ -1,17 +1,36 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import styled from '@emotion/styled';
 import COC from '~/views/pages/HomePage/sections/CoCSection/resources/coc';
 import CoCBanner from '~/views/pages/HomePage/sections/CoCSection/components/CoCBanner';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import { useIntersection } from 'use-intersection';
+import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 
 const CoCSection: FC = () => {
+  const containerRef = useRef<HTMLDivElement>();
+  const visible = useIntersection(containerRef, {
+    once: true,
+    rootMargin: '-200px 0px',
+  });
   return (
-    <Container>
-      <Title>Code Of Conduct</Title>
-      <SubText>FEConf에 참여하는 모든 분은 다음 사항을 준수해주세요.</SubText>
+    <Container ref={containerRef}>
+      <FadeInUp visible={visible} delay={0}>
+        <Title>Code Of Conduct</Title>
+      </FadeInUp>
+
+      <FadeInUp visible={visible} delay={100}>
+        <SubText>FEConf에 참여하는 모든 분은 다음 사항을 준수해주세요.</SubText>
+      </FadeInUp>
+
       <List>
-        {COC.map((data) => (
-          <CoCBanner key={data.title} {...data} />
+        {COC.map((data, index) => (
+          <FadeInUp
+            key={data.title}
+            visible={visible}
+            delay={200 + 100 * index}
+          >
+            <CoCBanner {...data} />
+          </FadeInUp>
         ))}
       </List>
     </Container>

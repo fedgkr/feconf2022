@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import logo from '../../resources/images/main-logo.png';
 import { DATE, LOCATION } from '~/resources/meta';
@@ -10,17 +10,23 @@ import {
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import preventDefault from '~/views/pages/HomePage/utils/preventDefault';
 import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
+import { useIntersection } from 'use-intersection';
+import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 
 const HeroSection: FC = () => {
+  const containerRef = useRef<HTMLDivElement>();
+  const visible = useIntersection(containerRef, {
+    once: true,
+    rootMargin: '0px 0px',
+  });
   const scrollTop = useWindowScrollTop();
   const height = useWindowHeight();
   const opacity = height
     ? Math.min(1, Math.max(0, height - scrollTop * 0.5) / height)
     : 1;
   const [isReady, setReady] = useState(false);
-
   return (
-    <Container>
+    <Container ref={containerRef}>
       <TitleArea
         style={{
           // transform: opacity ? `translateY(${-scrollTop / 2}px)` : "none",
@@ -28,11 +34,17 @@ const HeroSection: FC = () => {
           opacity,
         }}
       >
-        <Title src={logo.src} onMouseDown={preventDefault} />
-        <Info>
-          {DATE} {LOCATION}
-        </Info>
-        <ReserveButton />
+        <FadeInUp visible={visible} delay={0} range={80}>
+          <Title src={logo.src} onMouseDown={preventDefault} />
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={100} range={80}>
+          <Info>
+            {DATE} {LOCATION}
+          </Info>
+        </FadeInUp>
+        <FadeInUp visible={visible} delay={200} range={80}>
+          <ReserveButton />
+        </FadeInUp>
       </TitleArea>
       <EarthArea
         style={{
