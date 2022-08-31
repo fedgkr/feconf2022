@@ -146,63 +146,72 @@ export function getAtmosphereMesh(radius = 0.65) {
 
   return atmosphereMesh;
 }
+let earthCanvas!: HTMLCanvasElement;
+let canvasPromise!: Promise<HTMLCanvasElement>;
 
-export async function getEarthTexture() {
-  const image = await new THREE.ImageLoader().loadAsync(
+function getEarthTexture() {
+  if (earthCanvas) {
+    return Promise.resolve(new THREE.CanvasTexture(earthCanvas));
+  }
+  if (canvasPromise) {
+    return canvasPromise.then(canvas => new THREE.CanvasTexture(canvas));
+  }
+  canvasPromise = new THREE.ImageLoader().loadAsync(
     '/texture/small_earth.png'
-  );
+  ).then(image => {
+    const canvas = document.createElement('canvas');
 
-  const canvas = document.createElement('canvas');
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    const ctx = canvas.getContext('2d');
 
-  canvas.width = image.naturalWidth;
-  canvas.height = image.naturalHeight;
-  const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0);
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, 0, 0);
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-  const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    earthCanvas = document.createElement('canvas');
+    const zoom = 8;
+    const length = 1;
 
-  const canvas2 = document.createElement('canvas');
-  const zoom = 8;
-  const length = 1;
+    earthCanvas.width = image.naturalWidth * zoom;
+    earthCanvas.height = image.naturalHeight * zoom;
+    const ctx2 = earthCanvas.getContext('2d');
+    ctx2.clearRect(0, 0, earthCanvas.width, earthCanvas.height);
 
-  canvas2.width = image.naturalWidth * zoom;
-  canvas2.height = image.naturalHeight * zoom;
-  const ctx2 = canvas2.getContext('2d');
-  ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+    const dataWidth = data.width;
+    const dataheight = data.height;
 
-  const dataWidth = data.width;
-  const dataheight = data.height;
+    for (let y = 0; y < dataheight; ++y) {
+      for (let yZoom = 0; yZoom < length; ++yZoom) {
+        for (let x = 0; x < dataWidth; ++x) {
+          const alpha = data.data[(x + y * dataWidth) * 4 + 3];
 
-  for (let y = 0; y < dataheight; ++y) {
-    for (let yZoom = 0; yZoom < length; ++yZoom) {
-      for (let x = 0; x < dataWidth; ++x) {
-        const alpha = data.data[(x + y * dataWidth) * 4 + 3];
-
-        if (alpha < 50) {
-          continue;
-        }
-        // if (x % 2 || y % 2) {
-        //   continue;
-        // }
-        for (let xZoom = 0; xZoom < length; ++xZoom) {
-          ctx2.beginPath();
-          ctx2.fillStyle = `rgba(255, 255, 255, ${Math.max(0.8, alpha / 255)})`;
-          ctx2.arc(
-            (x + (xZoom / length) * 2) * zoom,
-            (y + (yZoom / length) * 2) * zoom,
-            1.5 / length,
-            0,
-            2 * Math.PI
-          );
-          ctx2.fill();
+          if (alpha < 50) {
+            continue;
+          }
+          // if (x % 2 || y % 2) {
+          //   continue;
+          // }
+          for (let xZoom = 0; xZoom < length; ++xZoom) {
+            ctx2.beginPath();
+            ctx2.fillStyle = `rgba(255, 255, 255, ${Math.max(0.8, alpha / 255)})`;
+            ctx2.arc(
+              (x + (xZoom / length) * 2) * zoom,
+              (y + (yZoom / length) * 2) * zoom,
+              1.5 / length,
+              0,
+              2 * Math.PI
+            );
+            ctx2.fill();
+          }
         }
       }
     }
-  }
+    return earthCanvas;
+  });
 
-  return new THREE.CanvasTexture(canvas2);
+  return canvasPromise.then(canvas => new THREE.CanvasTexture(canvas));
 }
 export function getImageBitmapTexture(url: string) {
   return new Promise<THREE.Texture>((resolve) => {

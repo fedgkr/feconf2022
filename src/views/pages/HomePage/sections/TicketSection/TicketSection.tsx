@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styled from '@emotion/styled';
 import { DATE, LOCATION } from '~/resources/meta';
 import useTicketButton from '~/views/pages/HomePage/hooks/useTicketButton';
@@ -7,10 +7,18 @@ import { Earth } from '../../components/Earth';
 import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 
 const TicketSection: FC = () => {
+  const [isReady, setReady] = useState(false);
+
   return (
     <Container>
-      <EarthContainer>
-        <Earth offset={0.4} scaleOffset={-0.1} />
+      <EarthContainer style={{
+          opacity: isReady ? 1 : 0,
+        }}>
+        <EarthWrapper>
+          <Earth offset={0.4} scaleOffset={-0.1} onReady={() => {
+            setReady(true);
+          }} />
+        </EarthWrapper>
       </EarthContainer>
       <TextWrap>
         <Title>
@@ -43,22 +51,28 @@ const EarthContainer = styled.div`
   position: relative;
   height: 897px;
   overflow: hidden;
+  transition: opacity ease 2s;
   ${mobile`
     height: 763px;
   `}
+`;
+const EarthWrapper = styled.div`
+left: 0;
+pointer-events: none;
+opacity: 0.7;
 
-  canvas {
-    position: absolute;
-    left: 0;
-    bottom: 190px;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0.7;
-    ${mobile`
-      bottom: 104px;
-    `}
-  }
+position: absolute;
+bottom: 190px;
+width: 100%;
+height: 1400px;
+${mobile`
+  bottom: 104px;
+  height: 1200px;
+`}
+canvas {
+  width: 100%;
+  height: 100%;
+}
 `;
 
 const TextWrap = styled.div`

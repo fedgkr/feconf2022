@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styled from '@emotion/styled';
 import logo from '../../resources/images/main-logo.png';
 import { DATE, LOCATION } from '~/resources/meta';
@@ -14,13 +14,16 @@ import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 const HeroSection: FC = () => {
   const scrollTop = useWindowScrollTop();
   const height = useWindowHeight();
+  const opacity = height ? Math.max(0, height - scrollTop * 5) / height : 1;
+  const [isReady, setReady] = useState(false);
 
   return (
     <Container>
       <TitleArea
         style={{
-          transform: `translateY(${-scrollTop / 2}px)`,
-          opacity: height ? Math.max(0, height - scrollTop * 5) / height : 1,
+          transform: opacity ? `translateY(${-scrollTop / 2}px)` : "none",
+          display: opacity ? "block" : "none",
+          opacity,
         }}
       >
         <Title src={logo.src} onMouseDown={preventDefault} />
@@ -29,7 +32,14 @@ const HeroSection: FC = () => {
         </Info>
         <ReserveButton />
       </TitleArea>
-      <Earth useScroll={true} />
+      <EarthArea style={{
+        transform: `translateY(${-scrollTop}px)`,
+        opacity: isReady ? 1 : 0,
+      }}>
+        <Earth useScroll={true} onReady={() => {
+          setReady(true);
+        }} />
+      </EarthArea>
     </Container>
   );
 };
@@ -39,15 +49,6 @@ const Container = styled.section`
   height: 100vh;
   text-align: center;
   margin-top: -60px;
-
-  .three-canvas {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-  }
 `;
 const TitleArea = styled.div`
   position: relative;
@@ -58,6 +59,24 @@ const TitleArea = styled.div`
   ${mobile`
     top: 16vh;
   `}
+`;
+const EarthArea = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1200px;
+  pointer-events: none;
+  transition: opacity ease 2s;
+
+  .three-canvas {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Title = styled.img`

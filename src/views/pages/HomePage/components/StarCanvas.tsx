@@ -4,6 +4,7 @@ export function StarCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
         const canvas = canvasRef.current;
+        const parentElement = canvas.parentElement;
         const ctx = canvas.getContext("2d");
 
         const vertexMap: Record<string, {
@@ -14,14 +15,17 @@ export function StarCanvas() {
         }> = {};
 
         const startTime = Date.now();
+        let resizeRaqId = 0;
+        function onResize() {
+            const inlineSize = parentElement.offsetWidth;
+            const blockSize = parentElement.offsetHeight;
 
-        function onResize(e: ResizeObserverEntry[]) {
-            const boxSize = e[0].borderBoxSize[0];
-
-            const inlineSize = boxSize.inlineSize;
-            const blockSize = boxSize.blockSize;
-            canvas.width = inlineSize;
-            canvas.height = blockSize;
+            cancelAnimationFrame(resizeRaqId);
+            resizeRaqId = requestAnimationFrame(() => {
+              canvas.width = inlineSize;
+              canvas.height = blockSize;
+              canvas.style.cssText += `width: ${inlineSize}px; height: ${blockSize}px;`;
+            });
         }
         const tile = 80;
 
@@ -103,9 +107,10 @@ export function StarCanvas() {
 
         const observer = new ResizeObserver(onResize);
 
-        observer.observe(canvas);
+        observer.observe(parentElement);
 
         return () => {
+            cancelAnimationFrame(resizeRaqId);
             cancelAnimationFrame(raqId);
             observer.disconnect();
         };

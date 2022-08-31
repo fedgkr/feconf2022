@@ -57,6 +57,7 @@ export const ThreeCanvas = forwardRef<ThreeCanvasObject, ThreeCanvasProps>((prop
 
         // renderer setup
         const canvas = canvasRef.current!;
+        const parentElement = canvas.parentElement;
         const renderer = new THREE.WebGLRenderer({
             canvas,
             antialias: true,
@@ -73,8 +74,8 @@ export const ThreeCanvas = forwardRef<ThreeCanvasObject, ThreeCanvasProps>((prop
         cameraRef.current = camera;
 
         function onResize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
+            width = parentElement.clientWidth;
+            height = parentElement.clientHeight;
 
 
             sizeRef.current = { width, height };
