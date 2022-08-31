@@ -279,6 +279,7 @@ export const Earth = (props: EarthProps) => {
   const threeCanvasRef = useRef<ThreeCanvasObject>(null);
 
   useEffect(() => {
+    const parentElement = threeCanvasRef.current!.canvasRef.current!.parentElement;
     const scene = threeCanvasRef.current!.sceneRef.current!;
 
     // scene.fog = new THREE.FogExp2( 0x000000, 0.001 );
