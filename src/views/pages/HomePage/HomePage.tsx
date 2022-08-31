@@ -32,8 +32,8 @@ const HomePage: FC = () => {
         <CoCSection />
         <NoticeSection />
         <Footer />
-        <SessionInfoModal />
       </Container>
+      <SessionInfoModal />
     </SessionInfoModalProvider>
   );
 };

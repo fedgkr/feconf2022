@@ -9,14 +9,18 @@ import {
 } from '~/views/pages/HomePage/styles/media-query';
 
 const SessionInfoModal: FC = () => {
-  const { session, visible, setVisible } = useSessionInfoModal();
+  const { initial, session, visible, setVisible } = useSessionInfoModal();
   const handleClickOverlay: MouseEventHandler = () => {
     setVisible(false);
   };
   return (
     <>
-      <Overlay visible={visible} onClick={handleClickOverlay} />
-      <Container visible={visible}>
+      <Overlay
+        initial={initial}
+        visible={visible}
+        onClick={handleClickOverlay}
+      />
+      <Container initial={initial} visible={visible}>
         <SessionInfoHeader session={session} />
         <Title>{session?.title}</Title>
         {session?.speakers.map((speaker) => (
@@ -30,7 +34,7 @@ const SessionInfoModal: FC = () => {
   );
 };
 
-const Overlay = styled.div<{ visible: boolean }>`
+const Overlay = styled.div<{ initial: boolean; visible: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -39,12 +43,12 @@ const Overlay = styled.div<{ visible: boolean }>`
   background-color: rgba(0, 0, 0);
   opacity: ${({ visible }) => (visible ? 0.6 : 0)};
   pointer-events: ${({ visible }) => (visible ? 'all' : 'none')};
-  transition: ${({ visible }) =>
-    visible ? 'opacity 300ms ease-in-out' : 'none'};
+  transition: ${({ initial }) =>
+    initial ? 'none' : 'opacity 300ms ease-in-out'};
   z-index: 999;
 `;
 
-const Container = styled.div<{ visible: boolean }>`
+const Container = styled.div<{ initial: boolean; visible: boolean }>`
   position: fixed;
   right: 0;
   left: 0;
@@ -61,11 +65,11 @@ const Container = styled.div<{ visible: boolean }>`
   z-index: 1000;
   transform: translateY(${(props) => (props.visible ? '0' : '100%')});
   transition: ${(props) =>
-    props.visible
-      ? 'opacity 300ms ease-in-out, transform 300ms ease-out'
-      : 'none'};
+    props.initial
+      ? 'none'
+      : 'opacity 300ms ease-in-out, transform 300ms ease-out'};
   ${mobileSelect} {
-    top: auto;
+    top: initial;
     bottom: 0;
     width: 100%;
     padding: 42px 24px 60px 24px;
