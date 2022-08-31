@@ -19,7 +19,9 @@ const CoCSection: FC = () => {
       </FadeInUp>
 
       <FadeInUp visible={visible} delay={100}>
-        <SubText>FEConf에 참여하는 모든 분은 다음 사항을 준수해주세요.</SubText>
+        <SubText>
+          FEConf에 참여하는 모든 분은 다음 사항을 준수해 주세요.
+        </SubText>
       </FadeInUp>
 
       <List>

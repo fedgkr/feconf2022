@@ -1,9 +1,9 @@
-import { AnchorHTMLAttributes, HTMLAttributes } from 'react';
+import { AnchorHTMLAttributes } from 'react';
 
 const inactiveProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
   onClick: (event) => {
     event.preventDefault();
-    alert('티켓 예매는 9월 6일 오픈 예정입니다.');
+    alert('티켓 예매는 9월 5일 오픈 예정입니다.');
   },
 };
 

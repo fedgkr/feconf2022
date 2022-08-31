@@ -57,7 +57,7 @@ const goldSponsors: Sponsor[] = [
   {
     name: 'musinsa',
     image: musinsa.src,
-    homepage: 'https://newsroom.musinsa.com/company/interview',
+    homepage: 'https://musinsa.career.greetinghr.com/',
   },
   {
     name: 'greenlabs',
@@ -91,7 +91,7 @@ const rookieSponsors: Sponsor[] = [
   {
     name: 'iamdt',
     image: iamdt.src,
-    homepage: 'http://www.vethonors.com/',
+    homepage: 'https://iamdt.co.kr/',
   },
 ];
 
