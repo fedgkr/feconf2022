@@ -38,7 +38,7 @@ export const SessionInfoModalProvider: FC<PropsWithChildren> = ({
     }
   }, [visible]);
   useEffect(() => {
-    const timeout = setTimeout(() => {}, 100);
+    const timeout = setTimeout(() => null, 100);
     setInitial(false);
     return () => {
       clearTimeout(timeout);

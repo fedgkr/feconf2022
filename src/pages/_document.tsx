@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 const Document = () => {
   return (
@@ -9,8 +10,8 @@ const Document = () => {
           type="text/css"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"
         />
-        <script
-          async
+        <Script
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=UA-68676515-5"
         />
         <script
@@ -23,7 +24,7 @@ gtag('js', new Date());
 gtag('config', 'UA-68676515-5');
         `,
           }}
-        ></script>
+        />
       </Head>
       <body>
         <Main />
