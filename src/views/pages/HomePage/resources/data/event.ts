@@ -129,7 +129,7 @@ const sessionList: Session[] = [
   {
     track: Track.B,
     time: timetable[1],
-    title: '일백개 패키지 모노레포 고요하게 운영하기',
+    title: '일백개 패키지 모노레포 우아하게 운영하기',
     description:
       '토스 전 계열사에서 사용하고 있는 거대한 사내 라이브러리 모노레포의 운영 경험에 대해 공유합니다.',
     speakers: [

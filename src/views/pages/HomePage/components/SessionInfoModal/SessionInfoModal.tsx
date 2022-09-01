@@ -79,7 +79,7 @@ const Container = styled.div<{ initial: boolean; visible: boolean }>`
 `;
 
 const Title = styled.h2`
-  max-width: 280px;
+  max-width: 380px;
   font-size: 32px;
   font-weight: 700;
   line-height: 1.3;
