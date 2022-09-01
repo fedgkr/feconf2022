@@ -61,7 +61,7 @@ const sessionList: Session[] = [
     ],
   },
   {
-    track: Track.B,
+    track: Track.A,
     time: timetable[2],
     title: '프론트엔드 DDD를 만나다',
     description:
