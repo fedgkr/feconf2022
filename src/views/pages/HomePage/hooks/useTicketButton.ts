@@ -10,13 +10,13 @@ const inactiveProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
 const activeProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
   rel: 'noopener noreferrer',
   target: '_blank',
-  href: '#',
+  href: 'https://booking.naver.com/booking/5/bizes/263881/items/4589753',
 };
 
 const useTicketButton = () => {
   return {
     text: '티켓 구매하기',
-    props: inactiveProps,
+    props: activeProps,
   };
 };
 
