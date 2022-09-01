@@ -1,1 +1,1 @@
-export { default } from '~/views/ComingSoonPage';
+export { default } from '~/views/pages/ComingSoonPage';

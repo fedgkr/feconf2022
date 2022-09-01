@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { FC, HTMLAttributes, ReactNode } from 'react';
 import SafeLink from '~/views/components/SafeLink';
-import { tablet } from '~/views/ComingSoonPage/styles/media-query';
+import { tablet } from '~/views/pages/ComingSoonPage/styles/media-query';
 
 interface Props extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
