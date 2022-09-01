@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 import { useIntersection } from 'use-intersection';
+import SafeLink from '~/views/components/SafeLink';
+import { EMAIL, FACEBOOK_FECONF, YOUTUBE } from '~/resources/meta';
 
 const NoticeSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>();
@@ -17,9 +19,9 @@ const NoticeSection: FC = () => {
       </FadeInUp>
       <FadeInUp visible={visible} delay={100}>
         <ButtonWrap>
-          <Button href="#">Facebook</Button>
-          <Button href="#">YouTube</Button>
-          <Button href="#">Email</Button>
+          <Button href={FACEBOOK_FECONF}>Facebook</Button>
+          <Button href={YOUTUBE}>YouTube</Button>
+          <Button href={`mailto:${EMAIL}`}>Email</Button>
         </ButtonWrap>
       </FadeInUp>
     </Container>
@@ -55,7 +57,7 @@ const ButtonWrap = styled.div`
   `}
 `;
 
-const Button = styled.a`
+const Button = styled(SafeLink)`
   display: inline-flex;
   align-items: center;
   justify-content: center;

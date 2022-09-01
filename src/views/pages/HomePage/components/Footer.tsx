@@ -1,17 +1,18 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import logo from '../resources/images/logo.png';
-import { EMAIL } from '~/resources/meta';
+import { EMAIL, FACEBOOK_FRONTEND } from '~/resources/meta';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import SafeLink from '~/views/components/SafeLink';
 
 const Footer: FC = () => {
   return (
     <Container>
       <Logo src={logo.src} alt="FEConf" />
       <LinkWrap>
-        <Link>FEConf 2021</Link>
+        <Link href="https://2021.feconf.kr">FEConf 2021</Link>
         <Divider>|</Divider>
-        <Link>프론트엔드개발그룹</Link>
+        <Link href={FACEBOOK_FRONTEND}>프론트엔드개발그룹</Link>
         <Divider>|</Divider>
         <Link href={`mailto:${EMAIL}`}>{EMAIL}</Link>
       </LinkWrap>
@@ -50,7 +51,7 @@ const LinkWrap = styled.div`
   `}
 `;
 
-const Link = styled.a`
+const Link = styled(SafeLink)`
   color: #acacac;
   font-size: 14px;
   line-height: 1.6;
