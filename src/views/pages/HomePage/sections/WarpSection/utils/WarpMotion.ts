@@ -30,7 +30,7 @@ class WarpMotion {
         mesh.rotation.z = targetRZ + rotZ;
       }
       mesh.material.transparent = true;
-      mesh.material.opacity = mesh.position.z / 15;
+      mesh.material.opacity = shouldRender ? mesh.position.z / 15 : 0;
     });
   }
 
