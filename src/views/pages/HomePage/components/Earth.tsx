@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SceneItem } from 'scenejs';
 import * as THREE from 'three';
 import { ThreeCanvas, ThreeCanvasObject } from '~/views/components/ThreeCanvas';
@@ -279,6 +279,17 @@ export const Earth = (props: EarthProps) => {
   const [isReady, setReady] = useState(false);
   const threeCanvasRef = useRef<ThreeCanvasObject>(null);
 
+  const onRender = useCallback(() => {
+    if (!earthRef.current) {
+      return;
+    }
+    earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, 0), 0.0003);
+
+    const height = threeCanvasRef.current.sizeRef.current.height;
+    (earthRef.current!.material as any).uniforms.uHeight.value = height;
+    (atmosphereRef.current!.material as any).uniforms.uHeight.value = height;
+    // cloudRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
+  }, []);
   useEffect(() => {
     const parentElement = threeCanvasRef.current!.canvasRef.current!.parentElement;
     const scene = threeCanvasRef.current!.sceneRef.current!;
@@ -360,22 +371,22 @@ export const Earth = (props: EarthProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isReady && !props.useAnimation) {
+      onRender();
+      const {
+        rendererRef,
+        sceneRef,
+        cameraRef,
+      } = threeCanvasRef.current;
+      rendererRef.current!.render(sceneRef.current!, cameraRef.current!);
+    }
+  }, [isReady, props.useAnimation]);
   return (
     <ThreeCanvas
       ref={threeCanvasRef}
       render={isReady && props.useAnimation}
-      onRender={() => {
-        if (!earthRef.current) {
-          return;
-        }
-        earthRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, 0), 0.0003);
-
-        const height = threeCanvasRef.current.sizeRef.current.height;
-        (earthRef.current!.material as any).uniforms.uHeight.value = height;
-        (atmosphereRef.current!.material as any).uniforms.uHeight.value =
-          height;
-        // cloudRef.current!.rotateOnAxis(new THREE.Vector3(1, 2, -1), 0.0003);
-      }}
+      onRender={onRender}
     ></ThreeCanvas>
   );
 };
