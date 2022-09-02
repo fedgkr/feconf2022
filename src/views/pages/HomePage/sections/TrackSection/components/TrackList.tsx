@@ -5,16 +5,12 @@ import useSelectedSessions from '~/views/pages/HomePage/sections/TrackSection/ho
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
 const TrackList: FC = () => {
-  const { sessions, titles } = useSelectedSessions();
+  const { sessions } = useSelectedSessions();
   return (
     <Container>
       <List>
         {sessions.map((session, index) => (
-          <TrackItem
-            key={session.title}
-            session={session}
-            title={titles[index]}
-          />
+          <TrackItem key={session.title} session={session} />
         ))}
       </List>
     </Container>

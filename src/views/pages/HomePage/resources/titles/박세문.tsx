@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const B3: FC = () => {
+const 박세문: FC = () => {
   return (
     <svg
       width="581"
@@ -19,4 +19,4 @@ const B3: FC = () => {
   );
 };
 
-export default B3;
+export default 박세문;

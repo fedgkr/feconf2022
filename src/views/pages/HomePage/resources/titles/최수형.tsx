@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const B4: FC = () => {
+const 최수형: FC = () => {
   return (
     <svg
       width="682"
@@ -19,4 +19,4 @@ const B4: FC = () => {
   );
 };
 
-export default B4;
+export default 최수형;

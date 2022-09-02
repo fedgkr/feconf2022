@@ -11,10 +11,9 @@ import gt from 'lodash/gt';
 
 interface Props {
   session: Session;
-  title: FC;
 }
 
-const TrackItem: FC<Props> = ({ session, title }) => {
+const TrackItem: FC<Props> = ({ session }) => {
   const { setSession, setVisible } = useSessionInfoModal();
   const handleClickItem: MouseEventHandler = (evt) => {
     evt.preventDefault();
@@ -27,7 +26,7 @@ const TrackItem: FC<Props> = ({ session, title }) => {
         <span>{session.time[0]}</span>
       </Time>
       <TextWrap>
-        <TitleSVG>{title({})}</TitleSVG>
+        <TitleSVG>{session.titleSvg({})}</TitleSVG>
         <Title>{session.title}</Title>
         <Info>
           {session.speakers.map((speaker, index) => (

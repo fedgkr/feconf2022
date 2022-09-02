@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const A1: FC = () => {
+const 정미량: FC = () => {
   return (
     <svg
       width="446"
@@ -19,4 +19,4 @@ const A1: FC = () => {
   );
 };
 
-export default A1;
+export default 정미량;

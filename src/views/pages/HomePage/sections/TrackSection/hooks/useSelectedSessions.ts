@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
 import eq from 'lodash/eq';
-import {
-  trackASessionTitles,
-  trackBSessionTitles,
-} from '~/views/pages/HomePage/sections/TrackSection/resources/titles';
 import { Track } from '~/types/event';
 import {
   TrackSortType,
@@ -22,15 +18,8 @@ const useSelectedSessions = () => {
     () => getFilteredSessions(currentSort),
     [currentSort]
   );
-  const titles = useMemo(() => {
-    if (eq(currentSort, 'all')) {
-      return [...trackASessionTitles, ...trackBSessionTitles];
-    }
-    return eq(currentSort, Track.A) ? trackASessionTitles : trackBSessionTitles;
-  }, [currentSort]);
   return {
     sessions,
-    titles,
   };
 };
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const A3: FC = () => {
+const 박신연: FC = () => {
   return (
     <svg
       width="519"
@@ -19,4 +19,4 @@ const A3: FC = () => {
   );
 };
 
-export default A3;
+export default 박신연;

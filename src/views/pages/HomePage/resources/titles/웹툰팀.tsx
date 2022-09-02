@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const A4: FC = () => {
+const 웹툰팀: FC = () => {
   return (
     <svg
       width="814"
@@ -19,4 +19,4 @@ const A4: FC = () => {
   );
 };
 
-export default A4;
+export default 웹툰팀;

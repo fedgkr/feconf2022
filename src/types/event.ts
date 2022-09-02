@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 enum Track {
   A,
   B,
@@ -22,6 +24,7 @@ interface Speaker {
 
 interface Session {
   title: string;
+  titleSvg: FC;
   description: string;
   speakers: Speaker[];
   track: Track;
