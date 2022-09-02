@@ -95,7 +95,6 @@ const MobileRow = styled(List)`
 
 const Item = styled.a`
   height: 100%;
-  padding: 0 24px;
   border-radius: 15px;
   overflow: hidden;
   transition: background-color 100ms ease-in;

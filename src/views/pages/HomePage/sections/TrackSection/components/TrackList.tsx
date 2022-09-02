@@ -44,12 +44,12 @@ const List = styled.ul`
   display: inline-flex;
   flex-direction: column;
   width: 1000px;
-  & > li:not(:first-of-type) {
+  & > div:not(:first-of-type) {
     margin-top: 20px;
   }
   ${mobile`
     width: 310px;
-    & > li:not(:first-of-type) {
+    & > div:not(:first-of-type) {
       margin-top: 32px;
     }
   `}
