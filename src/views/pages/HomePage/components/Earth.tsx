@@ -270,6 +270,7 @@ export interface EarthProps {
   useScroll?: boolean;
   offset?: number;
   scaleOffset?: number;
+  useAnimation?: boolean;
   onReady?: () => void;
 }
 export const Earth = (props: EarthProps) => {
@@ -362,7 +363,7 @@ export const Earth = (props: EarthProps) => {
   return (
     <ThreeCanvas
       ref={threeCanvasRef}
-      render={isReady}
+      render={isReady && props.useAnimation}
       onRender={() => {
         if (!earthRef.current) {
           return;

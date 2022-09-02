@@ -14,6 +14,7 @@ import { useIntersection } from 'use-intersection';
 import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 import SafeLink from '~/views/components/SafeLink';
 import { document } from '@daybrush/utils';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
 
 const useFontLoadingState = () => {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -33,6 +34,7 @@ const HeroSection: FC = () => {
     : 1;
   const [isReady, setReady] = useState(false);
   const fontLoaded = useFontLoadingState();
+  const reducedMotion = usePrefersReducedMotion();
   const visible = intersected && fontLoaded && isReady;
 
   return (
@@ -65,6 +67,7 @@ const HeroSection: FC = () => {
       >
         <Earth
           useScroll={false}
+          useAnimation={visible && !reducedMotion}
           onReady={() => {
             setReady(true);
           }}

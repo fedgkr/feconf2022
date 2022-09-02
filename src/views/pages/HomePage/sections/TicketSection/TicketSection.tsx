@@ -7,6 +7,7 @@ import ReserveButton from '~/views/pages/HomePage/components/ReserveButton';
 import { useIntersection } from 'use-intersection';
 import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 import SafeLink from '~/views/components/SafeLink';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
 
 const TicketSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>();
@@ -15,6 +16,7 @@ const TicketSection: FC = () => {
     rootMargin: '0px 0px',
   });
   const [isReady, setReady] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
   return (
     <Container>
       <EarthContainer
@@ -26,6 +28,7 @@ const TicketSection: FC = () => {
           <Earth
             offset={0.4}
             scaleOffset={-0.1}
+            useAnimation={visible && !reducedMotion}
             onReady={() => {
               setReady(true);
             }}
