@@ -1,57 +1,56 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-export function useWindowScrollTop() {
-    const [scrollTop, setScrollTop] = useState(0);
+export function useWindowScrollTop(active = false) {
+  const [scrollTop, setScrollTop] = useState(0);
 
-    useEffect(() => {
-        const onScroll = () => {
-            setScrollTop(document.documentElement.scrollTop);
-        };
+  useEffect(() => {
+    const onScroll = () => {
+      setScrollTop(document.documentElement.scrollTop);
+    };
+    onScroll();
 
-        onScroll();
-        window.addEventListener("scroll", onScroll);
+    if (active) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [active]);
 
-        return () => {
-            window.removeEventListener("scroll", onScroll);
-        };
-    }, []);
-
-    return scrollTop;
+  return scrollTop;
 }
 
 export function useWindowHeight() {
-    const [height, setHeight] = useState(0);
+  const [height, setHeight] = useState(0);
 
-    useEffect(() => {
-        const onResize = () => {
-            setHeight(window.innerHeight);
-        };
+  useEffect(() => {
+    const onResize = () => {
+      setHeight(window.innerHeight);
+    };
 
-        onResize();
-        window.addEventListener("resize", onResize);
+    onResize();
+    window.addEventListener('resize', onResize);
 
-        return () => {
-            window.removeEventListener("resize", onResize);
-        };
-    }, []);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
 
-    return height;
+  return height;
 }
 
 export function useWindowScorllEffect(callback: (scrollTop: number) => void) {
-    const onScroll = useCallback(callback, []);
-    
+  const onScroll = useCallback(callback, []);
 
-    useEffect(() => {
-        const onScrollCallback = () => {
-            onScroll(document.documentElement.scrollTop);
-        };
-        onScrollCallback();
-        window.addEventListener("scroll", onScrollCallback);
+  useEffect(() => {
+    const onScrollCallback = () => {
+      onScroll(document.documentElement.scrollTop);
+    };
+    onScrollCallback();
+    window.addEventListener('scroll', onScrollCallback);
 
-        return () => {
-            window.removeEventListener("scroll", onScrollCallback);
-        };
-    }, [onScroll]);
-
+    return () => {
+      window.removeEventListener('scroll', onScrollCallback);
+    };
+  }, [onScroll]);
 }

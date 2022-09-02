@@ -12,11 +12,11 @@ const TicketSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>();
   const visible = useIntersection(containerRef, {
     once: true,
-    rootMargin: '-200px 0px',
+    rootMargin: '0px 0px',
   });
   const [isReady, setReady] = useState(false);
   return (
-    <Container ref={containerRef}>
+    <Container>
       <EarthContainer
         style={{
           opacity: isReady ? 1 : 0,
@@ -32,7 +32,7 @@ const TicketSection: FC = () => {
           />
         </EarthWrapper>
       </EarthContainer>
-      <TextWrap>
+      <TextWrap ref={containerRef}>
         <FadeInUp visible={visible} delay={0}>
           <Title>
             다양한 기술을 익히며

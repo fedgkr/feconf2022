@@ -16,7 +16,7 @@ const TrackSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>();
   const visible = useIntersection(containerRef, {
     once: true,
-    rootMargin: '-150px 0px',
+    rootMargin: '0px 0px',
   });
   return (
     <TrackSortProvider>
@@ -35,9 +35,7 @@ const TrackSection: FC = () => {
         <FadeInUp visible={visible} delay={200}>
           <TrackSortBar />
         </FadeInUp>
-        <FadeInUp visible={visible} delay={300}>
-          <TrackList />
-        </FadeInUp>
+        <TrackList visible={visible} delay={300} />
       </Container>
     </TrackSortProvider>
   );
@@ -45,7 +43,6 @@ const TrackSection: FC = () => {
 
 const Container = styled.section<{ active: boolean }>`
   position: relative;
-  padding-top: 120px;
   padding-bottom: 160px;
   &::before {
     position: absolute;

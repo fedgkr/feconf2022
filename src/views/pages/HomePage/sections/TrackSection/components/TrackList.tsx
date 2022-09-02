@@ -3,14 +3,26 @@ import styled from '@emotion/styled';
 import TrackItem from '~/views/pages/HomePage/sections/TrackSection/components/TrackItem';
 import useSelectedSessions from '~/views/pages/HomePage/sections/TrackSection/hooks/useSelectedSessions';
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
+import FadeInUp from '~/views/pages/HomePage/components/FadeInUp';
 
-const TrackList: FC = () => {
+interface Props {
+  visible: boolean;
+  delay: number;
+}
+
+const TrackList: FC<Props> = ({ visible, delay }) => {
   const { sessions } = useSelectedSessions();
   return (
     <Container>
       <List>
         {sessions.map((session, index) => (
-          <TrackItem key={session.title} session={session} />
+          <FadeInUp
+            key={session.title}
+            visible={visible}
+            delay={delay + 50 * index}
+          >
+            <TrackItem session={session} />
+          </FadeInUp>
         ))}
       </List>
     </Container>
