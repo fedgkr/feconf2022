@@ -17,3 +17,9 @@ interface WindowDimension {
   width: number;
   height: number;
 }
+
+interface MotionData {
+  height: number;
+  current: number;
+  distance: number;
+}

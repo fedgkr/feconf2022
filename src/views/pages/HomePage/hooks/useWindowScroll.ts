@@ -29,7 +29,7 @@ export function useWindowHeight() {
     };
 
     onResize();
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
 
     return () => {
       window.removeEventListener('resize', onResize);
@@ -37,20 +37,4 @@ export function useWindowHeight() {
   }, []);
 
   return height;
-}
-
-export function useWindowScorllEffect(callback: (scrollTop: number) => void) {
-  const onScroll = useCallback(callback, []);
-
-  useEffect(() => {
-    const onScrollCallback = () => {
-      onScroll(document.documentElement.scrollTop);
-    };
-    onScrollCallback();
-    window.addEventListener('scroll', onScrollCallback);
-
-    return () => {
-      window.removeEventListener('scroll', onScrollCallback);
-    };
-  }, [onScroll]);
 }

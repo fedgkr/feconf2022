@@ -9,6 +9,7 @@ function createGradientMeshLineMaterial() {
     map: texture,
     side: DoubleSide,
     lineWidth: 0.02,
+    transparent: true,
   });
 }
 

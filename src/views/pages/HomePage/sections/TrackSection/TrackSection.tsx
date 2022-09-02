@@ -1,4 +1,4 @@
-import { FC, useContext, useRef } from 'react';
+import { FC, useContext, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import TrackSortBar from '~/views/pages/HomePage/sections/TrackSection/components/TrackSortBar';
 import { TrackSortProvider } from '~/views/pages/HomePage/sections/TrackSection/contexts/TrackSortContext';

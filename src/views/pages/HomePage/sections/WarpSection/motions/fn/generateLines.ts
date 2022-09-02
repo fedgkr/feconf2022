@@ -1,8 +1,8 @@
 import times from 'lodash/times';
 
-import createGradientMeshLineMaterial from '../resources/createGradientMeshLineMaterial';
-import createRectGeometry from '../resources/createRectGeometry';
-import createRectMesh from '../resources/createRectMesh';
+import createGradientMeshLineMaterial from '../../resources/createGradientMeshLineMaterial';
+import createRectGeometry from '../../resources/createRectGeometry';
+import createRectMesh from '../../resources/createRectMesh';
 
 const originZ = 7;
 

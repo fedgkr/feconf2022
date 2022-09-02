@@ -1,23 +1,31 @@
-import { FC } from 'react';
+import { FC, memo, useRef } from 'react';
 import styled from '@emotion/styled';
 
 import { mobile } from '~/views/pages/HomePage/styles/media-query';
 
-import useScrollMotion from '../hooks/useScrollMotion';
+import useHandleMotion from '../hooks/useHandleMotion';
+import { useIntersection } from 'use-intersection';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
 
-const WarpScene: FC = () => {
-  const { containerEl, titleEl, canvasEl } = useScrollMotion();
+const WarpScene: FC = memo(() => {
+  const container = useRef<HTMLDivElement>();
+  const title = useRef<HTMLHeadingElement>();
+  const canvas = useRef<HTMLCanvasElement>();
+  const intersected = useIntersection(container);
+  const reduced = usePrefersReducedMotion();
+  useHandleMotion({ container, title, canvas }, { intersected, reduced });
   return (
-    <Container ref={containerEl}>
-      <Title ref={titleEl}>
+    <Container ref={container}>
+      <Title ref={title}>
         프론트엔드 엔지니어의
         <br />
         다양한 도전과 경험
       </Title>
-      <canvas ref={canvasEl} />
+      <canvas ref={canvas} />
     </Container>
   );
-};
+});
+WarpScene.displayName = 'WarpScene';
 
 const Container = styled.div`
   position: absolute;
@@ -28,6 +36,7 @@ const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
+    opacity: 0;
     pointer-events: none;
   }
 `;

@@ -1,4 +1,4 @@
-import { FC, useContext, useRef } from 'react';
+import { FC, useContext, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import TitleBadge from '~/views/pages/HomePage/components/TitleBadge';
 import SectionTitle from '~/views/pages/HomePage/components/SectionTitle';

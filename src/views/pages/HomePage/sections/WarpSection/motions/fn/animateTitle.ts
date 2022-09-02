@@ -2,14 +2,10 @@ import clamp from 'lodash/clamp';
 import gt from 'lodash/gt';
 import eq from 'lodash/eq';
 
-function animateText(
-  title: HTMLHeadingElement,
-  containerTop: number,
-  windowHeight: number
-) {
-  const windowHeightHalf = windowHeight / 2;
-  const textLen = windowHeight + windowHeightHalf;
-  const textTop = -(containerTop - windowHeightHalf);
+function animateTitle(title: HTMLHeadingElement, motionData: MotionData) {
+  const windowHeightHalf = motionData.height / 2;
+  const textLen = motionData.height + windowHeightHalf;
+  const textTop = -(motionData.current - windowHeightHalf);
   const duration = clamp(textTop / textLen, 0, 1);
   const tailMotionStart = 0.85;
 
@@ -29,4 +25,4 @@ function animateText(
   }
 }
 
-export default animateText;
+export default animateTitle;

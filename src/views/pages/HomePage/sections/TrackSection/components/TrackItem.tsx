@@ -1,13 +1,17 @@
 import { FC, MouseEventHandler } from 'react';
 import styled from '@emotion/styled';
+
 import { Session, Track } from '~/types/event';
 import eq from 'lodash/eq';
+import gt from 'lodash/gt';
+import map from 'lodash/map';
+import head from 'lodash/head';
+import isUndefined from 'lodash/isUndefined';
 import {
   mobile,
   mobileSelect,
 } from '~/views/pages/HomePage/styles/media-query';
 import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
-import gt from 'lodash/gt';
 
 interface Props {
   session: Session;
@@ -23,24 +27,24 @@ const TrackItem: FC<Props> = ({ session }) => {
   return (
     <Container onClick={handleClickItem}>
       <Time>
-        <span>{session.time[0]}</span>
+        <span>{head(session.time)}</span>
       </Time>
       <TextWrap>
         <TitleSVG>{session.titleSvg({})}</TitleSVG>
         <Title>{session.title}</Title>
         <Info>
-          {session.speakers.map((speaker, index) => (
+          {map(session.speakers, (speaker, index) => (
             <Speaker key={speaker.name}>
               {gt(index, 0) ? '/' : ''}
               {speaker.name}
             </Speaker>
           ))}
-          {session.speakers[0].company ? (
+          {isUndefined(head(session.speakers).company) ? null : (
             <>
               <Divider>·</Divider>
-              <Company>{session.speakers[0].company.name}</Company>
+              <Company>{head(session.speakers).company.name}</Company>
             </>
-          ) : null}
+          )}
           <Tag>40min</Tag>
           <Tag>{eq(session.track, Track.A) ? 'A' : 'B'} Track</Tag>
         </Info>
