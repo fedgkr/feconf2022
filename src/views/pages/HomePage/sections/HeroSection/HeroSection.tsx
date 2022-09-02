@@ -90,6 +90,7 @@ const TitleArea = styled.div`
     top: 16vh;
   `}
 `;
+
 const EarthArea = styled.div`
   position: fixed;
   bottom: 0;
@@ -107,6 +108,9 @@ const EarthArea = styled.div`
     width: 100%;
     height: 100%;
   }
+  ${mobile`
+    height: 650px;
+  `}
 `;
 
 const Title = styled.img`
