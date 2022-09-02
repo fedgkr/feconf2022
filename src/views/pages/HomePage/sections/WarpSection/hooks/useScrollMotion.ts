@@ -50,9 +50,12 @@ const onFrame = (
   } else {
     animate(canvas);
   }
+  if (reduced) {
+    const topRatio = -top / height;
 
-  const cursor = top - windowHeight;
-  const duration = reduced ? 0.5 : Math.min(cursor / -height, 1);
+    canvas.style.opacity = `${Math.min(1, Math.max(0, (topRatio > 0.5 ? 1 - topRatio : topRatio) * 2))}`;
+  }
+  const duration = reduced ? 0.5 : Math.min((windowHeight - top) / height, 1);
   warp.run(duration, setActive);
 };
 
