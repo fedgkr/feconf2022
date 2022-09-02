@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
 
 interface Props {
   visible: boolean;
@@ -13,15 +14,15 @@ const FadeInUp: FC<PropsWithChildren<Props>> = ({
   delay,
   range = 200,
 }) => {
-  // return <>{children}</>;
+  const reduced = usePrefersReducedMotion();
   return (
-    <Container visible={visible} delay={delay} range={range}>
+    <Container reduced={reduced} visible={visible} delay={delay} range={range}>
       {children}
     </Container>
   );
 };
 
-const Container = styled.div<Props>`
+const Container = styled.div<Props & { reduced: boolean }>`
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transform: translate3d(
     0,
@@ -30,9 +31,9 @@ const Container = styled.div<Props>`
   );
   transition: ${(props) =>
     props.visible
-      ? `transform 500ms ${props.delay}ms
+      ? `transform ${props.reduced ? 0 : 500}ms ${props.delay}ms
       cubic-bezier(0.33, 1, 0.68, 1),
-    opacity 600ms ${props.delay}ms ease-out`
+    opacity ${props.reduced ? 0 : 600}ms ${props.delay}ms ease-out`
       : ''};
 `;
 

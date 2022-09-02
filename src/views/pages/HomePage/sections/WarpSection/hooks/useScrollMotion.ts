@@ -3,6 +3,9 @@ import { useContext, useEffect, useRef } from 'react';
 import animateText from '../utils/animateText';
 import BackgroundContext from '../contexts/BackgroundContext';
 import Warp from '~/views/pages/HomePage/sections/WarpSection/utils/Warp';
+import usePrefersReducedMotion from '~/hoooks/usePrefersReducedMotion';
+import { useIntersection } from 'use-intersection';
+import gt from 'lodash/gt';
 
 interface Refs {
   container: HTMLDivElement;
@@ -24,22 +27,32 @@ function animate(canvas: HTMLCanvasElement) {
   canvas.style.opacity = '1';
 }
 
+function endAnimation(canvas: HTMLCanvasElement) {
+  canvas.style.position = 'absolute';
+  canvas.style.top = 'auto';
+  canvas.style.bottom = '0';
+  canvas.style.opacity = '0';
+}
+
 const onFrame = (
   { container, title, canvas }: Refs,
   warp: Warp,
+  reduced: boolean,
   setActive: (val: boolean) => void
 ) => {
   const windowHeight = window.innerHeight;
   const { top, height } = container.getBoundingClientRect();
   animateText(title, top, windowHeight);
-  if (top > 0) {
+  if (gt(top, 0)) {
     prepareAnimation(canvas);
+  } else if (gt(-top, height)) {
+    endAnimation(canvas);
   } else {
     animate(canvas);
   }
 
   const cursor = top - windowHeight;
-  const duration = Math.min(cursor / -height, 1);
+  const duration = reduced ? 0.5 : Math.min(cursor / -height, 1);
   warp.run(duration, setActive);
 };
 
@@ -48,6 +61,8 @@ const useScrollMotion = () => {
   const titleEl = useRef<HTMLHeadingElement>();
   const canvasEl = useRef<HTMLCanvasElement>();
   const containerEl = useRef<HTMLDivElement>();
+  const intersected = useIntersection(containerEl);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     const warp = new Warp(canvasEl.current);
@@ -57,7 +72,7 @@ const useScrollMotion = () => {
       canvas: canvasEl.current,
     };
     let tick = null;
-    const frame = () => onFrame(refs, warp, setActive);
+    const frame = () => onFrame(refs, warp, reduced, setActive);
     const cb = () => {
       if (tick) {
         tick();
@@ -69,13 +84,17 @@ const useScrollMotion = () => {
       requestAnimationFrame(cb);
     };
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+
+    if (intersected) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
     return () => {
       tick = null;
       window.removeEventListener('scroll', onScroll);
       warp.removeResizeHandler();
     };
-  }, []);
+  }, [intersected, reduced]);
   return {
     containerEl,
     titleEl,
