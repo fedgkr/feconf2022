@@ -16,11 +16,15 @@ const WarpSection: FC = memo(() => {
 WarpSection.displayName = 'WarpSection';
 
 const sectionRatio = (1440 / 2560) * 100;
-const sectionHeight = sectionRatio * 10;
 
 const Container = styled.section<{ reduced: boolean; active: boolean }>`
   position: relative;
-  padding-bottom: ${sectionHeight}%;
+  padding-bottom: ${sectionRatio * 10}%;
+
+  @media (prefers-reduced-motion: reduce) {
+    padding-bottom: 0;
+    height: 150vh;
+  }
   &::before {
     position: absolute;
     content: '';
