@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import styled from '@emotion/styled';
 import { Sponsor } from '~/types/event';
 import { mobile, tablet } from '~/views/pages/HomePage/styles/media-query';
@@ -14,13 +14,23 @@ interface Props {
 const SponsorList: FC<Props> = ({ grade, list }) => {
   const firstRow = slice(list, 0, 3);
   const secondRow = slice(list, 3, list.length);
+  const handleClickItem = (sponsor: Sponsor) => {
+    window.gtag('event', 'CLICK', {
+      event_category: '스폰서',
+      event_label: `${sponsor.name}`,
+    });
+  };
   return (
     <Container>
       <Title>{grade}</Title>
       <MobileList>
         <MobileRow>
           {firstRow.map((sponsor) => (
-            <Item key={sponsor.name} href={sponsor.homepage}>
+            <Item
+              key={sponsor.name}
+              href={sponsor.homepage}
+              onClick={() => handleClickItem(sponsor)}
+            >
               <img src={sponsor.image} alt={sponsor.name} />
             </Item>
           ))}
@@ -28,7 +38,11 @@ const SponsorList: FC<Props> = ({ grade, list }) => {
         {gt(size(secondRow), 0) ? (
           <MobileRow>
             {secondRow.map((sponsor) => (
-              <Item key={sponsor.name} href={sponsor.homepage}>
+              <Item
+                key={sponsor.name}
+                href={sponsor.homepage}
+                onClick={() => handleClickItem(sponsor)}
+              >
                 <img src={sponsor.image} alt={sponsor.name} />
               </Item>
             ))}

@@ -11,6 +11,12 @@ interface Window {
     moveTo: (target: number) => void;
     silentMoveTo: (target: number) => void;
   };
+
+  gtag: (
+    target: string,
+    eventName: string,
+    data: { event_category: string; event_label: string }
+  ) => void;
 }
 
 interface WindowDimension {

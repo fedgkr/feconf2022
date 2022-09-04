@@ -11,6 +11,12 @@ const activeProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
   rel: 'noopener noreferrer',
   target: '_blank',
   href: 'https://booking.naver.com/booking/5/bizes/263881/items/4589753',
+  onClick: () => {
+    window.gtag('event', 'CLICK', {
+      event_category: '티켓',
+      event_label: '티켓_구매하기',
+    });
+  },
 };
 
 const useTicketButton = () => {
