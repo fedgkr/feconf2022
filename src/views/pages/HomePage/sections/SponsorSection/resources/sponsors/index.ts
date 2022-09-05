@@ -2,7 +2,7 @@ import todayHouse from './today-house1.png';
 import banksalad from './banksalad.png';
 import ably from './ably.png';
 import yanolja from './yanolja.png';
-import toss from './toss.png';
+import toss from './toss2.png';
 import fastcampus from './fastcampus.png';
 import superbAi from './superb-ai.png';
 import musinsa from './musinsa.png';
