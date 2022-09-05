@@ -50,7 +50,7 @@ const platinumSponsors: Sponsor[] = [
   {
     name: 'superbAi',
     image: superbAi.src,
-    homepage: 'https://www.superb-ai.com/careers',
+    homepage: 'https://hubs.li/Q01lk-r90',
   },
 ];
 const goldSponsors: Sponsor[] = [
