@@ -55,6 +55,22 @@ const platinumSponsors: Sponsor[] = [
 ];
 const goldSponsors: Sponsor[] = [
   {
+    name: 'imWeb',
+    image: imWeb.src,
+    homepage: 'https://team.imweb.me',
+  },
+  {
+    name: 'nc',
+    image: nc.src,
+    homepage: 'https://careers.ncsoft.com/',
+  },
+  {
+    name: 'yogiyo',
+    image: yogiyo.src,
+    homepage:
+      'https://techrecruiting.wesang.com/join-us.do/?utm_source=fecon&utm_medium=2209r&utm_campaign=recruit&utm_term=social',
+  },
+  {
     name: 'musinsa',
     image: musinsa.src,
     homepage: 'https://musinsa.career.greetinghr.com/',
@@ -64,22 +80,6 @@ const goldSponsors: Sponsor[] = [
     image: greenlabs.src,
     homepage:
       'https://greenlabs.co.kr/%ec%b1%84%ec%9a%a9%ec%a0%95%eb%b3%b4/%ec%b1%84%ec%9a%a9%ec%a0%95%eb%b3%b4/',
-  },
-  {
-    name: 'yogiyo',
-    image: yogiyo.src,
-    homepage:
-      'https://techrecruiting.wesang.com/join-us.do/?utm_source=fecon&utm_medium=2209r&utm_campaign=recruit&utm_term=social',
-  },
-  {
-    name: 'nc',
-    image: nc.src,
-    homepage: 'https://careers.ncsoft.com/',
-  },
-  {
-    name: 'imWeb',
-    image: imWeb.src,
-    homepage: 'https://team.imweb.me',
   },
 ];
 const rookieSponsors: Sponsor[] = [
