@@ -85,10 +85,12 @@ const sessionList: Session[] = [
   {
     track: Track.A,
     time: timetable[3],
-    title: 'React 기반의 WYSIWYG 에디터로의 도전',
+    title: '텍스트 에디터? 그게 뭘 만드는 건데?',
     titleSvg: titles.노용구,
     description:
-      '웹 에디터의 역사를 알아보고, 그를 통해 React + contentEditable 기반의 새로운 WYSIWYG 에디터를 만들게 된 배경과 만들며 겪은 기술적인 도전을 공유합니다.',
+      '텍스트 에디터는 어떻게 만들어질지 궁금증을 가져보신 적이 있으신가요?<br/>' +
+      '텍스트 에디터 발전의 역사를 기술적인 측면에서 알아보고,<br/>' +
+      'React + contenteditable 기반의 새로운 에디터를 만들게 된 배경과 만들며 겪은 기술적인 도전을 공유합니다.',
     speakers: [
       {
         name: '노용구',
