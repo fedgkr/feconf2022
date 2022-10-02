@@ -12,6 +12,7 @@ import {
   mobileSelect,
 } from '~/views/pages/HomePage/styles/media-query';
 import { useSessionInfoModal } from '~/views/pages/HomePage/contexts/SessionInfoModalContext';
+import replaceWithBr from '~/views/pages/HomePage/utils/replaceWithBr';
 
 interface Props {
   session: Session;
@@ -31,7 +32,9 @@ const TrackItem: FC<Props> = ({ session }) => {
       </Time>
       <TextWrap>
         <TitleSVG>{session.titleSvg({})}</TitleSVG>
-        <Title>{session.title}</Title>
+        <Title
+          dangerouslySetInnerHTML={{ __html: replaceWithBr(session.title) }}
+        />
         <Info>
           {map(session.speakers, (speaker, index) => (
             <Speaker key={speaker.name}>

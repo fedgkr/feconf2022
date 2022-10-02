@@ -7,6 +7,7 @@ import {
   mobile,
   mobileSelect,
 } from '~/views/pages/HomePage/styles/media-query';
+import replaceWithBr from '~/views/pages/HomePage/utils/replaceWithBr';
 
 const SessionInfoModal: FC = () => {
   const { initial, session, visible, setVisible } = useSessionInfoModal();
@@ -22,7 +23,9 @@ const SessionInfoModal: FC = () => {
       />
       <Container initial={initial} visible={visible}>
         <SessionInfoHeader session={session} />
-        <Title>{session?.title}</Title>
+        <Title
+          dangerouslySetInnerHTML={{ __html: replaceWithBr(session?.title) }}
+        />
         {session?.speakers.map((speaker) => (
           <SpeakerBadge key={speaker.name} speaker={speaker} />
         ))}
