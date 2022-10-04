@@ -22,7 +22,16 @@ const activeProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
 const useTicketButton = () => {
   return {
     text: '티켓 구매하기',
-    props: activeProps,
+    props: {
+      onClick: (event) => {
+        event.preventDefault();
+        alert('마감되었습니다.')
+        window.gtag('event', 'CLICK', {
+          event_category: '티켓',
+          event_label: '티켓_구매하기',
+        });
+      },
+    },
   };
 };
 
