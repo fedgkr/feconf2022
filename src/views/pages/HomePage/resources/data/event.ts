@@ -105,7 +105,7 @@ const sessionList: Session[] = [
   {
     track: Track.A,
     time: timetable[4],
-    title: 'Edge Computing으로\n프론트엔 포텐셜 끌어올리기',
+    title: 'Edge Computing으로\n프론트엔드 포텐셜 끌어올리기',
     titleSvg: titles.김혜성,
     description:
       '엣지 컴퓨팅이라는 기술 트렌드가 가져온, 그리고 앞으로 가져올 웹 개발의 변화들을 사례와 함께 설명합니다.<br/><br/> 최근 등장한 다양한 엣지 컴퓨팅 플랫폼들을 슬기롭게 응용해서 웹 프론트엔드 개발을 확장하는 방법들을 소개하고, 앞으로 다가올 미래를 이야기합니다.',
