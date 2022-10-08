@@ -21,14 +21,14 @@ const activeProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
 
 const useTicketButton = () => {
   return {
-    text: '티켓 구매하기',
+    text: '유튜브 보러가기',
     props: {
       onClick: (event) => {
         event.preventDefault();
-        alert('마감되었습니다.')
+        location.href = "https://www.youtube.com/channel/UCWEzfYIpFBIG5jh6laXC6hA/videos";
         window.gtag('event', 'CLICK', {
-          event_category: '티켓',
-          event_label: '티켓_구매하기',
+          event_category: '유튜브',
+          event_label: '유튜브_보러가기',
         });
       },
     },
